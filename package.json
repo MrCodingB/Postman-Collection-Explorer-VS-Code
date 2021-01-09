@@ -10,7 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:postman-collection-explorer.helloWorld"
+    "onCommand:postman-collection-explorer.helloWorld",
+    "onView:postmanCollectionExplorer"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -19,7 +20,24 @@
 				"command": "postman-collection-explorer.helloWorld",
 				"title": "Hello World"
 			}
-		]
+    ],
+    "views": {
+      "postman-collection-explorer": [
+        {
+          "id": "postmanCollectionExplorer",
+          "name": "Postman Collection Explorer"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "postman-collection-explorer",
+          "title": "Postman Collection Explorer",
+          "icon": "assets/postman-head.png"
+        }
+      ]
+    }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
