@@ -11,8 +11,6 @@
     "strict": true,
     "alwaysStrict": true,
     "allowJs": false,
-    "inlineSourceMap": true,
-    "inlineSources": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "charset": "utf-8",
