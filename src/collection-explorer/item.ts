@@ -20,6 +20,11 @@ export class TreeViewItem extends TreeItem {
     ? new ThemeIcon('folder-opened')
     : this.itemGroup
     ? new ThemeIcon('folder')
+    : this.item
+    ? {
+        light: join(__dirname, '..', '..', 'assets', 'light', `${this.item.request.method.toLowerCase()}.svg`),
+        dark: join(__dirname, '..', '..', 'assets', 'dark', `${this.item.request.method.toLowerCase()}.svg`)
+      }
     : new ThemeIcon('export');
 
   public static createFromCollection(collection: Collection): TreeViewItem {
