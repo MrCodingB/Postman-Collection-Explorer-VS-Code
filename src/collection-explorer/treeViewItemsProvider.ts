@@ -19,11 +19,7 @@ export class TreeViewItemsProvider implements TreeDataProvider<TreeViewItem> {
     }
 
     if (element) {
-      if (isPostmanElement(element)) {
-        element = TreeViewItem.create(element);
-      }
-
-      return this.getChildrenAsItems(element);
+      return this.getChildrenAsItems(isPostmanElement(element) ? TreeViewItem.create(element) : element);
     } else {
       const collections = await getCollections();
 
