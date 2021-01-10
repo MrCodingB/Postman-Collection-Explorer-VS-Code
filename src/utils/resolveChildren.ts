@@ -1,8 +1,8 @@
 import { Collection as PmCollection, Item, ItemGroup } from 'postman-collection';
-import { Collection } from './Collection';
-import { Folder } from './Folder';
-import { Request } from './Request';
-import { isItemGroup } from './typeChecks';
+import { Collection } from '../postman/Collection';
+import { Folder } from '../postman/Folder';
+import { Request } from '../postman/Request';
+import { isItemGroup } from '../postman/typeChecks';
 
 export function resolveChildren(itemGroup: ItemGroup<Item> | PmCollection, parent: Collection | Folder): (Folder | Request)[] {
   return itemGroup.items

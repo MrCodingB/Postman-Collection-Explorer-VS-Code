@@ -1,7 +1,7 @@
 import { Collection as PmCollection } from 'postman-collection';
 import { Request } from './Request';
 import { Folder } from './Folder';
-import { resolveChildren } from './resolveChildren';
+import { resolveChildren } from '../utils';
 
 export class Collection {
   public id: string;
