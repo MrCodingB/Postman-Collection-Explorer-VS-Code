@@ -3,7 +3,8 @@ import { TreeViewItemsProvider } from './collection-explorer/treeViewItemsProvid
 import { commands } from './commands/commands';
 
 export function activate(context: vscode.ExtensionContext) {
-  for (const command of commands) {
+  for (const commandClass of commands) {
+    const command = new commandClass();
     const disposable = vscode.commands.registerCommand(command.name, command.callback, command.thisArg);
 
     context.subscriptions.push(disposable);
