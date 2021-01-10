@@ -10,8 +10,8 @@
 		"Other"
 	],
 	"activationEvents": [
-    "onCommand:postman-collection-explorer.helloWorld",
-    "onView:postmanCollectionExplorer"
+		"onCommand:postman-collection-explorer.helloWorld",
+		"onView:postmanCollectionExplorer"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -20,24 +20,24 @@
 				"command": "postman-collection-explorer.helloWorld",
 				"title": "Hello World"
 			}
-    ],
-    "views": {
-      "postman-collection-explorer": [
-        {
-          "id": "postmanCollectionExplorer",
-          "name": "Postman Collection Explorer"
-        }
-      ]
-    },
-    "viewsContainers": {
-      "activitybar": [
-        {
-          "id": "postman-collection-explorer",
-          "title": "Postman Collection Explorer",
-          "icon": "assets/postman-head.png"
-        }
-      ]
-    }
+		],
+		"views": {
+			"postman-collection-explorer": [
+				{
+					"id": "postmanCollectionExplorer",
+					"name": "Postman Collection Explorer"
+				}
+			]
+		},
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"id": "postman-collection-explorer",
+					"title": "Postman Collection Explorer",
+					"icon": "assets/postman-head.png"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
@@ -59,5 +59,10 @@
 		"mocha": "^8.0.1",
 		"typescript": "^3.8.3",
 		"vscode-test": "^1.4.0"
+	},
+	"dependencies": {
+		"@types/postman-collection": "^3.5.5",
+		"postman-collection": "^3.6.9",
+		"postman-runtime": "^7.26.10"
 	}
 }
