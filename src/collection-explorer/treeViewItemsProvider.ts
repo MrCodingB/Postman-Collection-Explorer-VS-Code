@@ -20,26 +20,24 @@ export class TreeViewItemsProvider implements TreeDataProvider<TreeViewItem> {
       if (collections.length === 0) {
         window.showInformationMessage('Workspace has no postman collections');
       } else if (collections.length === 1) {
-        return this.getChildren(TreeViewItem.createFromCollection(collections[0]));
+        return this.getChildren(TreeViewItem.create(collections[0]));
       }
 
-      return collections.map(TreeViewItem.createFromCollection);
+      return collections.map(TreeViewItem.create);
     }
   }
 
   private getChildrenAsItems(element: TreeViewItem): TreeViewItem[] {
-    var items = element.collection?.items ?? element.itemGroup?.items;
+    if (!element.isCollection() && !element.isItemGroup()) {
+      return [];
+    }
+
+    var items = element.itemObject.items;
 
     if (items === undefined) {
       return [];
     }
 
-    return items.map((i) => {
-      if (ItemGroup.isItemGroup(i)) {
-        return TreeViewItem.createFromItemGroup((i as ItemGroup<Item>));
-      } else {
-        return TreeViewItem.createFromItem((i as Item));
-      }
-    });
+    return items.map((i) => TreeViewItem.create(i));
   }
 }

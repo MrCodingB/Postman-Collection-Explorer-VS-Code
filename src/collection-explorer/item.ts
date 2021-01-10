@@ -1,49 +1,77 @@
 import { join } from 'path';
 import { Collection, Item, ItemGroup } from 'postman-collection';
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from 'vscode';
+import { isCollection, isItem, isItemGroup } from '../postman/typeChecks';
 
 export class TreeViewItem extends TreeItem {
   constructor(
     public readonly label: string,
     public readonly collapsibleState: TreeItemCollapsibleState,
-    public readonly collection?: Collection,
-    public readonly itemGroup?: ItemGroup<Item>,
-    public readonly item?: Item
+    public readonly itemObject: Collection | ItemGroup<Item> | Item
   ) {
     super(label, collapsibleState);
     this.tooltip = `${this.label}`;
+    this.description = itemObject.description?.toString();
   }
 
-  iconPath = this.collection
-    ? new ThemeIcon('archive')
-    : this.itemGroup && this.collapsibleState === TreeItemCollapsibleState.Expanded
-    ? new ThemeIcon('folder-opened')
-    : this.itemGroup
-    ? new ThemeIcon('folder')
-    : this.item
-    ? {
-        light: join(__dirname, '..', '..', 'assets', 'light', `${this.item.request.method.toLowerCase()}.svg`),
-        dark: join(__dirname, '..', '..', 'assets', 'dark', `${this.item.request.method.toLowerCase()}.svg`)
+  iconPath = this.getIcon();
+
+  public static create(object: Collection | ItemGroup<Item> | Item): TreeViewItem {
+    let collapsibleState = TreeItemCollapsibleState.None;
+
+    if (isItemGroup(object) || isCollection(object)) {
+      const childCount = object.items.count();
+
+      if (childCount > 0) {
+        collapsibleState = TreeItemCollapsibleState.Collapsed;
       }
-    : new ThemeIcon('export');
+    }
 
-  public static createFromCollection(collection: Collection): TreeViewItem {
-    const label = collection.name;
-    const childCount = collection.items.count();
-    const collapsibleState = childCount === 0 ? TreeItemCollapsibleState.None : TreeItemCollapsibleState.Collapsed;
-
-    return new TreeViewItem(label, collapsibleState, collection);
+    return new TreeViewItem(object.name, collapsibleState, object);
   }
 
-  public static createFromItemGroup(itemGroup: ItemGroup<Item>): TreeViewItem {
-    const label = itemGroup.name;
-    const childCount = itemGroup.items.count();
-    const collapsibleState = childCount === 0 ? TreeItemCollapsibleState.None : TreeItemCollapsibleState.Collapsed;
-
-    return new TreeViewItem(label, collapsibleState, undefined, itemGroup);
+  public isCollection(): this is TreeItem & { itemObject: Collection } {
+    return Collection.isCollection(this.itemObject);
   }
 
-  public static createFromItem(item: Item): TreeViewItem {
-    return new TreeViewItem(item.name, TreeItemCollapsibleState.None, undefined, undefined, item);
+  public isItemGroup(): this is TreeItem & { itemObject: ItemGroup<Item> } {
+    return ItemGroup.isItemGroup(this.itemObject);
+  }
+
+  public isItem(): this is TreeItem & { itemObject: Item } {
+    return Item.isItem(this.itemObject);
+  }
+
+  /**
+   * Gets the icon for the TreeViewItem representing it's type and state
+   * - Collection: `archive`
+   * - Expanded ItemGroup: `folder-opened`
+   * - Collapsed ItemGroup: `folder`
+   * - Item: `{
+   *     dark: 'dark/${method}.svg',
+   *     light: 'light/${method}.svg'
+   *   }`
+   */
+  private getIcon(): ThemeIcon | { dark: string, light: string } {
+    if (this.isCollection()) {
+      return new ThemeIcon('archive');
+    }
+
+    if (this.isItemGroup()) {
+      if (this.collapsibleState === TreeItemCollapsibleState.Expanded) {
+        return new ThemeIcon('folder-opened');
+      }
+
+      return new ThemeIcon('folder');
+    }
+
+    if (this.isItem()) {
+      return {
+        light: join(__dirname, '..', '..', 'assets', 'light', `${this.itemObject.request.method.toLowerCase()}.svg`),
+        dark: join(__dirname, '..', '..', 'assets', 'dark', `${this.itemObject.request.method.toLowerCase()}.svg`)
+      };
+    }
+
+    return new ThemeIcon('export');
   }
 }
