@@ -18,7 +18,24 @@
 		"commands": [
 			{
 				"command": "postman-collection-explorer.helloWorld",
-				"title": "Hello World"
+        "title": "Hello World",
+        "category": "Postman"
+      },
+      {
+				"command": "postman-collection-explorer.createCollection",
+        "title": "Create Collection",
+        "category": "Postman"
+      },
+      {
+				"command": "postman-collection-explorer.deleteCollection",
+        "title": "Delete Collection",
+        "category": "Postman"
+			},
+      {
+				"command": "postman-collection-explorer.refreshView",
+        "title": "Refresh View",
+        "category": "Postman",
+        "icon": "$(refresh)"
 			}
 		],
 		"views": {
@@ -34,15 +51,22 @@
 				{
 					"id": "postman-collection-explorer",
 					"title": "Postman Collection Explorer",
-					"icon": "assets/postman-head.png"
+					"icon": "assets/postman-head.svg"
 				}
 			]
     },
     "menus": {
       "view/item/context": [
         {
-          "command": "postman-collection-explorer.helloWorld",
+          "command": "postman-collection-explorer.deleteCollection",
           "when": "viewItem == collection"
+        }
+      ],
+      "view/title": [
+        {
+          "command": "postman-collection-explorer.refreshView",
+          "when": "view == postmanCollectionExplorer",
+          "group": "navigation"
         }
       ]
     }

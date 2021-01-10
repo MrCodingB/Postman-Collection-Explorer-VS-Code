@@ -1,4 +1,5 @@
 import * as vscode from 'vscode';
+import { TreeViewItem } from './collection-explorer/treeViewItem';
 import { TreeViewItemsProvider } from './collection-explorer/treeViewItemsProvider';
 import { Command } from './commands/command';
 import { commands } from './commands/commands';
@@ -17,7 +18,9 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(disposable);
   }
 
-  vscode.window.registerTreeDataProvider('postmanCollectionExplorer', new TreeViewItemsProvider());
+  const treeViewItemsProvider = new TreeViewItemsProvider();
+  vscode.window.registerTreeDataProvider('postmanCollectionExplorer', treeViewItemsProvider);
+  vscode.commands.registerCommand(`${commandPrefix}.refreshView`, (args?: TreeViewItem) => treeViewItemsProvider.refresh(args));
 }
 
 export function deactivate() {}
