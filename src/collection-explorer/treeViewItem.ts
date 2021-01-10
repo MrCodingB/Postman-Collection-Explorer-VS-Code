@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { Collection, Item, ItemGroup } from 'postman-collection';
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from 'vscode';
-import { isCollection, isItem, isItemGroup } from '../postman/typeChecks';
+import { isCollection, isItemGroup } from '../postman/typeChecks';
 
 export class TreeViewItem extends TreeItem {
   constructor(
@@ -12,6 +12,7 @@ export class TreeViewItem extends TreeItem {
     super(label, collapsibleState);
     this.tooltip = `${this.label}`;
     this.description = itemObject.description?.toString();
+    this.id = this.itemObject.id;
   }
 
   iconPath = this.getIcon();

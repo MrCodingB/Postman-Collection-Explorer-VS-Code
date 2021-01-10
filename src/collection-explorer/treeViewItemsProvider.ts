@@ -1,7 +1,7 @@
 import { Item, ItemGroup } from 'postman-collection';
 import { TreeDataProvider, TreeItem, window, workspace } from 'vscode';
 import { getCollections } from '../postman/getCollections';
-import { TreeViewItem } from './item';
+import { TreeViewItem } from './treeViewItem';
 
 export class TreeViewItemsProvider implements TreeDataProvider<TreeViewItem> {
   getTreeItem(element: TreeViewItem): TreeItem {
