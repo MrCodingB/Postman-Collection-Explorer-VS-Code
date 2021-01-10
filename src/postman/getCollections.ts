@@ -1,6 +1,7 @@
 import { readFileSync } from 'fs';
-import { Collection } from 'postman-collection';
 import { workspace } from 'vscode';
+import { Collection } from './Collection';
+import { Collection as PmCollection } from 'postman-collection';
 
 export async function getCollections(): Promise<Collection[]> {
   const collectionFiles = await getCollectionsInWorkspace();
@@ -26,9 +27,9 @@ function getCollectionFromFile(path: string): Collection | undefined {
   try {
     const json = readFileSync(path).toString();
     const obj = JSON.parse(json);
-    const collection = new Collection(obj);
+    const pmCollection = new PmCollection(obj);
 
-    return collection;
+    return new Collection(pmCollection);
   } catch (err) {
     console.warn(`Failed creating collection from path: ${path}`, err);
   }

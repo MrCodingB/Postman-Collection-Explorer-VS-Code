@@ -1,9 +1,14 @@
-import { Collection, Item, ItemGroup } from 'postman-collection';
+import { Collection as PmCollection, Item, ItemGroup } from 'postman-collection';
+import { Folder } from './Folder';
+import { Request } from './Request';
+import { Collection } from './Collection';
 
-export type PostmanElement = Collection | ItemGroup<Item> | Item;
+export type PostmanElement = Collection | Folder | Request;
 
-export function isCollection(obj: any): obj is Collection {
-  return Collection.isCollection(obj);
+export type PostmanNativeElement = PmCollection | ItemGroup<Item> | Item;
+
+export function isPostmanCollection(obj: any): obj is PmCollection {
+  return PmCollection.isCollection(obj);
 }
 
 export function isItemGroup(obj: any): obj is ItemGroup<Item> {
@@ -14,6 +19,10 @@ export function isItem(obj: any): obj is Item {
   return Item.isItem(obj);
 }
 
+export function isPostmanNativeElement(obj: any): obj is PostmanNativeElement {
+  return isPostmanCollection(obj) || isItemGroup(obj) || isItem(obj);
+}
+
 export function isPostmanElement(obj: any): obj is PostmanElement {
-  return isCollection(obj) || isItemGroup(obj) || isItem(obj);
+  return Collection.isCollection(obj) || Folder.isFolder(obj) || Request.isRequest(obj);
 }

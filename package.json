@@ -37,7 +37,15 @@
 					"icon": "assets/postman-head.png"
 				}
 			]
-		}
+    },
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "postman-collection-explorer.helloWorld",
+          "when": "viewItem == collection"
+        }
+      ]
+    }
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
