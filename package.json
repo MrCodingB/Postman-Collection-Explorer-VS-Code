@@ -24,7 +24,8 @@
       {
 				"command": "postman-collection-explorer.createCollection",
         "title": "Create Collection",
-        "category": "Postman"
+        "category": "Postman",
+        "icon": "$(add)"
       },
       {
 				"command": "postman-collection-explorer.deleteCollection",
@@ -65,6 +66,11 @@
       "view/title": [
         {
           "command": "postman-collection-explorer.refreshView",
+          "when": "view == postmanCollectionExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "postman-collection-explorer.createCollection",
           "when": "view == postmanCollectionExplorer",
           "group": "navigation"
         }

@@ -1,8 +1,8 @@
-import { writeFileSync } from 'fs';
 import { Collection } from '../../postman/Collection';
 import { Collection as PmCollection } from 'postman-collection';
 import { Command } from '../command';
-import { window, workspace } from 'vscode';
+import { commands, Uri, window, workspace } from 'vscode';
+import { join } from 'path';
 
 export class CreateCollection implements Command {
   name = 'createCollection';
@@ -11,7 +11,7 @@ export class CreateCollection implements Command {
     window
       .showInputBox({ placeHolder: 'Collection name' })
       .then((name) => {
-        if (name === undefined) {
+        if (name === undefined || name === '') {
           return;
         }
 
@@ -22,9 +22,18 @@ export class CreateCollection implements Command {
         }
 
         const pmCollection = new PmCollection({ name });
-        const collection = new Collection(pmCollection, workspaceFolders[0].uri.fsPath);
+        const filePath = join(workspaceFolders[0].uri.fsPath, `${name}.postman_collection.json`);
+        const collection = new Collection(pmCollection, filePath);
 
-        writeFileSync(collection.filePath, JSON.stringify(collection.collection.toJSON()));
+        try {
+          workspace.fs
+            .writeFile(
+              Uri.file(filePath),
+              Buffer.from(JSON.stringify(collection.collection.toJSON())))
+            .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));;
+        } catch (err) {
+          console.warn(err);
+        }
       });
   }
 }
