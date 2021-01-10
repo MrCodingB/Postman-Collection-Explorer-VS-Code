@@ -13,6 +13,7 @@ export class TreeViewItem extends TreeItem {
     this.tooltip = `${this.label}`;
     this.description = itemObject.description?.toString();
     this.id = this.itemObject.id;
+    this.contextValue = isCollection(itemObject) ? 'collection' : isItemGroup(itemObject) ? 'itemGroup' : 'item';
   }
 
   iconPath = this.getIcon();
