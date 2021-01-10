@@ -3,7 +3,7 @@ import { Collection } from '../postman/Collection';
 import { Folder } from '../postman/Folder';
 import { getCollections } from '../postman/getCollections';
 import { Request } from '../postman/Request';
-import { isPostmanElement } from '../postman/typeChecks';
+import { isPostmanElement } from '../utils';
 import { TreeViewItem } from './treeViewItem';
 
 export class TreeViewItemsProvider implements TreeDataProvider<TreeViewItem> {

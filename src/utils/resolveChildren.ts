@@ -2,7 +2,7 @@ import { Collection as PmCollection, Item, ItemGroup } from 'postman-collection'
 import { Collection } from '../postman/Collection';
 import { Folder } from '../postman/Folder';
 import { Request } from '../postman/Request';
-import { isItemGroup } from '../postman/typeChecks';
+import { isItemGroup } from './typeChecks';
 
 export function resolveChildren(itemGroup: ItemGroup<Item> | PmCollection, parent: Collection | Folder): (Folder | Request)[] {
   return itemGroup.items

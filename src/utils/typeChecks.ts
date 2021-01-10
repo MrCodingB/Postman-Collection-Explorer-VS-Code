@@ -1,7 +1,7 @@
 import { Collection as PmCollection, Item, ItemGroup } from 'postman-collection';
-import { Folder } from './Folder';
-import { Request } from './Request';
-import { Collection } from './Collection';
+import { Folder } from '../postman/Folder';
+import { Request } from '../postman/Request';
+import { Collection } from '../postman/Collection';
 
 export type PostmanElement = Collection | Folder | Request;
 
