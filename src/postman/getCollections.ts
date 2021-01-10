@@ -29,7 +29,7 @@ function getCollectionFromFile(path: string): Collection | undefined {
     const obj = JSON.parse(json);
     const pmCollection = new PmCollection(obj);
 
-    return new Collection(pmCollection);
+    return new Collection(pmCollection, path);
   } catch (err) {
     console.warn(`Failed creating collection from path: ${path}`, err);
   }

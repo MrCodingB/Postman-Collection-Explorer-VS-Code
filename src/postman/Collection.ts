@@ -9,7 +9,7 @@ export class Collection {
   public name: string;
   public description: string;
 
-  constructor(public collection: PmCollection) {
+  constructor(public collection: PmCollection, public filePath: string) {
     this.id = collection.id;
     this.name = collection.name;
     this.description = collection.description?.toString() ?? '';
