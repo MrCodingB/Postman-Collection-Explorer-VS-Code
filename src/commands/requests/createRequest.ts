@@ -31,4 +31,4 @@ export function createCollection(): void {
         console.warn(err);
       }
     });
-};
+}

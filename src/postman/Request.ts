@@ -1,8 +1,10 @@
-import { Item } from 'postman-collection';
+import { Item, ItemDefinition } from 'postman-collection';
+import { isItem } from '../utils';
 import { Collection } from './Collection';
 import { Folder } from './Folder';
 
 export class Request {
+  public rootItem: Item;
   public id: string;
   public name: string;
   public description: string;
@@ -10,12 +12,14 @@ export class Request {
 
   constructor(
     public parent: Collection | Folder,
-    public item: Item
+    item: Item | ItemDefinition
   ) {
-    this.id = item.id;
-    this.name = item.name;
-    this.description = item.description?.toString() ?? '';
-    this.method = item.request.method;
+    this.rootItem = isItem(item) ? item : new Item(item);
+
+    this.id = this.rootItem.id;
+    this.name = this.rootItem.name;
+    this.description = this.rootItem.description?.toString() ?? '';
+    this.method = this.rootItem.request.method;
   }
 
   public static isRequest(obj: any): obj is Request {

@@ -1,9 +1,10 @@
-import { Item, ItemGroup } from 'postman-collection';
+import { Item, ItemGroup, ItemGroupDefinition } from 'postman-collection';
 import { Collection } from './Collection';
 import { Request } from './Request';
-import { resolveChildren } from '../utils';
+import { isItemGroup, resolveChildren } from '../utils';
 
 export class Folder {
+  public rootItem: ItemGroup<Item>;
   public id: string;
   public children: (Folder | Request)[];
   public name: string;
@@ -11,12 +12,14 @@ export class Folder {
 
   constructor(
     public parent: Collection | Folder,
-    public itemGroup: ItemGroup<Item>
+    itemGroup: ItemGroup<Item> | ItemGroupDefinition
   ) {
-    this.id = itemGroup.id;
-    this.name = itemGroup.name;
-    this.description = itemGroup.description?.toString() ?? '';
-    this.children = resolveChildren(itemGroup, this);
+    this.rootItem = isItemGroup(itemGroup) ? itemGroup : new ItemGroup<Item>(itemGroup);
+
+    this.id = this.rootItem.id;
+    this.name = this.rootItem.name;
+    this.description = this.rootItem.description?.toString() ?? '';
+    this.children = resolveChildren(this.rootItem, this);
   }
 
   public static isFolder(obj: any): obj is Folder {

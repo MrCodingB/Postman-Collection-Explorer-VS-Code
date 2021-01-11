@@ -1,4 +1,4 @@
-import { Collection } from 'postman-collection';
+import { Collection } from '../postman/Collection';
 import { Folder } from '../postman/Folder';
 import { Request } from '../postman/Request';
 

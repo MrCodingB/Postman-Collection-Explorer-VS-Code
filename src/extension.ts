@@ -1,26 +1,22 @@
 import * as vscode from 'vscode';
 import { TreeViewItem } from './collection-explorer/treeViewItem';
 import { TreeViewItemsProvider } from './collection-explorer/treeViewItemsProvider';
-import { Command } from './commands/command';
-import { commands } from './commands/commands';
-
-const commandPrefix = 'postman-collection-explorer';
+import { commands, COMMAND_ID_PREFIX } from './commands/commands';
 
 export function activate(context: vscode.ExtensionContext) {
-  for (const commandClass of commands) {
-    const command = new commandClass() as Command;
-    if (!command.name.startsWith(commandPrefix)) {
-      command.name = `${commandPrefix}.${command.name}`;
-    }
+  const commandNames = Object.keys(commands) as (keyof typeof commands)[];
 
-    const disposable = vscode.commands.registerCommand(command.name, command.callback, command.thisArg);
+  for (const name of commandNames) {
+    const command = commands[name];
+
+    const disposable = vscode.commands.registerCommand(`${COMMAND_ID_PREFIX}.${name}`, command);
 
     context.subscriptions.push(disposable);
   }
 
   const treeViewItemsProvider = new TreeViewItemsProvider();
   vscode.window.registerTreeDataProvider('postmanCollectionExplorer', treeViewItemsProvider);
-  vscode.commands.registerCommand(`${commandPrefix}.refreshView`, (args?: TreeViewItem) => treeViewItemsProvider.refresh(args));
+  vscode.commands.registerCommand(`${COMMAND_ID_PREFIX}.refreshView`, (args?: TreeViewItem) => treeViewItemsProvider.refresh(args));
 }
 
-export function deactivate() {}
+export function deactivate() { }
