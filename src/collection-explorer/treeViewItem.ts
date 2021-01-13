@@ -14,7 +14,7 @@ export class TreeViewItem extends TreeItem {
     this.tooltip = `${this.label}`;
     this.description = itemObject.description?.toString();
     this.id = this.itemObject.id;
-    this.contextValue = Collection.isCollection(itemObject) ? 'collection' : Folder.isFolder(itemObject) ? 'itemGroup' : 'item';
+    this.contextValue = Collection.isCollection(itemObject) ? 'collection' : Folder.isFolder(itemObject) ? 'folder' : 'request';
   }
 
   iconPath = this.getIcon();
