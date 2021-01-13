@@ -11,11 +11,24 @@
 	],
 	"activationEvents": [
 		"onCommand:postman-collection-explorer.helloWorld",
+		"onCommand:postman-collection-explorer.createCollection",
+		"onCommand:postman-collection-explorer.deleteCollection",
+		"onCommand:postman-collection-explorer.saveCollection",
+		"onCommand:postman-collection-explorer.createFolder",
+		"onCommand:postman-collection-explorer.deleteFolder",
+		"onCommand:postman-collection-explorer.createRequest",
+		"onCommand:postman-collection-explorer.deleteRequest",
 		"onView:postmanCollectionExplorer"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
+      {
+				"command": "postman-collection-explorer.refreshView",
+        "title": "Refresh View",
+        "category": "Postman",
+        "icon": "$(refresh)"
+			},
 			{
 				"command": "postman-collection-explorer.helloWorld",
         "title": "Hello World",
@@ -30,13 +43,32 @@
       {
 				"command": "postman-collection-explorer.deleteCollection",
         "title": "Delete Collection",
-        "category": "Postman"
+        "category": "Postman",
+        "icon": "$(trash)"
 			},
       {
-				"command": "postman-collection-explorer.refreshView",
-        "title": "Refresh View",
+				"command": "postman-collection-explorer.createFolder",
+        "title": "Create Folder",
         "category": "Postman",
-        "icon": "$(refresh)"
+        "icon": "$(add)"
+      },
+      {
+				"command": "postman-collection-explorer.deleteFolder",
+        "title": "Delete Folder",
+        "category": "Postman",
+        "icon": "$(trash)"
+			},
+      {
+				"command": "postman-collection-explorer.createRequest",
+        "title": "Create Request",
+        "category": "Postman",
+        "icon": "$(add)"
+      },
+      {
+				"command": "postman-collection-explorer.deleteRequest",
+        "title": "Delete Request",
+        "category": "Postman",
+        "icon": "$(trash)"
 			}
 		],
 		"views": {

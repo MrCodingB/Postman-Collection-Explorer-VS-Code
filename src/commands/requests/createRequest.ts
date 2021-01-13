@@ -1,34 +1,29 @@
-import { Collection } from '../../postman/Collection';
-import { Collection as PmCollection } from 'postman-collection';
-import { commands, Uri, window, workspace } from 'vscode';
-import { join } from 'path';
+import { Item, ItemGroup } from 'postman-collection';
+import { window } from 'vscode';
+import { Folder } from '../../postman/Folder';
+import { TreeViewItem } from '../../collection-explorer/treeViewItem';
+import { getCollection } from '../../utils';
+import { runCommand } from '../commands';
 
-export function createCollection(): void {
+export function createRequest(parentNode?: TreeViewItem): void {
+  if (parentNode === undefined || (!parentNode.isCollection() && !parentNode.isFolder())) {
+    return;
+  }
+
   window
-    .showInputBox({ placeHolder: 'Collection name' })
+    .showInputBox({ placeHolder: 'Request name' })
     .then((name) => {
       if (name === undefined || name === '') {
         return;
       }
 
-      const workspaceFolders = workspace.workspaceFolders;
-      if (workspaceFolders === undefined || workspaceFolders[0] === undefined) {
-        window.showWarningMessage('You have to open a folder to create a new collection');
-        return;
-      }
+      const itemGroup = new ItemGroup<Item>({ name });
+      const folder = new Folder(parentNode.itemObject, itemGroup);
 
-      const pmCollection = new PmCollection({ name });
-      const filePath = join(workspaceFolders[0].uri.fsPath, `${name}.postman_collection.json`);
-      const collection = new Collection(pmCollection, filePath);
+      const collection = parentNode.isCollection() ? parentNode.itemObject : getCollection(parentNode.itemObject);
 
-      try {
-        workspace.fs
-          .writeFile(
-            Uri.file(filePath),
-            Buffer.from(JSON.stringify(collection.rootItem.toJSON())))
-          .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));;
-      } catch (err) {
-        console.warn(err);
-      }
+      collection.addChild(folder);
+
+      runCommand('saveCollection', collection);
     });
 }

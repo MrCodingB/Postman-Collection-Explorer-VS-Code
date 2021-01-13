@@ -20,9 +20,15 @@ export class Collection {
   }
 
   public addChild(item: Folder | Request): void {
-    this.rootItem.items.add(Folder.isFolder(item) ? item.rootItem : item.rootItem);
+    this.rootItem.items.add(item.rootItem);
 
     this.children.push(item);
+  }
+
+  public removeChild(item: Folder | Request): void {
+    this.rootItem.items.remove(item.rootItem, {});
+
+    this.children.splice(this.children.indexOf(item), 1);
   }
 
   public static isCollection(obj: any): obj is Collection {

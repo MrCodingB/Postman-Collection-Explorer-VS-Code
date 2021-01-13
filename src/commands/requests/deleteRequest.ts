@@ -1,17 +1,14 @@
-import { commands, Uri, workspace } from 'vscode';
+import { commands } from 'vscode';
 import { TreeViewItem } from '../../collection-explorer/treeViewItem';
+import { getCollection } from '../../utils';
 
-export function deleteCollection(node?: TreeViewItem): void {
-  if (node === undefined || !node.isCollection()) {
+export function deleteRequest(node?: TreeViewItem): void {
+  if (node === undefined || !node.isRequest()) {
     return;
   }
 
-  try {
-    workspace.fs
-      .delete(Uri.file(node.itemObject.filePath))
-      .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));
-  } catch (err) {
-    console.warn('Could not delete collection');
-    console.warn(err);
-  }
+  const collection = getCollection(node.itemObject);
+  collection.removeChild(node.itemObject);
+
+  commands.executeCommand('postman-collection-explorer.refreshView');
 }

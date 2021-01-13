@@ -1,8 +1,13 @@
+import * as vscode from 'vscode';
+
 import { createCollection } from './collections/createCollection';
 import { deleteCollection } from './collections/deleteCollection';
 import { saveCollection } from './collections/saveCollection';
+import { createFolder } from './folders/createFolder';
+import { deleteFolder } from './folders/deleteFolder';
+import { createRequest } from './requests/createRequest';
+import { deleteRequest } from './requests/deleteRequest';
 import { helloWorld } from './helloWorld';
-import * as vscode from 'vscode';
 
 export const COMMAND_ID_PREFIX = 'postman-collection-explorer';
 
@@ -10,7 +15,11 @@ export const commands = {
   helloWorld,
   createCollection,
   deleteCollection,
-  saveCollection
+  saveCollection,
+  createFolder,
+  deleteFolder,
+  createRequest,
+  deleteRequest
 };
 
 export type Commands = typeof commands;
