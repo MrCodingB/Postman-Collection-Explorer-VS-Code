@@ -28,5 +28,5 @@ export function runCommand<
   N extends keyof typeof commands = keyof typeof commands,
   A extends Parameters<typeof commands[N]> = Parameters<typeof commands[N]>
 >(name: N, ...args: A): Thenable<unknown> {
-  return vscode.commands.executeCommand(`${COMMAND_ID_PREFIX}.${name}`, args);
+  return vscode.commands.executeCommand(`${COMMAND_ID_PREFIX}.${name}`, ...args);
 }

@@ -3,7 +3,7 @@ import { TreeViewItem } from '../../collection-explorer/treeViewItem';
 import { Collection } from '../../postman/Collection';
 
 export function saveCollection(itemOrCollection: Collection | TreeViewItem): void {
-  if (!Collection.isCollection(itemOrCollection) && !(itemOrCollection?.isCollection && itemOrCollection.isCollection())) {
+  if (!Collection.isCollection(itemOrCollection) && !(itemOrCollection?.isCollection !== undefined && itemOrCollection.isCollection())) {
     return;
   }
 

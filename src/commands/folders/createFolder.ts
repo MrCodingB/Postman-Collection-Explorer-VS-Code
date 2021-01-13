@@ -10,8 +10,6 @@ export function createFolder(parentNode?: TreeViewItem): void {
     return;
   }
 
-  console.log(parentNode);
-
   window
     .showInputBox({ placeHolder: 'Folder name' })
     .then((name) => {

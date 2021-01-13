@@ -45,6 +45,12 @@
         "title": "Delete Collection",
         "category": "Postman",
         "icon": "$(trash)"
+      },
+      {
+				"command": "postman-collection-explorer.saveCollection",
+        "title": "Save Collection",
+        "category": "Postman",
+        "icon": "$(save)"
 			},
       {
 				"command": "postman-collection-explorer.createFolder",
