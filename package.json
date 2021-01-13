@@ -92,7 +92,18 @@
       "view/item/context": [
         {
           "command": "postman-collection-explorer.deleteCollection",
-          "when": "viewItem == collection"
+          "when": "viewItem == collection",
+          "group": "inline"
+        },
+        {
+          "command": "postman-collection-explorer.deleteFolder",
+          "when": "viewItem == folder",
+          "group": "inline"
+        },
+        {
+          "command": "postman-collection-explorer.deleteRequest",
+          "when": "viewItem == request",
+          "group": "inline"
         }
       ],
       "view/title": [
