@@ -23,7 +23,7 @@ export class Folder {
   }
 
   public static isFolder(obj: any): obj is Folder {
-    const itemGroup = obj.itemGroup;
+    const itemGroup = obj.rootItem;
 
     return itemGroup !== undefined && ItemGroup.isItemGroup(itemGroup);
   }

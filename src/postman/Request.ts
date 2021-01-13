@@ -23,7 +23,7 @@ export class Request {
   }
 
   public static isRequest(obj: any): obj is Request {
-    const item = obj.item;
+    const item = obj.rootItem;
 
     return item !== undefined && Item.isItem(item);
   }

@@ -32,7 +32,7 @@ export class Collection {
   }
 
   public static isCollection(obj: any): obj is Collection {
-    const collection = obj.collection;
+    const collection = obj.rootItem;
 
     return collection !== undefined && PmCollection.isCollection(collection);
   }
