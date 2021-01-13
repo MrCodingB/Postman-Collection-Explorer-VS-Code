@@ -3,7 +3,7 @@ import { TreeViewItem } from '../../collection-explorer/treeViewItem';
 import { Collection } from '../../postman/Collection';
 
 export function saveCollection(itemOrCollection: Collection | TreeViewItem): void {
-  if (!Collection.isCollection(itemOrCollection) && !itemOrCollection.isCollection()) {
+  if (!Collection.isCollection(itemOrCollection) && !(itemOrCollection?.isCollection && itemOrCollection.isCollection())) {
     return;
   }
 
@@ -13,7 +13,7 @@ export function saveCollection(itemOrCollection: Collection | TreeViewItem): voi
     workspace.fs
       .writeFile(
         Uri.file(collection.filePath),
-        Buffer.from(JSON.stringify(collection.rootItem.toJSON())))
+        Buffer.from(JSON.stringify(collection.rootItem.toJSON(), undefined, 4)))
       .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));;
   } catch (err) {
     console.warn(err);

@@ -2,6 +2,7 @@ import { Collection } from '../../postman/Collection';
 import { Collection as PmCollection } from 'postman-collection';
 import { commands, Uri, window, workspace } from 'vscode';
 import { join } from 'path';
+import { runCommand } from '../commands';
 
 export function createCollection(): void {
   window
@@ -21,14 +22,6 @@ export function createCollection(): void {
       const filePath = join(workspaceFolders[0].uri.fsPath, `${name}.postman_collection.json`);
       const collection = new Collection(pmCollection, filePath);
 
-      try {
-        workspace.fs
-          .writeFile(
-            Uri.file(filePath),
-            Buffer.from(JSON.stringify(collection.rootItem.toJSON())))
-          .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));;
-      } catch (err) {
-        console.warn(err);
-      }
+      runCommand('saveCollection', collection);
     });
 };

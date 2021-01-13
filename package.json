@@ -107,11 +107,11 @@
         },
         {
           "command": "postman-collection-explorer.createFolder",
-          "when": "view == postmanCollectionExplorer && (viewItem == folder || viewItem == collection)"
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer"
         },
         {
           "command": "postman-collection-explorer.createRequest",
-          "when": "view == postmanCollectionExplorer && (viewItem == folder || viewItem == collection)"
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer"
         }
       ],
       "view/title": [
