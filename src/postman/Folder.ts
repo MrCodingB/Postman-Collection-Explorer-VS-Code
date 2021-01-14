@@ -1,12 +1,11 @@
 import { Item, ItemGroup, ItemGroupDefinition } from 'postman-collection';
 import { Collection } from './Collection';
-import { Request } from './Request';
 import { isItemGroup, resolveChildren } from '../utils';
+import { Container } from './container';
 
-export class Folder {
+export class Folder extends Container {
   public rootItem: ItemGroup<Item>;
   public id: string;
-  public children: (Folder | Request)[];
   public name: string;
   public description: string;
 
@@ -14,6 +13,8 @@ export class Folder {
     public parent: Collection | Folder,
     itemGroup: ItemGroup<Item> | ItemGroupDefinition
   ) {
+    super();
+
     this.rootItem = isItemGroup(itemGroup) ? itemGroup : new ItemGroup<Item>(itemGroup);
 
     this.id = this.rootItem.id;
