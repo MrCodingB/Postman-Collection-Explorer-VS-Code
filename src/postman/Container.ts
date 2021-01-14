@@ -13,7 +13,7 @@ export abstract class Container {
   }
 
   public removeChild(child: Folder | Request): void {
-    this.rootItem.items.remove(child.rootItem, {});
+    this.rootItem.items.remove((c) => c.id === child.rootItem.id, {});
 
     this.children.splice(this.children.indexOf(child), 1);
   }
