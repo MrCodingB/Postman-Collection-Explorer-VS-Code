@@ -6,9 +6,10 @@ import { Collection as PmCollection } from 'postman-collection';
 export async function getCollections(): Promise<Collection[]> {
   const collectionFiles = await getCollectionsInWorkspace();
 
-  const collections = collectionFiles
+  const collections = (collectionFiles
     .map((f) => getCollectionFromFile(f))
-    .filter((c) => c !== undefined) as Collection[];
+    .filter((c) => c !== undefined) as Collection[])
+    .sort((a, b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0);
 
   return collections;
 }
