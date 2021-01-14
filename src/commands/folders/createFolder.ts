@@ -17,13 +17,13 @@ export function createFolder(parentNode?: TreeViewItem): void {
         return;
       }
 
+      const parent = parentNode.itemObject;
+
       const itemGroup = new ItemGroup<Item>({ name });
-      const folder = new Folder(parentNode.itemObject, itemGroup);
+      const folder = new Folder(parent, itemGroup);
 
-      const collection = parentNode.isCollection() ? parentNode.itemObject : getCollection(parentNode.itemObject);
+      parent.addChild(folder);
 
-      collection.addChild(folder);
-
-      runCommand('saveCollection', collection);
+      runCommand('saveCollection', getCollection(parent));
     });
 }

@@ -1,9 +1,9 @@
-import { Item, ItemGroup } from 'postman-collection';
+import { Item } from 'postman-collection';
 import { window } from 'vscode';
-import { Folder } from '../../postman/Folder';
 import { TreeViewItem } from '../../collection-explorer/treeViewItem';
 import { getCollection } from '../../utils';
 import { runCommand } from '../commands';
+import { Request } from '../../postman/Request';
 
 export function createRequest(parentNode?: TreeViewItem): void {
   if (parentNode === undefined || (!parentNode.isCollection() && !parentNode.isFolder())) {
@@ -17,12 +17,12 @@ export function createRequest(parentNode?: TreeViewItem): void {
         return;
       }
 
-      const itemGroup = new ItemGroup<Item>({ name });
-      const folder = new Folder(parentNode.itemObject, itemGroup);
+      const item = new Item({ name });
+      const request = new Request(parentNode.itemObject, item);
 
-      const collection = parentNode.isCollection() ? parentNode.itemObject : getCollection(parentNode.itemObject);
+      parentNode.itemObject.addChild(request);
 
-      collection.addChild(folder);
+      const collection = getCollection(parentNode.itemObject);
 
       runCommand('saveCollection', collection);
     });

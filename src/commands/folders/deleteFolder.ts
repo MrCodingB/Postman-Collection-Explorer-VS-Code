@@ -1,14 +1,14 @@
-import { commands } from 'vscode';
 import { TreeViewItem } from '../../collection-explorer/treeViewItem';
 import { getCollection } from '../../utils';
+import { runCommand } from '../commands';
 
 export function deleteFolder(node?: TreeViewItem): void {
   if (node === undefined || !node.isFolder()) {
     return;
   }
 
-  const collection = getCollection(node.itemObject);
-  collection.removeChild(node.itemObject);
+  const folder = node.itemObject;
+  folder.parent.removeChild(folder);
 
-  commands.executeCommand('postman-collection-explorer.refreshView');
+  runCommand('saveCollection', getCollection(folder));
 }
