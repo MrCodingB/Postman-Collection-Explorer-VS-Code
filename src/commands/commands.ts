@@ -8,6 +8,7 @@ import { deleteFolder } from './folders/deleteFolder';
 import { createRequest } from './requests/createRequest';
 import { deleteRequest } from './requests/deleteRequest';
 import { helloWorld } from './helloWorld';
+import { runNewman } from './runNewman';
 
 export const COMMAND_ID_PREFIX = 'postman-collection-explorer';
 
@@ -19,14 +20,20 @@ export const commands = {
   createFolder,
   deleteFolder,
   createRequest,
-  deleteRequest
+  deleteRequest,
+  runNewman
 };
 
 export type Commands = typeof commands;
 
-export function runCommand<
+export async function runCommand<
   N extends keyof typeof commands = keyof typeof commands,
-  A extends Parameters<typeof commands[N]> = Parameters<typeof commands[N]>
->(name: N, ...args: A): Thenable<unknown> {
-  return vscode.commands.executeCommand(`${COMMAND_ID_PREFIX}.${name}`, ...args);
+  A extends Parameters<typeof commands[N]> = Parameters<typeof commands[N]>,
+  R extends ReturnType<typeof commands[N]> = ReturnType<typeof commands[N]>
+>(name: N, ...args: A): Promise<R> {
+  return new Promise<R>((resolve) => {
+    vscode.commands
+      .executeCommand(`${COMMAND_ID_PREFIX}.${name}`, ...args)
+      .then((result: any) => resolve(result));
+  });
 }
