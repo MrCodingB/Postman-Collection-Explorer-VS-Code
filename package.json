@@ -1,98 +1,98 @@
 {
-	"name": "postman-collection-explorer",
-	"displayName": "Postman Collection Explorer",
-	"description": "An extension for VS Code to explore, manage and test Postman Collections.",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.52.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"onCommand:postman-collection-explorer.helloWorld",
-		"onCommand:postman-collection-explorer.createCollection",
-		"onCommand:postman-collection-explorer.deleteCollection",
-		"onCommand:postman-collection-explorer.saveCollection",
-		"onCommand:postman-collection-explorer.createFolder",
-		"onCommand:postman-collection-explorer.deleteFolder",
-		"onCommand:postman-collection-explorer.createRequest",
-		"onCommand:postman-collection-explorer.deleteRequest",
-		"onView:postmanCollectionExplorer"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
+  "name": "postman-collection-explorer",
+  "displayName": "Postman Collection Explorer",
+  "description": "An extension for VS Code to explore, manage and test Postman Collections.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.52.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:postman-collection-explorer.helloWorld",
+    "onCommand:postman-collection-explorer.createCollection",
+    "onCommand:postman-collection-explorer.deleteCollection",
+    "onCommand:postman-collection-explorer.saveCollection",
+    "onCommand:postman-collection-explorer.createFolder",
+    "onCommand:postman-collection-explorer.deleteFolder",
+    "onCommand:postman-collection-explorer.createRequest",
+    "onCommand:postman-collection-explorer.deleteRequest",
+    "onView:postmanCollectionExplorer"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
       {
-				"command": "postman-collection-explorer.refreshView",
+        "command": "postman-collection-explorer.refreshView",
         "title": "Refresh View",
         "category": "Postman",
         "icon": "$(refresh)"
-			},
-			{
-				"command": "postman-collection-explorer.helloWorld",
+      },
+      {
+        "command": "postman-collection-explorer.helloWorld",
         "title": "Hello World",
         "category": "Postman"
       },
       {
-				"command": "postman-collection-explorer.createCollection",
+        "command": "postman-collection-explorer.createCollection",
         "title": "Create Collection",
         "category": "Postman",
         "icon": "$(add)"
       },
       {
-				"command": "postman-collection-explorer.deleteCollection",
+        "command": "postman-collection-explorer.deleteCollection",
         "title": "Delete Collection",
         "category": "Postman",
         "icon": "$(trash)"
       },
       {
-				"command": "postman-collection-explorer.saveCollection",
+        "command": "postman-collection-explorer.saveCollection",
         "title": "Save Collection",
         "category": "Postman",
         "icon": "$(save)"
-			},
+      },
       {
-				"command": "postman-collection-explorer.createFolder",
+        "command": "postman-collection-explorer.createFolder",
         "title": "Create Folder",
         "category": "Postman",
         "icon": "$(add)"
       },
       {
-				"command": "postman-collection-explorer.deleteFolder",
+        "command": "postman-collection-explorer.deleteFolder",
         "title": "Delete Folder",
         "category": "Postman",
         "icon": "$(trash)"
-			},
+      },
       {
-				"command": "postman-collection-explorer.createRequest",
+        "command": "postman-collection-explorer.createRequest",
         "title": "Create Request",
         "category": "Postman",
         "icon": "$(add)"
       },
       {
-				"command": "postman-collection-explorer.deleteRequest",
+        "command": "postman-collection-explorer.deleteRequest",
         "title": "Delete Request",
         "category": "Postman",
         "icon": "$(trash)"
-			}
-		],
-		"views": {
-			"postman-collection-explorer": [
-				{
-					"id": "postmanCollectionExplorer",
-					"name": "Postman Collection Explorer"
-				}
-			]
-		},
-		"viewsContainers": {
-			"activitybar": [
-				{
-					"id": "postman-collection-explorer",
-					"title": "Postman Collection Explorer",
-					"icon": "assets/postman-head.svg"
-				}
-			]
+      }
+    ],
+    "views": {
+      "postman-collection-explorer": [
+        {
+          "id": "postmanCollectionExplorer",
+          "name": "Postman Collection Explorer"
+        }
+      ]
+    },
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "postman-collection-explorer",
+          "title": "Postman Collection Explorer",
+          "icon": "assets/postman-head.svg"
+        }
+      ]
     },
     "menus": {
       "view/item/context": [
@@ -133,31 +133,33 @@
         }
       ]
     }
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"lint": "eslint src --ext ts",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/vscode": "^1.52.0",
-		"@types/glob": "^7.1.3",
-		"@types/mocha": "^8.0.0",
-		"@types/node": "^14.0.27",
-		"eslint": "^7.6.0",
-		"@typescript-eslint/eslint-plugin": "^3.8.0",
-		"@typescript-eslint/parser": "^3.8.0",
-		"glob": "^7.1.6",
-		"mocha": "^8.0.1",
-		"typescript": "^3.8.3",
-		"vscode-test": "^1.4.0"
-	},
-	"dependencies": {
-		"@types/postman-collection": "^3.5.5",
-		"postman-collection": "^3.6.9",
-		"postman-runtime": "^7.26.10"
-	}
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.0",
+    "@types/newman": "^5.1.1",
+    "@types/node": "^14.0.27",
+    "@types/postman-collection": "^3.5.5",
+    "@types/vscode": "^1.52.0",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
+    "eslint": "^7.6.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.0.1",
+    "typescript": "^3.8.3",
+    "vscode-test": "^1.4.0"
+  },
+  "dependencies": {
+    "newman": "^5.2.2",
+    "postman-collection": "^3.6.9",
+    "postman-runtime": "^7.26.10"
+  }
 }
