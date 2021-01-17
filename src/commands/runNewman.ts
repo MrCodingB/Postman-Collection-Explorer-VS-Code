@@ -1,13 +1,13 @@
-import { NewmanRunSummary } from 'newman';
 import { commands } from 'vscode';
 import { TreeViewItem } from '../collection-explorer/treeViewItem';
 import { Collection } from '../postman/Collection';
 import { getCollections } from '../postman/getCollections';
+import { RunSummary } from '../postman/newmanTypes';
 import { getCollection } from '../utils';
 import { runWithNewman } from '../utils/runWithNewman';
 import { COMMAND_ID_PREFIX } from './commands';
 
-async function runTestsForItem(item: TreeViewItem | Collection): Promise<NewmanRunSummary> {
+async function runTestsForItem(item: TreeViewItem | Collection): Promise<RunSummary> {
   const collection = Collection.isCollection(item) ? item : getCollection(item.itemObject);
 
   const [err, summary] = await runWithNewman({
@@ -23,7 +23,7 @@ async function runTestsForItem(item: TreeViewItem | Collection): Promise<NewmanR
 }
 
 export async function runNewman(item?: TreeViewItem | Collection): Promise<void> {
-  let summaries: NewmanRunSummary[] | undefined;
+  let summaries: RunSummary[] | undefined;
 
   if (item === undefined) {
     const collections = await getCollections();

@@ -125,11 +125,13 @@
         },
         {
           "command": "postman-collection-explorer.createFolder",
-          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer"
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
+          "group": "1_create@1"
         },
         {
           "command": "postman-collection-explorer.createRequest",
-          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer"
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
+          "group": "1_create@2"
         }
       ],
       "view/title": [
@@ -147,6 +149,11 @@
           "command": "postman-collection-explorer.refreshTestView",
           "when": "view == postmanTestExplorer",
           "group": "navigation"
+        },
+        {
+          "command": "postman-collection-explorer.refreshTestView",
+          "when": "view == postmanTestExplorer",
+          "group": "1_run@1"
         }
       ]
     }

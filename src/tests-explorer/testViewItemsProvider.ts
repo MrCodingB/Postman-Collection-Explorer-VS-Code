@@ -1,23 +1,19 @@
-import { NewmanRunSummary } from 'newman';
-import { Event, EventEmitter, TreeDataProvider, window, workspace } from 'vscode';
-import { Collection } from '../postman/Collection';
-import { Folder } from '../postman/Folder';
-import { getCollections } from '../postman/getCollections';
-import { Request } from '../postman/Request';
+import { Event, EventEmitter, TreeDataProvider } from 'vscode';
+import { RunSummary } from '../postman/newmanTypes';
 import { TestViewItem } from './testViewItem';
 
 export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
   public onDidChangeTreeData: Event<TestViewItem | null | undefined | void>;
 
   private treeDataChanged: EventEmitter<TestViewItem | undefined | null | void>;
-  private summaries?: NewmanRunSummary[];
+  private summaries?: RunSummary[];
 
   constructor() {
     this.treeDataChanged = new EventEmitter<TestViewItem | undefined | null | void>();
     this.onDidChangeTreeData = this.treeDataChanged.event;
   }
 
-  setRunSummaries(summaries?: NewmanRunSummary[]): void {
+  setRunSummaries(summaries?: RunSummary[]): void {
     this.summaries = summaries;
     this.refresh();
   }
@@ -27,38 +23,22 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
   }
 
   getTreeItem(element: TestViewItem): TestViewItem {
-    if (Collection.isCollection(element) || Folder.isFolder(element) || Request.isRequest(element)) {
-      return TestViewItem.create(element);
-    }
-
     return element;
   }
 
   async getChildren(element?: TestViewItem): Promise<TestViewItem[]> {
-    if (workspace.workspaceFolders === undefined || workspace.workspaceFolders.length === 0) {
+    if (this.summaries === undefined) {
       return [];
     }
 
     if (element) {
-      return this.getChildrenAsItems(element);
+      return this.getChildrenAsItems();
     } else {
-      const collections = await getCollections();
-
-      if (collections.length === 0) {
-        window.showInformationMessage('No postman collections found in workspace');
-      }
-
-      return collections.map(TestViewItem.create);
+      return this.summaries.map((sum) => TestViewItem.create(sum));
     }
   }
 
-  private getChildrenAsItems(element: TestViewItem): TestViewItem[] {
-    if (!element.isCollection() && !element.isFolder()) {
-      return [];
-    }
-
-    const children = element.itemObject.children;
-
-    return children.map((i) => TestViewItem.create(i));
+  private getChildrenAsItems(): TestViewItem[] {
+    return [];
   }
 }
