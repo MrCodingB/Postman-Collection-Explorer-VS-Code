@@ -2,23 +2,17 @@ import { Item, ItemDefinition } from 'postman-collection';
 import { isItem } from '../utils';
 import { Collection } from './Collection';
 import { Folder } from './Folder';
+import { PostmanItem } from './PostmanItem';
 
-export class Request {
-  public rootItem: Item;
-  public id: string;
-  public name: string;
-  public description: string;
+export class Request extends PostmanItem<Item> {
   public method: string;
 
   constructor(
     public parent: Collection | Folder,
     item: Item | ItemDefinition
   ) {
-    this.rootItem = isItem(item) ? item : new Item(item);
+    super(isItem(item) ? item : new Item(item));
 
-    this.id = this.rootItem.id;
-    this.name = this.rootItem.name;
-    this.description = this.rootItem.description?.toString() ?? '';
     this.method = this.rootItem.request.method;
   }
 

@@ -1,11 +1,10 @@
-import { Collection, Item, ItemGroup } from 'postman-collection';
+import { Collection as PmCollection, Item, ItemGroup } from 'postman-collection';
 import { Folder } from './Folder';
+import { PostmanItem } from './PostmanItem';
 import { Request } from './Request';
 
-export abstract class Container {
+export abstract class Container<T extends ItemGroup<Item> | PmCollection = ItemGroup<Item> | PmCollection> extends PostmanItem<T> {
   public children: (Folder | Request)[] = [];
-
-  public abstract rootItem: Collection | ItemGroup<Item>;
 
   public addChild(child: Folder | Request): void {
     this.rootItem.items.add(child.rootItem);
