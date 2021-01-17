@@ -1,3 +1,4 @@
+import { NewmanRunSummary } from 'newman';
 import * as vscode from 'vscode';
 import { TreeViewItem } from './collection-explorer/treeViewItem';
 import { TreeViewItemsProvider } from './collection-explorer/treeViewItemsProvider';
@@ -23,6 +24,7 @@ export function activate(context: vscode.ExtensionContext): void {
   const testViewItemsProvider = new TestViewItemsProvider();
   vscode.window.registerTreeDataProvider('postmanTestExplorer', testViewItemsProvider);
   vscode.commands.registerCommand(`${COMMAND_ID_PREFIX}.refreshTestView`, (args?: TestViewItem) => testViewItemsProvider.refresh(args));
+  vscode.commands.registerCommand(`${COMMAND_ID_PREFIX}.setRunSummaries`, (args?: NewmanRunSummary[]) => testViewItemsProvider.setRunSummaries(args));
 }
 
 // export function deactivate(): void { }

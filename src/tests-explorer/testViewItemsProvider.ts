@@ -10,15 +10,15 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
   public onDidChangeTreeData: Event<TestViewItem | null | undefined | void>;
 
   private treeDataChanged: EventEmitter<TestViewItem | undefined | null | void>;
-  private lastRunSummary?: NewmanRunSummary;
+  private summaries?: NewmanRunSummary[];
 
   constructor() {
     this.treeDataChanged = new EventEmitter<TestViewItem | undefined | null | void>();
     this.onDidChangeTreeData = this.treeDataChanged.event;
   }
 
-  setLastRunSummary(summary: NewmanRunSummary): void {
-    this.lastRunSummary = summary;
+  setRunSummaries(summaries?: NewmanRunSummary[]): void {
+    this.summaries = summaries;
     this.refresh();
   }
 

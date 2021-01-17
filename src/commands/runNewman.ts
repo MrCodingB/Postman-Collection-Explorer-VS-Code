@@ -1,27 +1,13 @@
 import { NewmanRunSummary } from 'newman';
+import { commands } from 'vscode';
 import { TreeViewItem } from '../collection-explorer/treeViewItem';
 import { Collection } from '../postman/Collection';
 import { getCollections } from '../postman/getCollections';
 import { getCollection } from '../utils';
 import { runWithNewman } from '../utils/runWithNewman';
+import { COMMAND_ID_PREFIX } from './commands';
 
-export async function runNewman(item?: TreeViewItem | Collection): Promise<NewmanRunSummary[]> {
-  if (item === undefined) {
-    const collections = await getCollections();
-
-    const result: Promise<NewmanRunSummary[]>[] = [];
-
-    for (const collection of collections) {
-      const summary = runNewman(collection);
-
-      result.push(summary);
-    }
-
-    return Promise
-      .all(result)
-      .then((array) => array.reduce((prev, cur) => prev.concat(cur), []));
-  }
-
+async function runTestsForItem(item: TreeViewItem | Collection): Promise<NewmanRunSummary> {
   const collection = Collection.isCollection(item) ? item : getCollection(item.itemObject);
 
   const [err, summary] = await runWithNewman({
@@ -33,5 +19,19 @@ export async function runNewman(item?: TreeViewItem | Collection): Promise<Newma
     throw err;
   }
 
-  return [summary];
+  return summary;
+}
+
+export async function runNewman(item?: TreeViewItem | Collection): Promise<void> {
+  let summaries: NewmanRunSummary[] | undefined;
+
+  if (item === undefined) {
+    const collections = await getCollections();
+
+    summaries = await Promise.all(collections.map((c) => runTestsForItem(c)));
+  } else {
+    summaries = [await runTestsForItem(item)];
+  }
+
+  commands.executeCommand(`${COMMAND_ID_PREFIX}.setRunSummaries`, summaries);
 }
