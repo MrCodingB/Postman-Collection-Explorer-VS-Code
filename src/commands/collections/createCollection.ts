@@ -1,6 +1,6 @@
 import { Collection } from '../../postman/Collection';
 import { Collection as PmCollection } from 'postman-collection';
-import { commands, Uri, window, workspace } from 'vscode';
+import { window, workspace } from 'vscode';
 import { join } from 'path';
 import { runCommand } from '../commands';
 
@@ -24,4 +24,4 @@ export function createCollection(): void {
 
       runCommand('saveCollection', collection);
     });
-};
+}

@@ -34,6 +34,6 @@ export async function runCommand<
   return new Promise<R>((resolve) => {
     vscode.commands
       .executeCommand(`${COMMAND_ID_PREFIX}.${name}`, ...args)
-      .then((result: any) => resolve(result));
+      .then((result) => resolve(result as R));
   });
 }

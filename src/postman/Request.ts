@@ -22,6 +22,7 @@ export class Request {
     this.method = this.rootItem.request.method;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
   public static isRequest(obj: any): obj is Request {
     const item = obj.rootItem;
 

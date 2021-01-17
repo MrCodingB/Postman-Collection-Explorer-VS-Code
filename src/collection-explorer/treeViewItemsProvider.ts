@@ -7,9 +7,14 @@ import { isPostmanElement } from '../utils';
 import { TreeViewItem } from './treeViewItem';
 
 export class TreeViewItemsProvider implements TreeDataProvider<TreeViewItem> {
-  private treeDataChanged = new EventEmitter<TreeViewItem | undefined | null | void>();
+  public onDidChangeTreeData: Event<TreeViewItem | null | undefined | void>;
 
-  public onDidChangeTreeData = this.treeDataChanged.event;
+  private treeDataChanged: EventEmitter<TreeViewItem | undefined | null | void>;
+
+  constructor() {
+    this.treeDataChanged = new EventEmitter<TreeViewItem | undefined | null | void>();
+    this.onDidChangeTreeData = this.treeDataChanged.event;
+  }
 
   refresh(data?: TreeViewItem): void {
     this.treeDataChanged.fire(data);
@@ -46,7 +51,7 @@ export class TreeViewItemsProvider implements TreeDataProvider<TreeViewItem> {
       return [];
     }
 
-    var children = element.itemObject.children;
+    const children = element.itemObject.children;
 
     return children.map((i) => TreeViewItem.create(i));
   }

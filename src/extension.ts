@@ -3,7 +3,7 @@ import { TreeViewItem } from './collection-explorer/treeViewItem';
 import { TreeViewItemsProvider } from './collection-explorer/treeViewItemsProvider';
 import { commands, COMMAND_ID_PREFIX } from './commands/commands';
 
-export function activate(context: vscode.ExtensionContext) {
+export function activate(context: vscode.ExtensionContext): void {
   const commandNames = Object.keys(commands) as (keyof typeof commands)[];
 
   for (const name of commandNames) {
@@ -19,4 +19,4 @@ export function activate(context: vscode.ExtensionContext) {
   vscode.commands.registerCommand(`${COMMAND_ID_PREFIX}.refreshView`, (args?: TreeViewItem) => treeViewItemsProvider.refresh(args));
 }
 
-export function deactivate() { }
+// export function deactivate(): void { }

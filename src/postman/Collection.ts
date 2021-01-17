@@ -19,6 +19,7 @@ export class Collection extends Container {
     this.children = resolveChildren(this.rootItem, this);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
   public static isCollection(obj: any): obj is Collection {
     const collection = obj.rootItem;
 

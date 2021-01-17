@@ -14,7 +14,7 @@ export function saveCollection(itemOrCollection: Collection | TreeViewItem): voi
       .writeFile(
         Uri.file(collection.filePath),
         Buffer.from(JSON.stringify(collection.rootItem.toJSON(), undefined, 4)))
-      .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));;
+      .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));
   } catch (err) {
     console.warn(err);
   }

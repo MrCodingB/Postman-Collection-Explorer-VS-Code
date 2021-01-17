@@ -23,6 +23,7 @@ export class Folder extends Container {
     this.children = resolveChildren(this.rootItem, this);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
   public static isFolder(obj: any): obj is Folder {
     const itemGroup = obj.rootItem;
 

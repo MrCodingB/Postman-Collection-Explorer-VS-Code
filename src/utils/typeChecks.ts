@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types */
 import { Collection as PmCollection, Item, ItemGroup } from 'postman-collection';
 import { Folder } from '../postman/Folder';
 import { Request } from '../postman/Request';

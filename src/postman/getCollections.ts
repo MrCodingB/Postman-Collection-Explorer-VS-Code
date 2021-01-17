@@ -2,17 +2,7 @@ import { readFileSync } from 'fs';
 import { workspace } from 'vscode';
 import { Collection } from './Collection';
 import { Collection as PmCollection } from 'postman-collection';
-
-export async function getCollections(): Promise<Collection[]> {
-  const collectionFiles = await getCollectionsInWorkspace();
-
-  const collections = (collectionFiles
-    .map((f) => getCollectionFromFile(f))
-    .filter((c) => c !== undefined) as Collection[])
-    .sort((a, b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0);
-
-  return collections;
-}
+import { runCommand } from '../commands/commands';
 
 function getCollectionsInWorkspace(): Promise<string[]> {
   const promise = new Promise<string[]>((resolve) => {
@@ -36,4 +26,23 @@ function getCollectionFromFile(path: string): Collection | undefined {
   }
 
   return undefined;
+}
+
+export async function getCollections(): Promise<Collection[]> {
+  const collectionFiles = await getCollectionsInWorkspace();
+
+  const collections = (collectionFiles
+    .map((f) => getCollectionFromFile(f))
+    .filter((c) => c !== undefined) as Collection[])
+    .sort((a, b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0);
+
+  const collection = collections.find((c) => c.name === 'Flask Test Project');
+  if (collection !== undefined) {
+    const result = await runCommand('runNewman', collection, [collection.children[0]]);
+    console.log('Result: ', result);
+  } else {
+    runCommand('runNewman');
+  }
+
+  return collections;
 }

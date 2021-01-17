@@ -7,6 +7,7 @@ export function getCollection(item: Folder | Request | Collection): Collection {
     return item;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let parent: any = item.parent;
 
   while (parent.parent !== undefined) {

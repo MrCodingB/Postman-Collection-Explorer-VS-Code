@@ -3,8 +3,9 @@ import { Folder } from './Folder';
 import { Request } from './Request';
 
 export abstract class Container {
-  public abstract rootItem: Collection | ItemGroup<Item>;
   public children: (Folder | Request)[] = [];
+
+  public abstract rootItem: Collection | ItemGroup<Item>;
 
   public addChild(child: Folder | Request): void {
     this.rootItem.items.add(child.rootItem);

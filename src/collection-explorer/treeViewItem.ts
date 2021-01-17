@@ -15,9 +15,8 @@ export class TreeViewItem extends TreeItem {
     this.description = itemObject.description?.toString();
     this.id = this.itemObject.id;
     this.contextValue = Collection.isCollection(itemObject) ? 'collection' : Folder.isFolder(itemObject) ? 'folder' : 'request';
+    this.iconPath = this.getIcon();
   }
-
-  iconPath = this.getIcon();
 
   public static create(object: Collection | Folder | Request): TreeViewItem {
     let collapsibleState = TreeItemCollapsibleState.None;
@@ -33,15 +32,15 @@ export class TreeViewItem extends TreeItem {
     return new TreeViewItem(object.name, collapsibleState, object);
   }
 
-  public isCollection(): this is TreeItem & { itemObject: Collection, filePath: string } {
+  public isCollection(): this is TreeItem & { itemObject: Collection; filePath: string } {
     return Collection.isCollection(this.itemObject);
   }
 
-  public isFolder(): this is TreeItem & { itemObject: Folder, filePath: undefined } {
+  public isFolder(): this is TreeItem & { itemObject: Folder; filePath: undefined } {
     return Folder.isFolder(this.itemObject);
   }
 
-  public isRequest(): this is TreeItem & { itemObject: Request, filePath: undefined } {
+  public isRequest(): this is TreeItem & { itemObject: Request; filePath: undefined } {
     return Request.isRequest(this.itemObject);
   }
 
@@ -55,7 +54,7 @@ export class TreeViewItem extends TreeItem {
    *     light: 'light/${method}.svg'
    *   }`
    */
-  private getIcon(): ThemeIcon | { dark: string, light: string } {
+  private getIcon(): ThemeIcon | { dark: string; light: string } {
     if (this.isCollection()) {
       return new ThemeIcon('archive');
     }
