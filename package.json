@@ -10,15 +10,7 @@
     "Other"
   ],
   "activationEvents": [
-    "onCommand:postman-collection-explorer.helloWorld",
-    "onCommand:postman-collection-explorer.createCollection",
-    "onCommand:postman-collection-explorer.deleteCollection",
-    "onCommand:postman-collection-explorer.saveCollection",
-    "onCommand:postman-collection-explorer.createFolder",
-    "onCommand:postman-collection-explorer.deleteFolder",
-    "onCommand:postman-collection-explorer.createRequest",
-    "onCommand:postman-collection-explorer.deleteRequest",
-    "onView:postmanCollectionExplorer"
+    "*"
   ],
   "main": "./out/extension.js",
   "contributes": {
@@ -81,6 +73,12 @@
         "title": "Delete Request",
         "category": "Postman",
         "icon": "$(trash)"
+      },
+      {
+        "command": "postman-collection-explorer.runTests",
+        "title": "Run Tests",
+        "category": "Postman",
+        "icon": "$(run)"
       }
     ],
     "views": {
@@ -147,6 +145,11 @@
         },
         {
           "command": "postman-collection-explorer.refreshTestView",
+          "when": "view == postmanTestExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "postman-collection-explorer.runTests",
           "when": "view == postmanTestExplorer",
           "group": "navigation"
         },

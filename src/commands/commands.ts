@@ -8,7 +8,7 @@ import { deleteFolder } from './folders/deleteFolder';
 import { createRequest } from './requests/createRequest';
 import { deleteRequest } from './requests/deleteRequest';
 import { helloWorld } from './helloWorld';
-import { runNewman } from './runNewman';
+import { runTests } from './runTests';
 
 export const COMMAND_ID_PREFIX = 'postman-collection-explorer';
 
@@ -21,7 +21,7 @@ export const commands = {
   deleteFolder,
   createRequest,
   deleteRequest,
-  runNewman
+  runTests
 };
 
 export type Commands = typeof commands;

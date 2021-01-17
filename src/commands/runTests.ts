@@ -22,7 +22,7 @@ async function runTestsForItem(item: TreeViewItem | Collection): Promise<RunSumm
   return summary;
 }
 
-export async function runNewman(item?: TreeViewItem | Collection): Promise<void> {
+export async function runTests(item?: TreeViewItem | Collection): Promise<void> {
   let summaries: RunSummary[] | undefined;
 
   if (item === undefined) {
