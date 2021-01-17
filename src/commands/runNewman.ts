@@ -1,14 +1,12 @@
 import { NewmanRunSummary } from 'newman';
+import { TreeViewItem } from '../collection-explorer/treeViewItem';
 import { Collection } from '../postman/Collection';
-import { Folder } from '../postman/Folder';
 import { getCollections } from '../postman/getCollections';
-import { Request } from '../postman/Request';
+import { getCollection } from '../utils';
 import { runWithNewman } from '../utils/runWithNewman';
 
-export async function runNewman(collection?: Collection, folders?: (Folder | Request)[]): Promise<NewmanRunSummary[]> {
-  console.log('I got run without being registered');
-
-  if (collection === undefined) {
+export async function runNewman(item?: TreeViewItem | Collection): Promise<NewmanRunSummary[]> {
+  if (item === undefined) {
     const collections = await getCollections();
 
     const result: Promise<NewmanRunSummary[]>[] = [];
@@ -24,9 +22,11 @@ export async function runNewman(collection?: Collection, folders?: (Folder | Req
       .then((array) => array.reduce((prev, cur) => prev.concat(cur), []));
   }
 
+  const collection = Collection.isCollection(item) ? item : getCollection(item.itemObject);
+
   const [err, summary] = await runWithNewman({
     collection: collection.filePath,
-    folder: folders?.map((f) => f.name)
+    folder: Collection.isCollection(item) ? undefined : item.itemObject.name
   });
 
   if (err !== null) {

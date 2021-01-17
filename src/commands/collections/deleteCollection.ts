@@ -9,7 +9,7 @@ export function deleteCollection(node?: TreeViewItem): void {
   try {
     workspace.fs
       .delete(Uri.file(node.itemObject.filePath))
-      .then(() => commands.executeCommand('postman-collection-explorer.refreshView'));
+      .then(() => commands.executeCommand('postman-collection-explorer.refreshCollectionView'));
   } catch (err) {
     console.warn('Could not delete collection');
     console.warn(err);

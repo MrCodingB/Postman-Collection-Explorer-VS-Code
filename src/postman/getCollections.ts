@@ -38,7 +38,7 @@ export async function getCollections(): Promise<Collection[]> {
 
   const collection = collections.find((c) => c.name === 'Flask Test Project');
   if (collection !== undefined) {
-    const result = await runCommand('runNewman', collection, [collection.children[0]]);
+    const result = await runCommand('runNewman', collection);
     console.log('Result: ', result);
   } else {
     runCommand('runNewman');

@@ -24,7 +24,13 @@
   "contributes": {
     "commands": [
       {
-        "command": "postman-collection-explorer.refreshView",
+        "command": "postman-collection-explorer.refreshCollectionView",
+        "title": "Refresh View",
+        "category": "Postman",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "postman-collection-explorer.refreshTestView",
         "title": "Refresh View",
         "category": "Postman",
         "icon": "$(refresh)"
@@ -83,6 +89,12 @@
           "id": "postmanCollectionExplorer",
           "name": "Postman Collection Explorer"
         }
+      ],
+      "test": [
+        {
+          "id": "postmanTestExplorer",
+          "name": "Postman Tests Explorer"
+        }
       ]
     },
     "viewsContainers": {
@@ -122,13 +134,18 @@
       ],
       "view/title": [
         {
-          "command": "postman-collection-explorer.refreshView",
+          "command": "postman-collection-explorer.refreshCollectionView",
           "when": "view == postmanCollectionExplorer",
           "group": "navigation"
         },
         {
           "command": "postman-collection-explorer.createCollection",
           "when": "view == postmanCollectionExplorer",
+          "group": "navigation"
+        },
+        {
+          "command": "postman-collection-explorer.refreshTestView",
+          "when": "view == postmanTestExplorer",
           "group": "navigation"
         }
       ]
