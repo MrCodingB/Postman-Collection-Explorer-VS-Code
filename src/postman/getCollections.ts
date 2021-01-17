@@ -36,13 +36,12 @@ export async function getCollections(): Promise<Collection[]> {
     .filter((c) => c !== undefined) as Collection[])
     .sort((a, b) => a.name > b.name ? 1 : a.name < b.name ? -1 : 0);
 
+
+
   const collection = collections.find((c) => c.name === 'Flask Test Project');
-  if (collection !== undefined) {
-    const result = await runCommand('runNewman', collection);
-    console.log('Result: ', result);
-  } else {
-    runCommand('runNewman');
-  }
+  runCommand('runNewman', collection);
+
+
 
   return collections;
 }

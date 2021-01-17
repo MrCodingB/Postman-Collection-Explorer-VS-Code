@@ -3,7 +3,11 @@ import { workspace } from 'vscode';
 import { RunSummary } from '../postman/newmanTypes';
 
 function toRunSummary(summary: NewmanRunSummary): RunSummary {
-  return JSON.parse(JSON.stringify(summary)) as RunSummary;
+  const result = JSON.parse(JSON.stringify(summary)) as RunSummary;
+
+  result.collection.id = summary.collection._.postman_id;
+
+  return result;
 }
 
 export async function runWithNewman(options: NewmanRunOptions): Promise<[Error | null, RunSummary]> {

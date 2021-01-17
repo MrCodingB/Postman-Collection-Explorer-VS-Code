@@ -8,6 +8,7 @@ export interface RunSummary extends NewmanRunSummary {
 }
 
 export interface RunCollection {
+  id: string;
   item: RunCollectionItem[];
   event: any[];
   variable: RunCollectionVariable[];
