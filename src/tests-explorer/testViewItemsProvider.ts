@@ -32,13 +32,41 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
     }
 
     if (element) {
-      return this.getChildrenAsItems();
+      return this.getChildrenAsItems(element);
     } else {
-      return this.summaries.map((sum) => TestViewItem.createFromSummary(sum));
+      return this.summaries.map(TestViewItem.createFromSummary);
     }
   }
 
-  private getChildrenAsItems(): TestViewItem[] {
+  private getChildrenAsItems(element: TestViewItem): TestViewItem[] {
+    if (this.summaries === undefined) {
+      return [];
+    }
+
+    let elementSummary: RunSummary | undefined;
+
+    elementSummary = this.summaries.find((s) => s.collection.id === element.id);
+    const collectionFromId = elementSummary?.collection;
+
+    if (collectionFromId !== undefined && elementSummary !== undefined) {
+      const executions = elementSummary.run.executions;
+
+      return executions.map(TestViewItem.createFromExecution);
+    }
+
+    elementSummary = this.summaries.find((s) => s.run.executions.find((e) => e.item.id === element.id) !== undefined);
+    const executionFromId = elementSummary?.run.executions.find((e) => e.item.id === element.id);
+
+    if (executionFromId !== undefined) {
+      const assertions = executionFromId.assertions;
+
+      if (assertions === undefined) {
+        return [];
+      }
+
+      return assertions.map(TestViewItem.createFromAssertion);
+    }
+
     return [];
   }
 }

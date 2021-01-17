@@ -10,9 +10,7 @@ export function activate(context: vscode.ExtensionContext): void {
   const commandNames = Object.keys(commands) as (keyof typeof commands)[];
 
   for (const name of commandNames) {
-    const command = commands[name];
-
-    const disposable = vscode.commands.registerCommand(`${COMMAND_ID_PREFIX}.${name}`, command);
+    const disposable = vscode.commands.registerCommand(`${COMMAND_ID_PREFIX}.${name}`, commands[name]);
 
     context.subscriptions.push(disposable);
   }

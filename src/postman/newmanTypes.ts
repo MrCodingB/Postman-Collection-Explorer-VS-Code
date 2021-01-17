@@ -1,10 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { NewmanRunSummary } from 'newman';
+import { NewmanRunExecutionAssertionError, NewmanRunFailure, NewmanRunStat } from 'newman';
 
-export interface RunSummary extends NewmanRunSummary {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface RunSummary {
+  error?: any;
   collection: RunCollection;
   environment: RunEnvironment;
   globals: RunGlobals;
+  run: Run;
 }
 
 export interface RunCollection {
@@ -50,4 +52,33 @@ export interface RunEnvironment {
 export interface RunGlobals {
   id: string;
   values: any[];
+}
+
+export interface Run {
+  stats: {
+    iterations: NewmanRunStat;
+    items: NewmanRunStat;
+    scripts: NewmanRunStat;
+    prerequests: NewmanRunStat;
+    requests: NewmanRunStat;
+    tests: NewmanRunStat;
+    assertions: NewmanRunStat;
+    testScripts: NewmanRunStat;
+    prerequestScripts: NewmanRunStat;
+  };
+  failures: NewmanRunFailure[];
+  executions: RunExecution[];
+}
+export interface RunExecution {
+  item: RunExecutionItem;
+  assertions?: RunExecutionAssertion[];
+}
+export interface RunExecutionItem {
+  id: string;
+  name: string;
+}
+export interface RunExecutionAssertion {
+  assertion: string;
+  skipped: boolean;
+  error?: NewmanRunExecutionAssertionError;
 }

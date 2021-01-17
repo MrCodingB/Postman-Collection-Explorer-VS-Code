@@ -14,6 +14,6 @@ export async function runWithNewman(options: NewmanRunOptions): Promise<[Error |
   return new Promise<[Error | null, RunSummary]>((resolve) => {
     const workingDir = workspace.workspaceFolders ? workspace.workspaceFolders[0].uri.fsPath : undefined;
 
-    run({ workingDir, ...options }, (err, summary) => resolve([err, toRunSummary(summary)]));
+    run({ workingDir, insecure: true, ...options }, (err, summary) => resolve([err, toRunSummary(summary)]));
   });
 }
