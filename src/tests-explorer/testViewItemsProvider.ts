@@ -34,7 +34,7 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
     if (element) {
       return this.getChildrenAsItems(element);
     } else {
-      return this.summaries.map(TestViewItem.createFromSummary);
+      return this.summaries.map((s) => new TestViewItem(s));
     }
   }
 
@@ -51,7 +51,7 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
     if (collectionFromId !== undefined && elementSummary !== undefined) {
       const executions = elementSummary.run.executions;
 
-      return executions.map(TestViewItem.createFromExecution);
+      return executions.map((e) => new TestViewItem(e));
     }
 
     elementSummary = this.summaries.find((s) => s.run.executions.find((e) => e.item.id === element.id) !== undefined);
@@ -64,7 +64,7 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
         return [];
       }
 
-      return assertions.map(TestViewItem.createFromAssertion);
+      return assertions.map((a) => new TestViewItem(a));
     }
 
     return [];
