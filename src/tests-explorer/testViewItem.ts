@@ -18,7 +18,7 @@ export class TestViewItem extends TreeItem {
   public static createFromSummary(summary: RunSummary): TestViewItem {
     const collapsibleState = summary.run.executions.length > 0 ? TreeItemCollapsibleState.Collapsed : TreeItemCollapsibleState.None;
     const failed = summary.run.failures.length > 0;
-    const status = failed ? 'failed' : summary.error ? 'errored' : 'passed';
+    const status = summary.error ? 'errored' : failed ? 'failed' : 'passed';
 
     return new TestViewItem(summary.collection.info.name, collapsibleState, 'collection', status, summary.collection.id);
   }
