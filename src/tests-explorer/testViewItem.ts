@@ -31,10 +31,11 @@ export class TestViewItem extends TreeItem {
       }
     }
 
-    if (this.isAssertion() && this.itemObject.error) {
+    if (this.isAssertion()) {
       this.label = this.itemObject.assertion;
-      this.description = `${this.itemObject.error.name}: ${this.itemObject.error.message}`;
-      this.tooltip = `${this.label} | ${this.description}`;
+
+      this.description = this.itemObject.error ? `${this.itemObject.error.name}: ${this.itemObject.error.message}` : '';
+      this.tooltip = this.itemObject.error ? `${this.label} | ${this.description}` : `${this.label}`;
     }
   }
 
