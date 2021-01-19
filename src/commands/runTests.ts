@@ -5,7 +5,7 @@ import { getCollections } from '../postman/getCollections';
 import { RunSummary } from '../postman/newmanTypes';
 import { getCollection } from '../utils';
 import { runWithNewman } from '../utils/runWithNewman';
-import { COMMAND_ID_PREFIX } from './commands';
+import { EXTENSION_PREFIX } from './commands';
 
 async function runTestsForItem(item: TreeViewItem | Collection): Promise<RunSummary> {
   const collection = Collection.isCollection(item) ? item : getCollection(item.itemObject);
@@ -33,5 +33,5 @@ export async function runTests(item?: TreeViewItem | Collection): Promise<void> 
     summaries = [await runTestsForItem(item)];
   }
 
-  commands.executeCommand(`${COMMAND_ID_PREFIX}.setRunSummaries`, summaries);
+  commands.executeCommand(`${EXTENSION_PREFIX}.setRunSummaries`, summaries);
 }

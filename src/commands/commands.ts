@@ -10,7 +10,7 @@ import { deleteRequest } from './requests/deleteRequest';
 import { helloWorld } from './helloWorld';
 import { runTests } from './runTests';
 
-export const COMMAND_ID_PREFIX = 'postman-collection-explorer';
+export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
 export const commands = {
   helloWorld,
@@ -33,7 +33,7 @@ export async function runCommand<
 >(name: N, ...args: A): Promise<R> {
   return new Promise<R>((resolve) => {
     vscode.commands
-      .executeCommand(`${COMMAND_ID_PREFIX}.${name}`, ...args)
+      .executeCommand(`${EXTENSION_PREFIX}.${name}`, ...args)
       .then((result) => resolve(result as R));
   });
 }
