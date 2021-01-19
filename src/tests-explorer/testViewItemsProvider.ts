@@ -35,6 +35,10 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
       return this.getChildrenAsItems(element);
     }
 
+    if (this.summaries.length === 1) {
+      return this.getChildrenAsItems(new TestViewItem(this.summaries[0]));
+    }
+
     return this.summaries.map((s) => new TestViewItem(s));
   }
 
