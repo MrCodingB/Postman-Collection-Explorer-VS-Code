@@ -21,8 +21,8 @@ export class TestViewItem extends TreeItem {
         this.collapsibleState = TreeItemCollapsibleState.Collapsed;
       }
 
-      this.description = this.itemObject.error ? `${this.itemObject.error.name}: ${this.itemObject.error.message}` : '';
-      this.tooltip = this.itemObject.error ? `${this.label} | ${this.description}` : `${this.label}`;
+      this.description = this.itemObject.error && `${this.itemObject.error.name}: ${this.itemObject.error.message}`;
+      this.tooltip = this.itemObject.error ? `${this.label} | ${this.description}` : this.label;
     }
 
     if (this.isRequest()) {
@@ -37,8 +37,8 @@ export class TestViewItem extends TreeItem {
     if (this.isAssertion()) {
       this.label = this.itemObject.assertion;
 
-      this.description = this.itemObject.error ? `${this.itemObject.error.name}: ${this.itemObject.error.message}` : '';
-      this.tooltip = this.itemObject.error ? `${this.label} | ${this.description}` : `${this.label}`;
+      this.description = this.itemObject.error && `${this.itemObject.error.name}: ${this.itemObject.error.message}`;
+      this.tooltip = this.itemObject.error ? `${this.label} | ${this.description}` : this.label;
     }
   }
 
