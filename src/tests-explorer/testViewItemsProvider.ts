@@ -27,19 +27,19 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
   }
 
   async getChildren(element?: TestViewItem): Promise<TestViewItem[]> {
-    if (this.summaries === undefined) {
+    if (!this.summaries) {
       return [];
     }
 
     if (element) {
       return this.getChildrenAsItems(element);
-    } else {
-      return this.summaries.map((s) => new TestViewItem(s));
     }
+
+    return this.summaries.map((s) => new TestViewItem(s));
   }
 
   private getChildrenAsItems(element: TestViewItem): TestViewItem[] {
-    if (this.summaries === undefined) {
+    if (!this.summaries) {
       return [];
     }
 
@@ -48,23 +48,17 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
     elementSummary = this.summaries.find((s) => s.collection.id === element.id);
     const collectionFromId = elementSummary?.collection;
 
-    if (collectionFromId !== undefined && elementSummary !== undefined) {
+    if (collectionFromId && elementSummary) {
       const executions = elementSummary.run.executions;
 
       return executions.map((e) => new TestViewItem(e));
     }
 
-    elementSummary = this.summaries.find((s) => s.run.executions.find((e) => e.item.id === element.id) !== undefined);
+    elementSummary = this.summaries.find((s) => !!s.run.executions.find((e) => e.item.id === element.id));
     const executionFromId = elementSummary?.run.executions.find((e) => e.item.id === element.id);
 
-    if (executionFromId !== undefined) {
-      const assertions = executionFromId.assertions;
-
-      if (assertions === undefined) {
-        return [];
-      }
-
-      return assertions.map((a) => new TestViewItem(a));
+    if (executionFromId && executionFromId.assertions) {
+      return executionFromId.assertions.map((a) => new TestViewItem(a));
     }
 
     return [];

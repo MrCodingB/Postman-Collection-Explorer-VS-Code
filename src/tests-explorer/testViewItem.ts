@@ -69,15 +69,15 @@ export class TestViewItem extends TreeItem {
 
   getStatus(): 'failed' | 'errored' | 'passed' {
     if (this.isCollection()) {
-      const errorAssertion = this.itemObject.run.executions.find((e) => e.assertions === undefined);
+      const errorAssertion = this.itemObject.run.executions.find((e) => !e.assertions);
 
       return this.itemObject.error || errorAssertion ? 'errored' : this.itemObject.run.failures.length > 0 ? 'failed' : 'passed';
     }
 
     if (this.isRequest()) {
-      const failedAssertion = this.itemObject.assertions?.find((e) => e.error !== undefined && e.error !== null);
+      const failedAssertion = this.itemObject.assertions?.find((e) => !!e.error);
 
-      return failedAssertion !== undefined ? 'failed' : 'passed';
+      return failedAssertion ? 'failed' : 'passed';
     }
 
     if (this.isAssertion()) {
