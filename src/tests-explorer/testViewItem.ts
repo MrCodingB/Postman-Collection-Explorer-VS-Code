@@ -3,10 +3,10 @@ import { TreeItem, TreeItemCollapsibleState } from 'vscode';
 import { RunExecution, RunExecutionAssertion, RunSummary } from '../postman/newmanTypes';
 
 export class TestViewItem extends TreeItem {
-  public readonly status: 'passed' | 'failed' | 'errored';
+  readonly status: 'passed' | 'failed' | 'errored';
 
   constructor(
-    public readonly itemObject: RunSummary | RunExecution | RunExecutionAssertion,
+    readonly itemObject: RunSummary | RunExecution | RunExecutionAssertion,
   ) {
     super('', TreeItemCollapsibleState.None);
     this.contextValue = this.getType(itemObject);
@@ -42,20 +42,20 @@ export class TestViewItem extends TreeItem {
     }
   }
 
-  public isCollection(): this is { type: 'collection'; itemObject: RunSummary; id: string } {
+  isCollection(): this is { type: 'collection'; itemObject: RunSummary; id: string } {
     return this.contextValue === 'collection';
   }
 
-  public isRequest(): this is { type: 'request'; itemObject: RunExecution; id: string } {
+  isRequest(): this is { type: 'request'; itemObject: RunExecution; id: string } {
     return this.contextValue === 'request';
   }
 
-  public isAssertion(): this is { type: 'test'; itemObject: RunExecutionAssertion } {
+  isAssertion(): this is { type: 'test'; itemObject: RunExecutionAssertion } {
     return this.contextValue === 'test';
   }
 
   // eslint-disable-next-line
-  public getType(object: any): 'collection' | 'request' | 'test' {
+  getType(object: any): 'collection' | 'request' | 'test' {
     if (object.run !== undefined) {
       return 'collection';
     }
@@ -67,7 +67,7 @@ export class TestViewItem extends TreeItem {
     return 'test';
   }
 
-  public getStatus(): 'failed' | 'errored' | 'passed' {
+  getStatus(): 'failed' | 'errored' | 'passed' {
     if (this.isCollection()) {
       const errorAssertion = this.itemObject.run.executions.find((e) => e.assertions === undefined);
 

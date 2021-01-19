@@ -6,7 +6,7 @@ import { runCommand } from '../commands';
 import { Request } from '../../postman/Request';
 
 export function createRequest(parentNode?: TreeViewItem): void {
-  if (parentNode === undefined || (!parentNode.isCollection() && !parentNode.isFolder())) {
+  if (parentNode === undefined || !(parentNode.isCollection() || parentNode.isFolder())) {
     return;
   }
 

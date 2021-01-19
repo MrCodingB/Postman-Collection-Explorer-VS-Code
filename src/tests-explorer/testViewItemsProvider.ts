@@ -3,7 +3,7 @@ import { RunSummary } from '../postman/newmanTypes';
 import { TestViewItem } from './testViewItem';
 
 export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
-  public onDidChangeTreeData: Event<TestViewItem | null | undefined | void>;
+  onDidChangeTreeData: Event<TestViewItem | null | undefined | void>;
 
   private treeDataChanged: EventEmitter<TestViewItem | undefined | null | void>;
   private summaries?: RunSummary[];

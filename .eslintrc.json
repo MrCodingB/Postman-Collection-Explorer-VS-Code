@@ -39,7 +39,15 @@
     "curly": "error",
     "eqeqeq": "error",
     "indent": "off",
+    "no-await-in-loop": "error",
+    "no-loss-of-precision": "error",
+    "no-promise-executor-return": "error",
+    "no-template-curly-in-string": "error",
     "no-throw-literal": "error",
+    "no-unreachable-loop": "error",
+    "no-unsafe-optional-chaining": "error",
+    "no-useless-backreference": "error",
+    "require-atomic-updates": "error",
     "semi": "error"
   }
 }

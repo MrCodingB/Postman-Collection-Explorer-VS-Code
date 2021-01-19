@@ -2,7 +2,6 @@ import { readFileSync } from 'fs';
 import { workspace } from 'vscode';
 import { Collection } from './Collection';
 import { Collection as PmCollection } from 'postman-collection';
-import { runCommand } from '../commands/commands';
 
 function getCollectionsInWorkspace(): Promise<string[]> {
   const promise = new Promise<string[]>((resolve) => {

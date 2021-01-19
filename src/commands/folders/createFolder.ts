@@ -6,7 +6,7 @@ import { getCollection } from '../../utils';
 import { runCommand } from '../commands';
 
 export function createFolder(parentNode?: TreeViewItem): void {
-  if (parentNode === undefined || (!parentNode.isCollection() && !parentNode.isFolder())) {
+  if (parentNode === undefined || !(parentNode.isCollection() || parentNode.isFolder())) {
     return;
   }
 
