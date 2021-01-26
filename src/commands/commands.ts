@@ -2,13 +2,13 @@ import * as vscode from 'vscode';
 
 import { createCollection } from './collections/createCollection';
 import { deleteCollection } from './collections/deleteCollection';
-import { editCollectionDescription } from './collections/editCollectionDescription';
 import { saveCollection } from './collections/saveCollection';
 import { createFolder } from './folders/createFolder';
 import { deleteFolder } from './folders/deleteFolder';
 import { createRequest } from './requests/createRequest';
 import { deleteRequest } from './requests/deleteRequest';
 import { helloWorld } from './helloWorld';
+import { editDescription } from './editDescription';
 import { runTests } from './runTests';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
@@ -17,12 +17,12 @@ export const commands = {
   helloWorld,
   createCollection,
   deleteCollection,
-  editCollectionDescription,
   saveCollection,
   createFolder,
   deleteFolder,
   createRequest,
   deleteRequest,
+  editDescription,
   runTests,
   getContext: (): vscode.ExtensionContext => ({} as vscode.ExtensionContext)
 };

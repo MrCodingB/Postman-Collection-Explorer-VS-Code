@@ -45,12 +45,6 @@
         "icon": "$(trash)"
       },
       {
-        "command": "postman-collection-explorer.editCollectionDescription",
-        "title": "Edit Description",
-        "category": "Postman",
-        "icon": "$(edit)"
-      },
-      {
         "command": "postman-collection-explorer.saveCollection",
         "title": "Save Collection",
         "category": "Postman",
@@ -79,6 +73,12 @@
         "title": "Delete Request",
         "category": "Postman",
         "icon": "$(trash)"
+      },
+      {
+        "command": "postman-collection-explorer.editDescription",
+        "title": "Edit Description",
+        "category": "Postman",
+        "icon": "$(edit)"
       },
       {
         "command": "postman-collection-explorer.runTests",
@@ -118,11 +118,6 @@
           "group": "inline"
         },
         {
-          "command": "postman-collection-explorer.editCollectionDescription",
-          "when": "view == postmanCollectionExplorer && viewItem == collection",
-          "group": "0_edit@1"
-        },
-        {
           "command": "postman-collection-explorer.deleteFolder",
           "when": "view == postmanCollectionExplorer && viewItem == folder",
           "group": "inline"
@@ -141,6 +136,11 @@
           "command": "postman-collection-explorer.createRequest",
           "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
           "group": "1_create@2"
+        },
+        {
+          "command": "postman-collection-explorer.editDescription",
+          "when": "view == postmanCollectionExplorer",
+          "group": "0_edit@1"
         }
       ],
       "view/title": [
