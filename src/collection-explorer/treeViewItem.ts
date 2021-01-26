@@ -14,7 +14,6 @@ export class TreeViewItem extends TreeItem {
   ) {
     super(label, collapsibleState);
     this.tooltip = `${this.label}`;
-    this.description = itemObject.description?.toString();
     this.id = this.itemObject.id;
     this.contextValue = this.isCollection() ? 'collection' : this.isFolder() ? 'folder' : 'request';
     this.iconPath = this.getIcon();
