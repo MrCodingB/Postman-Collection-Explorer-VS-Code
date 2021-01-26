@@ -21,7 +21,8 @@ export const commands = {
   deleteFolder,
   createRequest,
   deleteRequest,
-  runTests
+  runTests,
+  getContext: (): vscode.ExtensionContext => ({} as vscode.ExtensionContext)
 };
 
 export type Commands = typeof commands;
