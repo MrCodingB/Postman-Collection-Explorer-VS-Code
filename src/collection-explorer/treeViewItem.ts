@@ -5,6 +5,8 @@ import { Folder } from '../postman/Folder';
 import { Request } from '../postman/Request';
 
 export class TreeViewItem extends TreeItem {
+  public contextValue: 'collection' | 'folder' | 'request';
+
   constructor(
     public readonly label: string,
     public readonly collapsibleState: TreeItemCollapsibleState,
