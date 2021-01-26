@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 
 import { createCollection } from './collections/createCollection';
 import { deleteCollection } from './collections/deleteCollection';
+import { editCollectionDescription } from './collections/editCollectionDescription';
 import { saveCollection } from './collections/saveCollection';
 import { createFolder } from './folders/createFolder';
 import { deleteFolder } from './folders/deleteFolder';
@@ -16,6 +17,7 @@ export const commands = {
   helloWorld,
   createCollection,
   deleteCollection,
+  editCollectionDescription,
   saveCollection,
   createFolder,
   deleteFolder,

@@ -45,6 +45,12 @@
         "icon": "$(trash)"
       },
       {
+        "command": "postman-collection-explorer.editCollectionDescription",
+        "title": "Edit Description",
+        "category": "Postman",
+        "icon": "$(edit)"
+      },
+      {
         "command": "postman-collection-explorer.saveCollection",
         "title": "Save Collection",
         "category": "Postman",
@@ -110,6 +116,11 @@
           "command": "postman-collection-explorer.deleteCollection",
           "when": "view == postmanCollectionExplorer && viewItem == collection",
           "group": "inline"
+        },
+        {
+          "command": "postman-collection-explorer.editCollectionDescription",
+          "when": "view == postmanCollectionExplorer && viewItem == collection",
+          "group": "0_edit@1"
         },
         {
           "command": "postman-collection-explorer.deleteFolder",
