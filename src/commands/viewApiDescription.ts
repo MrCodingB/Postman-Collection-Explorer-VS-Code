@@ -17,7 +17,11 @@ function getFullDescription(item: Collection | Folder | Request): string[] {
   return description.filter((d) => d.trim() !== '');
 }
 
-export async function viewApiDescription(item: TreeViewItem): Promise<void> {
+export async function viewApiDescription(item?: TreeViewItem): Promise<void> {
+  if (item === undefined) {
+    return;
+  }
+
   const markdownExtension = extensions.getExtension('vscode.markdown-language-features');
   if (markdownExtension === undefined) {
     return;

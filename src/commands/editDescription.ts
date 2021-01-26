@@ -1,10 +1,14 @@
 import { join } from 'path';
-import { TextEditor, Uri, window, workspace } from 'vscode';
+import { Uri, window, workspace } from 'vscode';
 import { TreeViewItem } from '../collection-explorer/treeViewItem';
 import { getCollection } from '../utils';
 import { runCommand } from './commands';
 
-export async function editDescription(item: TreeViewItem): Promise<TextEditor> {
+export async function editDescription(item?: TreeViewItem): Promise<void> {
+  if (item === undefined) {
+    return;
+  }
+
   const context = await runCommand('getContext');
 
   const object = item.itemObject;
@@ -32,5 +36,5 @@ export async function editDescription(item: TreeViewItem): Promise<TextEditor> {
     }
   });
 
-  return window.showTextDocument(document);
+  await window.showTextDocument(document);
 }

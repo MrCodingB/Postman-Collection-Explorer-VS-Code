@@ -81,6 +81,12 @@
         "icon": "$(edit)"
       },
       {
+        "command": "postman-collection-explorer.rename",
+        "title": "Rename",
+        "category": "Postman",
+        "icon": "$(edit)"
+      },
+      {
         "command": "postman-collection-explorer.viewApiDescription",
         "title": "View API Description",
         "category": "Postman",
@@ -147,6 +153,11 @@
           "command": "postman-collection-explorer.editDescription",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@1"
+        },
+        {
+          "command": "postman-collection-explorer.rename",
+          "when": "view == postmanCollectionExplorer",
+          "group": "1_edit@2"
         },
         {
           "command": "postman-collection-explorer.viewApiDescription",
