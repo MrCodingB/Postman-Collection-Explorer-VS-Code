@@ -81,6 +81,12 @@
         "icon": "$(edit)"
       },
       {
+        "command": "postman-collection-explorer.viewApiDescription",
+        "title": "View API Description",
+        "category": "Postman",
+        "icon": "$(book)"
+      },
+      {
         "command": "postman-collection-explorer.runTests",
         "title": "Run Tests",
         "category": "Postman",
@@ -130,17 +136,22 @@
         {
           "command": "postman-collection-explorer.createFolder",
           "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
-          "group": "1_create@1"
+          "group": "2_add@1"
         },
         {
           "command": "postman-collection-explorer.createRequest",
           "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
-          "group": "1_create@2"
+          "group": "2_add@2"
         },
         {
           "command": "postman-collection-explorer.editDescription",
           "when": "view == postmanCollectionExplorer",
-          "group": "0_edit@1"
+          "group": "1_edit@1"
+        },
+        {
+          "command": "postman-collection-explorer.viewApiDescription",
+          "when": "view == postmanCollectionExplorer",
+          "group": "3_view@1"
         }
       ],
       "view/title": [
@@ -167,7 +178,7 @@
         {
           "command": "postman-collection-explorer.refreshTestView",
           "when": "view == postmanTestExplorer",
-          "group": "1_run@1"
+          "group": "actions@1"
         }
       ]
     }
