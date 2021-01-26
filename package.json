@@ -75,14 +75,20 @@
         "icon": "$(trash)"
       },
       {
+        "command": "postman-collection-explorer.rename",
+        "title": "Rename",
+        "category": "Postman",
+        "icon": "$(edit)"
+      },
+      {
         "command": "postman-collection-explorer.editDescription",
         "title": "Edit Description",
         "category": "Postman",
         "icon": "$(edit)"
       },
       {
-        "command": "postman-collection-explorer.rename",
-        "title": "Rename",
+        "command": "postman-collection-explorer.editTestScript",
+        "title": "Edit Tests",
         "category": "Postman",
         "icon": "$(edit)"
       },
@@ -150,14 +156,19 @@
           "group": "2_add@2"
         },
         {
-          "command": "postman-collection-explorer.editDescription",
+          "command": "postman-collection-explorer.rename",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@1"
         },
         {
-          "command": "postman-collection-explorer.rename",
+          "command": "postman-collection-explorer.editDescription",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@2"
+        },
+        {
+          "command": "postman-collection-explorer.editTestScript",
+          "when": "view == postmanCollectionExplorer",
+          "group": "1_edit@3"
         },
         {
           "command": "postman-collection-explorer.viewApiDescription",
