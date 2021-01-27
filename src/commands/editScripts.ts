@@ -5,27 +5,23 @@ import { ensureTypingsInStorageLocation } from '../postman/ensureTypingsInStorag
 import { getCollection } from '../utils';
 import { runCommand } from './commands';
 
-export async function editTestScript(item?: TreeViewItem): Promise<void> {
-  if (item === undefined) {
-    return;
-  }
-
+async function editScript(item: TreeViewItem, type: 'test' | 'prerequest'): Promise<void> {
   const context = await runCommand('getContext');
 
   const object = item.itemObject;
-  const scriptFolderUri = Uri.file(join(context.storageUri?.fsPath ?? context.extensionPath, 'test'));
+  const scriptFolderUri = Uri.file(join(context.storageUri?.fsPath ?? context.extensionPath, type));
 
-  await ensureTypingsInStorageLocation(scriptFolderUri, 'test');
+  await ensureTypingsInStorageLocation(scriptFolderUri, type);
 
-  const fileUri = Uri.file(join(scriptFolderUri.fsPath, `Tests-${object.id}.ts`));
+  const fileUri = Uri.file(join(scriptFolderUri.fsPath, `${type === 'test' ? 'Tests' : 'Pre-request Script'}-${object.id}.ts`));
 
-  await workspace.fs.writeFile(fileUri, Buffer.from(object.test));
+  await workspace.fs.writeFile(fileUri, Buffer.from(object[type]));
 
   const document = await workspace.openTextDocument(fileUri);
 
   const saveListener = workspace.onWillSaveTextDocument((e) => {
     if (e.document.uri === document.uri) {
-      object.test = document.getText();
+      object[type] = document.getText();
 
       const collection = getCollection(object);
       e.waitUntil(runCommand('saveCollection', collection));
@@ -41,4 +37,20 @@ export async function editTestScript(item?: TreeViewItem): Promise<void> {
   });
 
   await window.showTextDocument(document);
+}
+
+export async function editTestScript(item?: TreeViewItem): Promise<void> {
+  if (item === undefined) {
+    return;
+  }
+
+  await editScript(item, 'test');
+}
+
+export async function editPrerequestScript(item?: TreeViewItem): Promise<void> {
+  if (item === undefined) {
+    return;
+  }
+
+  await editScript(item, 'prerequest');
 }

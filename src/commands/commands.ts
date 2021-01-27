@@ -11,7 +11,7 @@ import { editDescription } from './editDescription';
 import { viewApiDescription } from './viewApiDescription';
 import { rename } from './rename';
 import { runTests } from './runTests';
-import { editTestScript } from './editTestScript';
+import { editPrerequestScript, editTestScript } from './editScripts';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
@@ -24,6 +24,7 @@ export const commands = {
   createRequest,
   deleteRequest,
   editDescription,
+  editPrerequestScript,
   editTestScript,
   rename,
   viewApiDescription,

@@ -87,6 +87,12 @@
         "icon": "$(edit)"
       },
       {
+        "command": "postman-collection-explorer.editPrerequestScript",
+        "title": "Edit Pre-request Script",
+        "category": "Postman",
+        "icon": "$(edit)"
+      },
+      {
         "command": "postman-collection-explorer.editTestScript",
         "title": "Edit Tests",
         "category": "Postman",
@@ -146,16 +152,6 @@
           "group": "inline"
         },
         {
-          "command": "postman-collection-explorer.createFolder",
-          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
-          "group": "2_add@1"
-        },
-        {
-          "command": "postman-collection-explorer.createRequest",
-          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
-          "group": "2_add@2"
-        },
-        {
           "command": "postman-collection-explorer.rename",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@1"
@@ -169,6 +165,21 @@
           "command": "postman-collection-explorer.editTestScript",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@3"
+        },
+        {
+          "command": "postman-collection-explorer.editPrerequestScript",
+          "when": "view == postmanCollectionExplorer",
+          "group": "1_edit@4"
+        },
+        {
+          "command": "postman-collection-explorer.createFolder",
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
+          "group": "2_add@1"
+        },
+        {
+          "command": "postman-collection-explorer.createRequest",
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
+          "group": "2_add@2"
         },
         {
           "command": "postman-collection-explorer.viewApiDescription",
