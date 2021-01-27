@@ -202,7 +202,25 @@
           "group": "actions@1"
         }
       ]
-    }
+    },
+    "configuration":[
+      {
+        "title": "Postman Collection Explorer",
+        "properties": {
+          "postman-collection-explorer.collectionFilePattern": {
+            "type": "string",
+            "default": "**/*.postman_collection.json",
+            "description": "A pattern to use when searching for collection files",
+            "pattern": ".+\\.json"
+          },
+          "postman-collection-explorer.ignorePaths": {
+            "type": "string",
+            "default": "**/node_modules/**; **/bin/**; **/out/**",
+            "description": "A pattern of paths to ignore when searching for collections"
+          }
+        }
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

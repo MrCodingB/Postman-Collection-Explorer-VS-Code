@@ -2,15 +2,23 @@ import { readFileSync } from 'fs';
 import { workspace } from 'vscode';
 import { Collection } from './Collection';
 import { Collection as PmCollection } from 'postman-collection';
+import { EXTENSION_PREFIX } from '../commands/commands';
 
-function getCollectionsInWorkspace(): Promise<string[]> {
-  const promise = new Promise<string[]>((resolve) => {
-    workspace
-      .findFiles('**/*.postman_collection.json', '**/node_modules/**', 5)
-      .then((uris) => resolve(uris.map((u) => u.fsPath)));
-  });
+async function getCollectionsInWorkspace(): Promise<string[]> {
+  const configuration = workspace.getConfiguration(EXTENSION_PREFIX);
+  const pattern = configuration.get<string>('collectionFilePattern', '**/*.postman_collection.json');
+  const ignore = configuration
+    .get<string>('ignorePaths', '**/node_modules/**; **/bin/**; **/out/**')
+    .split(';')
+    .map((s) => s.trim())
+    .filter((s) => s !== '')
+    .join(',');
 
-  return promise;
+  const collectionFilePaths = await workspace
+    .findFiles(pattern, `{${ignore}}`, 5)
+    .then((uris) => uris.map((u) => u.fsPath));
+
+  return collectionFilePaths;
 }
 
 function getCollectionFromFile(path: string): Collection | undefined {
