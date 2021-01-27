@@ -10,6 +10,7 @@ import { remove } from './remove';
 import { rename } from './rename';
 import { runTests } from './runTests';
 import { editPrerequestScript, editTestScript } from './editScripts';
+import { editAuth } from './editAuth';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
@@ -18,6 +19,7 @@ export const commands = {
   saveCollection,
   createFolder,
   createRequest,
+  editAuth,
   editDescription,
   editPrerequestScript,
   editTestScript,

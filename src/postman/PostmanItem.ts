@@ -1,4 +1,4 @@
-import { Event } from 'postman-collection';
+import { Event, RequestAuth, RequestAuthDefinition } from 'postman-collection';
 import { PostmanNativeElement } from '../utils';
 
 export abstract class PostmanItem<T extends PostmanNativeElement = PostmanNativeElement> {
@@ -7,6 +7,7 @@ export abstract class PostmanItem<T extends PostmanNativeElement = PostmanNative
   private _description: string;
   private _prerequest: string;
   private _test: string;
+  private _auth?: RequestAuth;
 
   get id(): string { return this._id; }
   set id(value: string) {
@@ -48,12 +49,23 @@ export abstract class PostmanItem<T extends PostmanNativeElement = PostmanNative
     }
   }
 
+  get auth(): RequestAuth | undefined { return this._auth; }
+  set auth(value: RequestAuth | undefined) {
+    this._auth = value;
+    (this.rootItem as PostmanNativeElement & { auth?: RequestAuthDefinition }).auth = value?.toJSON();
+  }
+
   constructor(public rootItem: T) {
     this._id = rootItem.id;
     this._name = rootItem.name;
     this._description = rootItem.description?.toString() ?? '';
     this._prerequest = this.getListener('prerequest')?.script.toSource() ?? '';
     this._test = this.getListener('test')?.script.toSource() ?? '';
+
+    const authDefinition = (rootItem as PostmanNativeElement & { auth?: RequestAuthDefinition}).auth;
+    if (authDefinition !== undefined) {
+      this._auth = new RequestAuth(authDefinition);
+    }
   }
 
   private getListener(type: 'test' | 'prerequest'): Event | undefined {

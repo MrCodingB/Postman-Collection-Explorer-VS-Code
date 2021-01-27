@@ -64,6 +64,12 @@
         "icon": "$(edit)"
       },
       {
+        "command": "postman-collection-explorer.editAuth",
+        "title": "Edit Authorization",
+        "category": "Postman",
+        "icon": "$(lock)"
+      },
+      {
         "command": "postman-collection-explorer.editDescription",
         "title": "Edit Description",
         "category": "Postman",
@@ -145,14 +151,19 @@
           "group": "1_edit@2"
         },
         {
-          "command": "postman-collection-explorer.editTestScript",
+          "command": "postman-collection-explorer.editAuth",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@3"
         },
         {
-          "command": "postman-collection-explorer.editPrerequestScript",
+          "command": "postman-collection-explorer.editTestScript",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@4"
+        },
+        {
+          "command": "postman-collection-explorer.editPrerequestScript",
+          "when": "view == postmanCollectionExplorer",
+          "group": "1_edit@5"
         },
         {
           "command": "postman-collection-explorer.createFolder",
