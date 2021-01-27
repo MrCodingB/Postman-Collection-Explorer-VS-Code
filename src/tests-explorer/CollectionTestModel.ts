@@ -2,7 +2,7 @@ import { join } from 'path';
 import { TreeItem, TreeItemCollapsibleState } from 'vscode';
 import { RunExecution, RunExecutionAssertion, RunSummary } from '../postman/newmanTypes';
 
-export class TestViewItem extends TreeItem {
+export class CollectionTestModel extends TreeItem {
   readonly status: 'passed' | 'failed' | 'errored';
 
   constructor(

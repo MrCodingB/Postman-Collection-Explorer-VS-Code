@@ -1,9 +1,9 @@
 import { window } from 'vscode';
-import { TreeViewItem } from '../collection-explorer/treeViewItem';
+import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
 import { getCollection } from '../utils';
 import { runCommand } from './commands';
 
-export async function rename(item?: TreeViewItem): Promise<void> {
+export async function rename(item?: PostmanItemModel): Promise<void> {
   if (item === undefined) {
     return;
   }

@@ -4,7 +4,7 @@ import { Collection } from '../postman/Collection';
 import { Folder } from '../postman/Folder';
 import { Request } from '../postman/Request';
 
-export class TreeViewItem extends TreeItem {
+export class PostmanItemModel extends TreeItem {
   public contextValue: 'collection' | 'folder' | 'request';
 
   constructor(
@@ -19,7 +19,7 @@ export class TreeViewItem extends TreeItem {
     this.iconPath = this.getIcon();
   }
 
-  public static create(object: Collection | Folder | Request): TreeViewItem {
+  public static create(object: Collection | Folder | Request): PostmanItemModel {
     let collapsibleState = TreeItemCollapsibleState.None;
 
     if (!Request.isRequest(object)) {
@@ -30,7 +30,7 @@ export class TreeViewItem extends TreeItem {
       }
     }
 
-    return new TreeViewItem(object.name, collapsibleState, object);
+    return new PostmanItemModel(object.name, collapsibleState, object);
   }
 
   public isCollection(): this is TreeItem & { itemObject: Collection; filePath: string } {

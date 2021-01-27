@@ -1,5 +1,5 @@
 import { commands, extensions, workspace } from 'vscode';
-import { TreeViewItem } from '../collection-explorer/treeViewItem';
+import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
 import { Collection } from '../postman/Collection';
 import { Folder } from '../postman/Folder';
 import { Request } from '../postman/Request';
@@ -17,7 +17,7 @@ function getFullDescription(item: Collection | Folder | Request): string[] {
   return description.filter((d) => d.trim() !== '');
 }
 
-export async function viewApiDescription(item?: TreeViewItem): Promise<void> {
+export async function viewApiDescription(item?: PostmanItemModel): Promise<void> {
   if (item === undefined) {
     return;
   }

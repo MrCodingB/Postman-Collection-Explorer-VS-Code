@@ -1,11 +1,11 @@
 import { join } from 'path';
 import { Uri, window, workspace } from 'vscode';
-import { TreeViewItem } from '../collection-explorer/treeViewItem';
+import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
 import { ensureTypingsInStorageLocation } from '../postman/ensureTypingsInStorageLocation';
 import { getCollection } from '../utils';
 import { runCommand } from './commands';
 
-async function editScript(item: TreeViewItem, type: 'test' | 'prerequest'): Promise<void> {
+async function editScript(item: PostmanItemModel, type: 'test' | 'prerequest'): Promise<void> {
   const context = await runCommand('getContext');
 
   const object = item.itemObject;
@@ -39,7 +39,7 @@ async function editScript(item: TreeViewItem, type: 'test' | 'prerequest'): Prom
   await window.showTextDocument(document);
 }
 
-export async function editTestScript(item?: TreeViewItem): Promise<void> {
+export async function editTestScript(item?: PostmanItemModel): Promise<void> {
   if (item === undefined) {
     return;
   }
@@ -47,7 +47,7 @@ export async function editTestScript(item?: TreeViewItem): Promise<void> {
   await editScript(item, 'test');
 }
 
-export async function editPrerequestScript(item?: TreeViewItem): Promise<void> {
+export async function editPrerequestScript(item?: PostmanItemModel): Promise<void> {
   if (item === undefined) {
     return;
   }

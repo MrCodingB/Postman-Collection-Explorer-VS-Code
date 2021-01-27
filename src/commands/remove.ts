@@ -1,10 +1,10 @@
 import { commands, Uri, workspace } from 'vscode';
-import { TreeViewItem } from '../collection-explorer/treeViewItem';
+import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
 import { Collection } from '../postman/Collection';
 import { getCollection } from '../utils';
 import { EXTENSION_PREFIX, runCommand } from './commands';
 
-export async function remove(item?: TreeViewItem): Promise<void> {
+export async function remove(item?: PostmanItemModel): Promise<void> {
   if (item === undefined) {
     return;
   }

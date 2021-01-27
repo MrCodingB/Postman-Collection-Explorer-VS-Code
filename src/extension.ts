@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
-import { TreeViewItem } from './collection-explorer/treeViewItem';
-import { TreeViewItemsProvider } from './collection-explorer/treeViewItemsProvider';
+import { PostmanItemModel } from './collection-explorer/postmanItemModel';
+import { PostmanItemsProvider } from './collection-explorer/postmanItemsProvider';
 import { commands, EXTENSION_PREFIX } from './commands/commands';
 import { RunSummary } from './postman/newmanTypes';
-import { TestViewItem } from './tests-explorer/testViewItem';
-import { TestViewItemsProvider } from './tests-explorer/testViewItemsProvider';
+import { CollectionTestModel } from './tests-explorer/CollectionTestModel';
+import { CollectionTestsProvider } from './tests-explorer/CollectionTestsProvider';
 
 export function activate(context: vscode.ExtensionContext): void {
   const commandNames = Object.keys(commands) as (keyof typeof commands)[];
@@ -20,16 +20,16 @@ export function activate(context: vscode.ExtensionContext): void {
     context.subscriptions.push(disposable);
   }
 
-  const treeViewItemsProvider = new TreeViewItemsProvider();
+  const treeViewItemsProvider = new PostmanItemsProvider();
   context.subscriptions.push(
     vscode.window.registerTreeDataProvider('postmanCollectionExplorer', treeViewItemsProvider),
-    vscode.commands.registerCommand(`${EXTENSION_PREFIX}.refreshCollectionView`, (args?: TreeViewItem) => treeViewItemsProvider.refresh(args))
+    vscode.commands.registerCommand(`${EXTENSION_PREFIX}.refreshCollectionView`, (args?: PostmanItemModel) => treeViewItemsProvider.refresh(args))
   );
 
-  const testViewItemsProvider = new TestViewItemsProvider();
+  const testViewItemsProvider = new CollectionTestsProvider();
   context.subscriptions.push(
     vscode.window.registerTreeDataProvider('postmanTestExplorer', testViewItemsProvider),
-    vscode.commands.registerCommand(`${EXTENSION_PREFIX}.refreshTestView`, (args?: TestViewItem) => testViewItemsProvider.refresh(args)),
+    vscode.commands.registerCommand(`${EXTENSION_PREFIX}.refreshTestView`, (args?: CollectionTestModel) => testViewItemsProvider.refresh(args)),
     vscode.commands.registerCommand(`${EXTENSION_PREFIX}.setRunSummaries`, (args?: RunSummary[]) => testViewItemsProvider.setRunSummaries(args))
   );
 }

@@ -1,11 +1,11 @@
 import { Item, ItemGroup } from 'postman-collection';
 import { window } from 'vscode';
 import { Folder } from '../../postman/Folder';
-import { TreeViewItem } from '../../collection-explorer/treeViewItem';
+import { PostmanItemModel } from '../../collection-explorer/postmanItemModel';
 import { getCollection } from '../../utils';
 import { runCommand } from '../commands';
 
-export function createFolder(parentNode?: TreeViewItem): void {
+export function createFolder(parentNode?: PostmanItemModel): void {
   if (parentNode === undefined || !(parentNode.isCollection() || parentNode.isFolder())) {
     return;
   }

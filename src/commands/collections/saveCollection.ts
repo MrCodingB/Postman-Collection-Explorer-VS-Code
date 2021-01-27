@@ -1,8 +1,8 @@
 import { commands, Uri, workspace } from 'vscode';
-import { TreeViewItem } from '../../collection-explorer/treeViewItem';
+import { PostmanItemModel } from '../../collection-explorer/postmanItemModel';
 import { Collection } from '../../postman/Collection';
 
-export function saveCollection(itemOrCollection?: Collection | TreeViewItem): void {
+export function saveCollection(itemOrCollection?: Collection | PostmanItemModel): void {
   if (itemOrCollection === undefined || !Collection.isCollection(itemOrCollection) && !(itemOrCollection?.isCollection !== undefined && itemOrCollection.isCollection())) {
     return;
   }

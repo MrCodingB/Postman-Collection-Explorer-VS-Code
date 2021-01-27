@@ -1,10 +1,10 @@
 import { join } from 'path';
 import { Uri, window, workspace } from 'vscode';
-import { TreeViewItem } from '../collection-explorer/treeViewItem';
+import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
 import { getCollection } from '../utils';
 import { runCommand } from './commands';
 
-export async function editDescription(item?: TreeViewItem): Promise<void> {
+export async function editDescription(item?: PostmanItemModel): Promise<void> {
   if (item === undefined) {
     return;
   }

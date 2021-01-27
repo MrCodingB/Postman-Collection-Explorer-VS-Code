@@ -1,15 +1,15 @@
 import { Event, EventEmitter, TreeDataProvider } from 'vscode';
 import { RunSummary } from '../postman/newmanTypes';
-import { TestViewItem } from './testViewItem';
+import { CollectionTestModel } from './CollectionTestModel';
 
-export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
-  onDidChangeTreeData: Event<TestViewItem | null | undefined | void>;
+export class CollectionTestsProvider implements TreeDataProvider<CollectionTestModel> {
+  onDidChangeTreeData: Event<CollectionTestModel | null | undefined | void>;
 
-  private treeDataChanged: EventEmitter<TestViewItem | undefined | null | void>;
+  private treeDataChanged: EventEmitter<CollectionTestModel | undefined | null | void>;
   private summaries?: RunSummary[];
 
   constructor() {
-    this.treeDataChanged = new EventEmitter<TestViewItem | undefined | null | void>();
+    this.treeDataChanged = new EventEmitter<CollectionTestModel | undefined | null | void>();
     this.onDidChangeTreeData = this.treeDataChanged.event;
   }
 
@@ -18,15 +18,15 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
     this.refresh();
   }
 
-  refresh(data?: TestViewItem): void {
+  refresh(data?: CollectionTestModel): void {
     this.treeDataChanged.fire(data);
   }
 
-  getTreeItem(element: TestViewItem): TestViewItem {
+  getTreeItem(element: CollectionTestModel): CollectionTestModel {
     return element;
   }
 
-  async getChildren(element?: TestViewItem): Promise<TestViewItem[]> {
+  async getChildren(element?: CollectionTestModel): Promise<CollectionTestModel[]> {
     if (!this.summaries) {
       return [];
     }
@@ -36,13 +36,13 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
     }
 
     if (this.summaries.length === 1) {
-      return this.getChildrenAsItems(new TestViewItem(this.summaries[0]));
+      return this.getChildrenAsItems(new CollectionTestModel(this.summaries[0]));
     }
 
-    return this.summaries.map((s) => new TestViewItem(s));
+    return this.summaries.map((s) => new CollectionTestModel(s));
   }
 
-  private getChildrenAsItems(element: TestViewItem): TestViewItem[] {
+  private getChildrenAsItems(element: CollectionTestModel): CollectionTestModel[] {
     if (!this.summaries) {
       return [];
     }
@@ -55,14 +55,14 @@ export class TestViewItemsProvider implements TreeDataProvider<TestViewItem> {
     if (collectionFromId && elementSummary) {
       const executions = elementSummary.run.executions;
 
-      return executions.map((e) => new TestViewItem(e));
+      return executions.map((e) => new CollectionTestModel(e));
     }
 
     elementSummary = this.summaries.find((s) => !!s.run.executions.find((e) => e.item.id === element.id));
     const executionFromId = elementSummary?.run.executions.find((e) => e.item.id === element.id);
 
     if (executionFromId && executionFromId.assertions) {
-      return executionFromId.assertions.map((a) => new TestViewItem(a));
+      return executionFromId.assertions.map((a) => new CollectionTestModel(a));
     }
 
     return [];
