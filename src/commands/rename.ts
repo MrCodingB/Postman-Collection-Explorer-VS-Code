@@ -16,7 +16,7 @@ export async function rename(item?: TreeViewItem): Promise<void> {
   }
 
   if (item.isCollection()) {
-    await runCommand('deleteCollection', item);
+    await runCommand('remove', item);
     item.itemObject.filePath = item.itemObject.filePath.replace(new RegExp(oldName, 'g'), name);
   }
 

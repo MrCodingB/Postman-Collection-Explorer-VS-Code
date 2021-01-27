@@ -28,21 +28,10 @@
         "icon": "$(refresh)"
       },
       {
-        "command": "postman-collection-explorer.helloWorld",
-        "title": "Hello World",
-        "category": "Postman"
-      },
-      {
         "command": "postman-collection-explorer.createCollection",
         "title": "Create Collection",
         "category": "Postman",
         "icon": "$(add)"
-      },
-      {
-        "command": "postman-collection-explorer.deleteCollection",
-        "title": "Delete Collection",
-        "category": "Postman",
-        "icon": "$(trash)"
       },
       {
         "command": "postman-collection-explorer.saveCollection",
@@ -57,20 +46,14 @@
         "icon": "$(add)"
       },
       {
-        "command": "postman-collection-explorer.deleteFolder",
-        "title": "Delete Folder",
-        "category": "Postman",
-        "icon": "$(trash)"
-      },
-      {
         "command": "postman-collection-explorer.createRequest",
         "title": "Create Request",
         "category": "Postman",
         "icon": "$(add)"
       },
       {
-        "command": "postman-collection-explorer.deleteRequest",
-        "title": "Delete Request",
+        "command": "postman-collection-explorer.remove",
+        "title": "Delete",
         "category": "Postman",
         "icon": "$(trash)"
       },
@@ -137,18 +120,8 @@
     "menus": {
       "view/item/context": [
         {
-          "command": "postman-collection-explorer.deleteCollection",
-          "when": "view == postmanCollectionExplorer && viewItem == collection",
-          "group": "inline"
-        },
-        {
-          "command": "postman-collection-explorer.deleteFolder",
-          "when": "view == postmanCollectionExplorer && viewItem == folder",
-          "group": "inline"
-        },
-        {
-          "command": "postman-collection-explorer.deleteRequest",
-          "when": "view == postmanCollectionExplorer && viewItem == request",
+          "command": "postman-collection-explorer.remove",
+          "when": "view == postmanCollectionExplorer",
           "group": "inline"
         },
         {
