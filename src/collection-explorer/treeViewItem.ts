@@ -57,7 +57,7 @@ export class TreeViewItem extends TreeItem {
    */
   private getIcon(): ThemeIcon | { dark: string; light: string } {
     if (this.isCollection()) {
-      return new ThemeIcon('archive');
+      return new ThemeIcon('repo');
     }
 
     if (this.isFolder()) {

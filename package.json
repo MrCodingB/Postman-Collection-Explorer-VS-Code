@@ -43,13 +43,13 @@
         "command": "postman-collection-explorer.createFolder",
         "title": "Create Folder",
         "category": "Postman",
-        "icon": "$(add)"
+        "icon": "$(new-folder)"
       },
       {
         "command": "postman-collection-explorer.createRequest",
         "title": "Create Request",
         "category": "Postman",
-        "icon": "$(add)"
+        "icon": "$(new-file)"
       },
       {
         "command": "postman-collection-explorer.remove",
@@ -120,9 +120,19 @@
     "menus": {
       "view/item/context": [
         {
+          "command": "postman-collection-explorer.createRequest",
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
+          "group": "inline@1"
+        },
+        {
+          "command": "postman-collection-explorer.createFolder",
+          "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
+          "group": "inline@2"
+        },
+        {
           "command": "postman-collection-explorer.remove",
           "when": "view == postmanCollectionExplorer",
-          "group": "inline"
+          "group": "inline@3"
         },
         {
           "command": "postman-collection-explorer.rename",
@@ -158,6 +168,11 @@
           "command": "postman-collection-explorer.viewApiDescription",
           "when": "view == postmanCollectionExplorer",
           "group": "3_view@1"
+        },
+        {
+          "command": "postman-collection-explorer.remove",
+          "when": "view == postmanCollectionExplorer",
+          "group": "4_remove@1"
         }
       ],
       "view/title": [
