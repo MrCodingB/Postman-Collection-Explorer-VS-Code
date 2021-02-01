@@ -1,6 +1,6 @@
-import { RequestAuth, RequestAuthDefinition } from 'postman-collection';
 import { window } from 'vscode';
 import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
+import { Auth } from '../postman/auth/auth';
 import { getCollection } from '../utils';
 import { runCommand } from './commands';
 
@@ -25,16 +25,9 @@ type AuthPick = {
 };
 
 async function showAuthPicker(): Promise<AuthPick | undefined> {
-  return new Promise<AuthPick>((resolve) => {
-    const authPick = window.createQuickPick<AuthPick>();
-    authPick.items = (Object.keys(AUTH_TYPES) as (keyof typeof AUTH_TYPES)[]).map((v) => ({ key: v, label: AUTH_TYPES[v] }));
-    authPick.canSelectMany = false;
-    authPick.placeholder = 'Authorization';
+  const items = (Object.keys(AUTH_TYPES) as (keyof typeof AUTH_TYPES)[]).map((v) => ({ key: v, label: AUTH_TYPES[v] }));
 
-    authPick.onDidAccept(() => resolve(authPick.selectedItems[0]));
-
-    authPick.show();
-  });
+  return window.showQuickPick<AuthPick>(items, { canPickMany: false, placeHolder: 'Authorization' });
 }
 
 export async function editAuth(item?: PostmanItemModel): Promise<void> {
@@ -49,16 +42,13 @@ export async function editAuth(item?: PostmanItemModel): Promise<void> {
     return;
   }
 
-  const auth: RequestAuthDefinition | undefined = authPick.key === 'inherit' ? undefined : { type: authPick.key };
-  if (auth === undefined) {
-    object.auth = undefined;
-    await runCommand('saveCollection', getCollection(object));
-    return;
+  if (authPick.key === 'inherit') {
+    if (object.auth !== undefined) {
+      object.auth.type = undefined;
+    }
+  } else {
+    object.auth = await (object.auth ?? new Auth({ type: authPick.key })).setFromUserInput(authPick.key);
   }
 
-  if (object.auth === undefined) {
-    object.auth = new RequestAuth(auth);
-  }
-
-  runCommand('saveCollection', getCollection(object));
+  await runCommand('saveCollection', getCollection(object));
 }

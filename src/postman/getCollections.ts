@@ -29,7 +29,7 @@ function getCollectionFromFile(path: string): Collection | undefined {
 
     return new Collection(pmCollection, path);
   } catch (err) {
-    console.warn(`Failed creating collection from path: ${path}`, err);
+    console.warn(`Failed creating collection from path: ${path}\n`, err);
   }
 
   return undefined;
