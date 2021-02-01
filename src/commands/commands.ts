@@ -11,6 +11,7 @@ import { rename } from './rename';
 import { runTests } from './runTests';
 import { editPrerequestScript, editTestScript } from './editScripts';
 import { editAuth } from './editAuth';
+import { editBody } from './requests/editBody';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
@@ -20,6 +21,7 @@ export const commands = {
   createFolder,
   createRequest,
   editAuth,
+  editBody,
   editDescription,
   editPrerequestScript,
   editTestScript,

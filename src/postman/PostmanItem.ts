@@ -63,7 +63,7 @@ export abstract class PostmanItem<T extends PostmanNativeElement = PostmanNative
     this._prerequest = this.getListener('prerequest')?.script.toSource() ?? '';
     this._test = this.getListener('test')?.script.toSource() ?? '';
 
-    if (isItem(rootItem)) {
+    if (isItem(rootItem) && rootItem.getAuth()) {
       this._auth = new Auth(rootItem.getAuth().toJSON());
     } else {
       const authDefinition = (rootItem as PostmanNativeElement & { auth?: RequestAuth}).auth?.toJSON();
