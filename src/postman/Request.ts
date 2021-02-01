@@ -2,21 +2,21 @@ import { Item, ItemDefinition, RequestBody } from 'postman-collection';
 import { isItem } from '../utils';
 import { Collection } from './Collection';
 import { Folder } from './Folder';
+import { RequestMethod } from './methods';
 import { PostmanItem } from './PostmanItem';
 
 export class Request extends PostmanItem<Item> {
-  private _method: string;
+  private _method: RequestMethod;
   private _body?: string;
 
-  get method(): string { return this._method; }
-  set method(value: string) {
+  get method(): RequestMethod { return this._method; }
+  set method(value: RequestMethod) {
     this._method = value;
     this.rootItem.request.method = value;
   }
 
   get body(): string | undefined { return this._body; }
   set body(value: string | undefined) {
-    console.log('Value: ', value);
     this._body = value;
     let body = this.rootItem.request.body;
     if (body === undefined) {
@@ -24,8 +24,6 @@ export class Request extends PostmanItem<Item> {
     } else {
       body.update({ raw: value, mode: 'raw' });
     }
-
-    console.log('New body: ', this.rootItem.request.body);
   }
 
   constructor(
@@ -34,7 +32,7 @@ export class Request extends PostmanItem<Item> {
   ) {
     super(isItem(item) ? item : new Item(item));
 
-    this._method = this.rootItem.request.method;
+    this._method = this.rootItem.request.method as RequestMethod;
     this._body = this.rootItem.request.body?.raw;
   }
 
