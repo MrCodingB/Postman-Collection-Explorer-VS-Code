@@ -2,6 +2,7 @@ import { commands, extensions, workspace } from 'vscode';
 import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
 import { Collection } from '../postman/Collection';
 import { Folder } from '../postman/Folder';
+import { getCollections } from '../postman/getCollections';
 import { Request } from '../postman/Request';
 import { getCollection } from '../utils';
 
@@ -18,10 +19,6 @@ function getFullDescription(item: Collection | Folder | Request): string[] {
 }
 
 export async function viewApiDescription(item?: PostmanItemModel): Promise<void> {
-  if (item === undefined) {
-    return;
-  }
-
   const markdownExtension = extensions.getExtension('vscode.markdown-language-features');
   if (markdownExtension === undefined) {
     return;
@@ -29,9 +26,9 @@ export async function viewApiDescription(item?: PostmanItemModel): Promise<void>
 
   await markdownExtension.activate();
 
-  const collection = getCollection(item.itemObject);
-
-  const description = getFullDescription(collection);
+  const description = item === undefined
+    ? (await getCollections()).map((c) => getFullDescription(c))
+    : getFullDescription(getCollection(item.itemObject));
 
   const descriptionDocument = await workspace.openTextDocument({ content: description.join('\n\n'), language: 'markdown' });
 

@@ -17,13 +17,13 @@
     "commands": [
       {
         "command": "postman-collection-explorer.refreshCollectionView",
-        "title": "Refresh View",
+        "title": "Refresh Collection Explorer",
         "category": "Postman",
         "icon": "$(refresh)"
       },
       {
         "command": "postman-collection-explorer.refreshTestView",
-        "title": "Refresh View",
+        "title": "Refresh Tests",
         "category": "Postman",
         "icon": "$(refresh)"
       },
@@ -83,7 +83,7 @@
       },
       {
         "command": "postman-collection-explorer.editTestScript",
-        "title": "Edit Tests",
+        "title": "Edit Test Script",
         "category": "Postman",
         "icon": "$(edit)"
       },
@@ -124,6 +124,44 @@
       ]
     },
     "menus": {
+      "commandPalette": [
+        {
+          "command": "postman-collection-explorer.saveCollection",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.createFolder",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.createRequest",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.remove",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.rename",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.editAuth",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.editDescription",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.editPrerequestScript",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.editTestScript",
+          "when": "false"
+        }
+      ],
       "view/item/context": [
         {
           "command": "postman-collection-explorer.createRequest",
