@@ -1,7 +1,6 @@
 import { commands } from 'vscode';
 import { getCollections, RunSummary, Collection } from '../postman';
-import { getCollection } from '../utils';
-import { runWithNewman } from '../utils/runWithNewman';
+import { getCollection, runWithNewman } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { EXTENSION_PREFIX } from './commands';
 
