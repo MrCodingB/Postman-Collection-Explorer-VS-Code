@@ -1,7 +1,7 @@
 import { window } from 'vscode';
-import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
-import { Auth } from '../postman/auth/auth';
+import { Auth } from '../postman';
 import { getCollection } from '../utils';
+import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { runCommand } from './commands';
 
 export const AUTH_TYPES = {

@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { TreeItem, TreeItemCollapsibleState } from 'vscode';
-import { RunExecution, RunExecutionAssertion, RunSummary } from '../postman/newmanTypes';
+import { RunExecution, RunExecutionAssertion, RunSummary } from '../../postman';
 
 export class CollectionTestModel extends TreeItem {
   readonly status: 'passed' | 'failed' | 'errored';

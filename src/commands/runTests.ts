@@ -1,10 +1,8 @@
 import { commands } from 'vscode';
-import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
-import { Collection } from '../postman/Collection';
-import { getCollections } from '../postman/getCollections';
-import { RunSummary } from '../postman/newmanTypes';
+import { getCollections, RunSummary, Collection } from '../postman';
 import { getCollection } from '../utils';
 import { runWithNewman } from '../utils/runWithNewman';
+import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { EXTENSION_PREFIX } from './commands';
 
 async function runTestsForItem(item: PostmanItemModel | Collection): Promise<RunSummary> {

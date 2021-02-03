@@ -1,7 +1,7 @@
 import { commands, Uri, workspace } from 'vscode';
-import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
-import { Collection } from '../postman/Collection';
+import { Collection } from '../postman';
 import { getCollection } from '../utils';
+import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { EXTENSION_PREFIX, runCommand } from './commands';
 
 export async function remove(item?: PostmanItemModel): Promise<void> {

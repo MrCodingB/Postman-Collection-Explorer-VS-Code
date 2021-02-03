@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { Uri, window, workspace } from 'vscode';
-import { PostmanItemModel } from '../../collection-explorer/postmanItemModel';
 import { getCollection } from '../../utils';
+import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 import { runCommand } from '../commands';
 
 export async function editBody(item: PostmanItemModel): Promise<void> {

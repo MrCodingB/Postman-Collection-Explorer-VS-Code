@@ -1,8 +1,8 @@
 import { join } from 'path';
 import { Uri, window, workspace } from 'vscode';
-import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
-import { ensureTypingsInStorageLocation } from '../postman/ensureTypingsInStorageLocation';
+import { ensureTypingsInStorageLocation } from '../postman';
 import { getCollection } from '../utils';
+import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { runCommand } from './commands';
 
 async function editScript(item: PostmanItemModel, type: 'test' | 'prerequest'): Promise<void> {

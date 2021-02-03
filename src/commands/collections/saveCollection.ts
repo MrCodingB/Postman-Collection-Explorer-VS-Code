@@ -1,6 +1,6 @@
 import { commands, Uri, workspace } from 'vscode';
-import { PostmanItemModel } from '../../collection-explorer/postmanItemModel';
-import { Collection } from '../../postman/Collection';
+import { Collection } from '../../postman';
+import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 
 export function saveCollection(itemOrCollection?: Collection | PostmanItemModel): void {
   if (itemOrCollection === undefined || !Collection.isCollection(itemOrCollection) && !(itemOrCollection?.isCollection !== undefined && itemOrCollection.isCollection())) {

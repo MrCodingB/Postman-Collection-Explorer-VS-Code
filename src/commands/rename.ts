@@ -1,6 +1,6 @@
 import { window } from 'vscode';
-import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
 import { getCollection } from '../utils';
+import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { runCommand } from './commands';
 
 export async function rename(item?: PostmanItemModel): Promise<void> {

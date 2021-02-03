@@ -1,7 +1,7 @@
 import { Item, ItemGroup } from 'postman-collection';
 import { window } from 'vscode';
-import { Folder } from '../../postman/Folder';
-import { PostmanItemModel } from '../../collection-explorer/postmanItemModel';
+import { Folder } from '../../postman';
+import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 import { getCollection } from '../../utils';
 import { runCommand } from '../commands';
 

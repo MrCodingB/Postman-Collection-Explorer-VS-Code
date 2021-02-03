@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
-import { PostmanItemModel } from './collection-explorer/postmanItemModel';
-import { PostmanItemsProvider } from './collection-explorer/postmanItemsProvider';
 import { commands, EXTENSION_PREFIX } from './commands/commands';
-import { RunSummary } from './postman/newmanTypes';
-import { CollectionTestModel } from './tests-explorer/CollectionTestModel';
-import { CollectionTestsProvider } from './tests-explorer/CollectionTestsProvider';
+import { RunSummary } from './postman';
+import { CollectionTestModel } from './views/collectionTests/CollectionTestModel';
+import { CollectionTestsProvider } from './views/collectionTests/CollectionTestsProvider';
+import { PostmanItemModel } from './views/postmanItems/postmanItemModel';
+import { PostmanItemsProvider } from './views/postmanItems/postmanItemsProvider';
 
 export function activate(context: vscode.ExtensionContext): void {
   const commandNames = Object.keys(commands) as (keyof typeof commands)[];

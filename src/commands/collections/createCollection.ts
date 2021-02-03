@@ -1,4 +1,4 @@
-import { Collection } from '../../postman/Collection';
+import { Collection } from '../../postman';
 import { Collection as PmCollection } from 'postman-collection';
 import { window, workspace } from 'vscode';
 import { join } from 'path';

@@ -1,10 +1,7 @@
 import { commands, extensions, workspace } from 'vscode';
-import { PostmanItemModel } from '../collection-explorer/postmanItemModel';
-import { Collection } from '../postman/Collection';
-import { Folder } from '../postman/Folder';
-import { getCollections } from '../postman/getCollections';
-import { Request } from '../postman/Request';
+import { Request, getCollections, Collection, Folder } from '../postman';
 import { getCollection } from '../utils';
+import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 
 function getFullDescription(item: Collection | Folder | Request): string[] {
   const description = [item.description];

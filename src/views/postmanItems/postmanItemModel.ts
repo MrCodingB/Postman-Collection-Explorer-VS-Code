@@ -1,8 +1,6 @@
 import { join } from 'path';
 import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from 'vscode';
-import { Collection } from '../postman/Collection';
-import { Folder } from '../postman/Folder';
-import { Request } from '../postman/Request';
+import { Collection, Folder, Request } from '../../postman';
 
 export class PostmanItemModel extends TreeItem {
   public contextValue: 'collection' | 'folder' | 'request';

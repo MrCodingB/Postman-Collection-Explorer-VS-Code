@@ -1,5 +1,5 @@
 import { Event, EventEmitter, TreeDataProvider } from 'vscode';
-import { RunSummary } from '../postman/newmanTypes';
+import { RunSummary } from '../../postman';
 import { CollectionTestModel } from './CollectionTestModel';
 
 export class CollectionTestsProvider implements TreeDataProvider<CollectionTestModel> {

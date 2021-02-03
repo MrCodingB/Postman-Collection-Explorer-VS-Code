@@ -22,10 +22,12 @@ export interface RunCollectionItem {
   name: string;
   request: RunCollectionItemRequest;
 }
+
 export interface RunCollectionItemRequest {
   url: RunCollectionItemRequestUrl;
   method: string;
 }
+
 export interface RunCollectionItemRequestUrl {
   path: string[];
   host: string[];
@@ -69,14 +71,17 @@ export interface Run {
   failures: NewmanRunFailure[];
   executions: RunExecution[];
 }
+
 export interface RunExecution {
   item: RunExecutionItem;
   assertions?: RunExecutionAssertion[];
 }
+
 export interface RunExecutionItem {
   id: string;
   name: string;
 }
+
 export interface RunExecutionAssertion {
   assertion: string;
   skipped: boolean;

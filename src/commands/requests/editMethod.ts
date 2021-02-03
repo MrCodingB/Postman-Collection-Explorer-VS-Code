@@ -1,7 +1,7 @@
 import { window } from 'vscode';
-import { PostmanItemModel } from '../../collection-explorer/postmanItemModel';
-import { METHODS, RequestMethod } from '../../postman/methods';
+import { METHODS, RequestMethod } from '../../postman';
 import { getCollection } from '../../utils';
+import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 import { runCommand } from '../commands';
 
 export async function editMethod(item?: PostmanItemModel): Promise<void> {
