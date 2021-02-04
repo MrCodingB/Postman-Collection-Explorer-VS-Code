@@ -5,7 +5,6 @@ import { CollectionTestModel } from './views/collectionTests/CollectionTestModel
 import { CollectionTestsProvider } from './views/collectionTests/CollectionTestsProvider';
 import { PostmanItemModel } from './views/postmanItems/postmanItemModel';
 import { PostmanItemsProvider } from './views/postmanItems/postmanItemsProvider';
-import { RequestSettingsView } from './views/requestSettingsView/requestSettingsView';
 
 export function activate(context: vscode.ExtensionContext): void {
   const commandNames = Object.keys(commands) as (keyof typeof commands)[];
@@ -33,15 +32,6 @@ export function activate(context: vscode.ExtensionContext): void {
     vscode.commands.registerCommand(`${EXTENSION_PREFIX}.refreshTestView`, (args?: CollectionTestModel) => testViewItemsProvider.refresh(args)),
     vscode.commands.registerCommand(`${EXTENSION_PREFIX}.setRunSummaries`, (args?: RunSummary[]) => testViewItemsProvider.setRunSummaries(args))
   );
-
-  new RequestSettingsView({
-    disableCookies: true,
-    disableUrlEncoding: false,
-    followAuthorizationHeader: true,
-    followOriginalHttpMethod: false
-  }, 'Request Settings').onChange((e) => {
-    console.log('Settings changed: ', e);
-  });
 }
 
 // export function deactivate(): void { }
