@@ -10,7 +10,13 @@
     "Other"
   ],
   "activationEvents": [
-    "*"
+    "onView:postmanCollectionExplorer",
+    "onView:postmanTestExplorer",
+    "onCommand:postman-collection-explorer.refreshCollectionView",
+    "onCommand:postman-collection-explorer.refreshTestView",
+    "onCommand:postman-collection-explorer.createCollection",
+    "onCommand:postman-collection-explorer.viewApiDescription",
+    "onCommand:postman-collection-explorer.runTests"
   ],
   "main": "./out/extension.js",
   "contributes": {
