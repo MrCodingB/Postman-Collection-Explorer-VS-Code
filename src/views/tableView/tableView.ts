@@ -30,8 +30,9 @@ export class TableView {
   private async getWebViewHtml(): Promise<string> {
     const context = await runCommand('getContext');
 
-    const styleResetUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'reset.css'));
+    const styleGlobalUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'global.css'));
     const styleVSCodeUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'vscode.css'));
+    const styleTableViewUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'tableView.css'));
     const scriptUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'tableView.js'));
 
     const nonce = getNonce();
@@ -43,8 +44,9 @@ export class TableView {
         <meta charset="UTF-8">
         <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src ${this.panel.webview.cspSource}; script-src 'nonce-${nonce}'">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="${styleResetUri}" rel="stylesheet">
+        <link href="${styleGlobalUri}" rel="stylesheet">
         <link href="${styleVSCodeUri}" rel="stylesheet">
+        <link href="${styleTableViewUri}" rel="stylesheet">
 
         <script src="${scriptUri}" nonce="${nonce}"></script>
 

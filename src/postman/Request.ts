@@ -4,10 +4,12 @@ import { Collection } from './Collection';
 import { Folder } from './Folder';
 import { RequestMethod } from './methods';
 import { PostmanItem } from './PostmanItem';
+import { RequestSettings } from './PostmanSettings';
 
 export class Request extends PostmanItem<Item> {
   private _method: RequestMethod;
   private _body?: string;
+  private _settings?: RequestSettings;
 
   get method(): RequestMethod { return this._method; }
   set method(value: RequestMethod) {
@@ -26,6 +28,12 @@ export class Request extends PostmanItem<Item> {
     }
   }
 
+  get settings(): RequestSettings | undefined { return this._settings; }
+  set settings(value: RequestSettings | undefined) {
+    this._settings = value;
+    (this.rootItem as Item & { protocolProfileBehavior?: RequestSettings }).protocolProfileBehavior = value;
+  }
+
   constructor(
     public parent: Collection | Folder,
     item: Item | ItemDefinition
@@ -34,6 +42,7 @@ export class Request extends PostmanItem<Item> {
 
     this._method = this.rootItem.request.method as RequestMethod;
     this._body = this.rootItem.request.body?.raw;
+    this._settings = (this.rootItem as Item & { protocolProfileBehavior?: RequestSettings }).protocolProfileBehavior;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types

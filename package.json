@@ -302,6 +302,16 @@
             "type": "string",
             "default": "**/node_modules/**; **/bin/**; **/out/**",
             "description": "A pattern of paths to ignore when searching for collections"
+          },
+          "postman-collection-explorer.strictSSL": {
+            "type": "boolean",
+            "default": true,
+            "description": "Verify SSL certificates when sending a request. Verification failures will result in the request being aborted."
+          },
+          "postman-collection-explorer.followRedirects": {
+            "type": "boolean",
+            "default": true,
+            "description": "Follow HTTP 3xx responses as redirects."
           }
         }
       }
