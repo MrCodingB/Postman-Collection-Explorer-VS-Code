@@ -13,6 +13,7 @@ import { editPrerequestScript, editTestScript } from './editScripts';
 import { editAuth } from './editAuth';
 import { editBody } from './requests/editBody';
 import { editMethod } from './requests/editMethod';
+import { editSettings } from './requests/editSettings';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
@@ -26,6 +27,7 @@ export const commands = {
   editDescription,
   editMethod,
   editPrerequestScript,
+  editSettings,
   editTestScript,
   remove,
   rename,

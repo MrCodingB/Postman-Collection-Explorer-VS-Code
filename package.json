@@ -82,6 +82,12 @@
         "icon": "$(edit)"
       },
       {
+        "command": "postman-collection-explorer.editSettings",
+        "title": "Edit Settings",
+        "category": "Postman",
+        "icon": "$(edit)"
+      },
+      {
         "command": "postman-collection-explorer.editDescription",
         "title": "Edit Description",
         "category": "Postman",
@@ -172,6 +178,10 @@
           "when": "false"
         },
         {
+          "command": "postman-collection-explorer.editSettings",
+          "when": "false"
+        },
+        {
           "command": "postman-collection-explorer.editDescription",
           "when": "false"
         },
@@ -220,24 +230,29 @@
           "group": "1_edit@3"
         },
         {
-          "command": "postman-collection-explorer.editDescription",
-          "when": "view == postmanCollectionExplorer",
+          "command": "postman-collection-explorer.editSettings",
+          "when": "view == postmanCollectionExplorer && viewItem == request",
           "group": "1_edit@4"
         },
         {
-          "command": "postman-collection-explorer.editAuth",
+          "command": "postman-collection-explorer.editDescription",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@5"
         },
         {
-          "command": "postman-collection-explorer.editTestScript",
+          "command": "postman-collection-explorer.editAuth",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@6"
         },
         {
-          "command": "postman-collection-explorer.editPrerequestScript",
+          "command": "postman-collection-explorer.editTestScript",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@7"
+        },
+        {
+          "command": "postman-collection-explorer.editPrerequestScript",
+          "when": "view == postmanCollectionExplorer",
+          "group": "1_edit@8"
         },
         {
           "command": "postman-collection-explorer.createFolder",
