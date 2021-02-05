@@ -1,4 +1,4 @@
-import { Item, ItemDefinition, RequestBody, Url } from 'postman-collection';
+import { HeaderList, Item, ItemDefinition, RequestBody, Url } from 'postman-collection';
 import { isItem } from '../utils';
 import { Collection } from './Collection';
 import { Folder } from './Folder';
@@ -11,6 +11,7 @@ export class Request extends PostmanItem<Item> {
   private _body?: string;
   private _settings?: RequestSettings;
   private _url: Url;
+  private _headers: HeaderList;
 
   get method(): RequestMethod { return this._method; }
   set method(value: RequestMethod) {
@@ -41,6 +42,12 @@ export class Request extends PostmanItem<Item> {
     (this.rootItem as Item & { protocolProfileBehavior?: RequestSettings }).protocolProfileBehavior = value;
   }
 
+  get headers(): HeaderList { return this._headers; }
+  set headers(value: HeaderList) {
+    this._headers = value;
+    this.rootItem.request.headers = value;
+  }
+
   constructor(
     public parent: Collection | Folder,
     item: Item | ItemDefinition
@@ -51,6 +58,7 @@ export class Request extends PostmanItem<Item> {
     this._body = this.rootItem.request.body?.raw;
     this._settings = (this.rootItem as Item & { protocolProfileBehavior?: RequestSettings }).protocolProfileBehavior;
     this._url = this.rootItem.request.url;
+    this._headers = this.rootItem.request.headers;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types

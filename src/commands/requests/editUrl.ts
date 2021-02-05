@@ -4,7 +4,7 @@ import { getCollection } from '../../utils';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 import { runCommand } from '../commands';
 
-export async function editRequestUrl(item?: PostmanItemModel): Promise<void> {
+export async function editUrl(item?: PostmanItemModel): Promise<void> {
   if (item === undefined || !item.isRequest()) {
     return;
   }

@@ -100,8 +100,14 @@
         "icon": "$(edit)"
       },
       {
-        "command": "postman-collection-explorer.editRequestUrl",
-        "title": "Edit Request URL",
+        "command": "postman-collection-explorer.editUrl",
+        "title": "Edit URL",
+        "category": "Postman",
+        "icon": "$(edit)"
+      },
+      {
+        "command": "postman-collection-explorer.editHeaders",
+        "title": "Edit Headers",
         "category": "Postman",
         "icon": "$(edit)"
       },
@@ -196,7 +202,11 @@
           "when": "false"
         },
         {
-          "command": "postman-collection-explorer.editRequestUrl",
+          "command": "postman-collection-explorer.editUrl",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.editHeaders",
           "when": "false"
         },
         {
@@ -235,39 +245,44 @@
           "group": "1_edit@2"
         },
         {
-          "command": "postman-collection-explorer.editRequestUrl",
+          "command": "postman-collection-explorer.editUrl",
           "when": "view == postmanCollectionExplorer && viewItem == request",
           "group": "1_edit@3"
         },
         {
-          "command": "postman-collection-explorer.editBody",
+          "command": "postman-collection-explorer.editHeaders",
           "when": "view == postmanCollectionExplorer && viewItem == request",
           "group": "1_edit@4"
         },
         {
-          "command": "postman-collection-explorer.editSettings",
+          "command": "postman-collection-explorer.editBody",
           "when": "view == postmanCollectionExplorer && viewItem == request",
           "group": "1_edit@5"
         },
         {
-          "command": "postman-collection-explorer.editDescription",
-          "when": "view == postmanCollectionExplorer",
+          "command": "postman-collection-explorer.editSettings",
+          "when": "view == postmanCollectionExplorer && viewItem == request",
           "group": "1_edit@6"
         },
         {
-          "command": "postman-collection-explorer.editAuth",
+          "command": "postman-collection-explorer.editDescription",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@7"
         },
         {
-          "command": "postman-collection-explorer.editTestScript",
+          "command": "postman-collection-explorer.editAuth",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@8"
         },
         {
-          "command": "postman-collection-explorer.editPrerequestScript",
+          "command": "postman-collection-explorer.editTestScript",
           "when": "view == postmanCollectionExplorer",
           "group": "1_edit@9"
+        },
+        {
+          "command": "postman-collection-explorer.editPrerequestScript",
+          "when": "view == postmanCollectionExplorer",
+          "group": "1_edit@10"
         },
         {
           "command": "postman-collection-explorer.createFolder",
