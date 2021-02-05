@@ -3,7 +3,7 @@ import { ThemeIcon, TreeItem, TreeItemCollapsibleState } from 'vscode';
 import { Collection, Folder, Request } from '../../postman';
 
 export class PostmanItemModel extends TreeItem {
-  public contextValue: 'collection' | 'folder' | 'request';
+  public contextValue?: 'collection' | 'folder' | 'request';
 
   constructor(
     public readonly label: string,
@@ -13,8 +13,7 @@ export class PostmanItemModel extends TreeItem {
     super(label, collapsibleState);
     this.tooltip = `${this.label}`;
     this.id = this.itemObject.id;
-    this.contextValue = this.isCollection() ? 'collection' : this.isFolder() ? 'folder' : 'request';
-    this.iconPath = this.getIcon();
+    this.setContextAndIcon();
   }
 
   public static create(object: Collection | Folder | Request): PostmanItemModel {
@@ -43,36 +42,25 @@ export class PostmanItemModel extends TreeItem {
     return Request.isRequest(this.itemObject);
   }
 
-  /**
-   * Gets the icon for the TreeViewItem representing it's type and state
-   * - Collection: `archive`
-   * - Expanded ItemGroup: `folder-opened`
-   * - Collapsed ItemGroup: `folder`
-   * - Item: `{
-   *     dark: 'dark/${method}.svg',
-   *     light: 'light/${method}.svg'
-   *   }`
-   */
-  private getIcon(): ThemeIcon | { dark: string; light: string } {
+  private setContextAndIcon(): void {
     if (this.isCollection()) {
-      return new ThemeIcon('repo');
-    }
-
-    if (this.isFolder()) {
+      this.iconPath =  new ThemeIcon('repo');
+      this.contextValue = 'collection';
+    } else if (this.isFolder()) {
       if (this.collapsibleState === TreeItemCollapsibleState.Expanded) {
-        return new ThemeIcon('folder-opened');
+        this.iconPath = new ThemeIcon('folder-opened');
       }
 
-      return new ThemeIcon('folder');
-    }
-
-    if (this.isRequest()) {
-      return {
+      this.iconPath = new ThemeIcon('folder');
+      this.contextValue = 'folder';
+    } else if (this.isRequest()) {
+      this.iconPath = {
         light: join(__dirname, '..', '..', '..', 'assets', 'light', `${this.itemObject.method.toLowerCase()}.svg`),
         dark: join(__dirname, '..', '..', '..', 'assets', 'dark', `${this.itemObject.method.toLowerCase()}.svg`)
       };
+      this.contextValue = 'request';
+    } else {
+      this.iconPath = new ThemeIcon('export');
     }
-
-    return new ThemeIcon('export');
   }
 }
