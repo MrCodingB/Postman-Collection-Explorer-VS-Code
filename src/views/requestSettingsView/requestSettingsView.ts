@@ -22,8 +22,26 @@ export class RequestSettingsView {
       if (e.type === 'dataChanged') {
         this.dataChanged(e.data);
       } else if (e.type === 'requestInitialData') {
-        this.panel.webview.postMessage({ type: 'initialData', data: this.settings });
+        this.triggerRender();
       }
+    });
+  }
+
+  private triggerRender(): void {
+    this.panel.webview.postMessage({
+      type: 'render',
+      settings: this.settings,
+      settingInfos: this.getSettingInfos()
+    });
+  }
+
+  private getSettingInfos(): unknown {
+    return REQUEST_SETTINGS.map((s) => {
+      if (s.default === 'settings') {
+        s.default = this.getSettingFromConfig(s.key);
+      }
+
+      return s;
     });
   }
 
@@ -67,7 +85,7 @@ export class RequestSettingsView {
 
     this.settings[key] = settingValue as never;
     this.onChangeEmitter.fire(this.settings);
-    this.panel.webview.postMessage({ type: 'reload', body: this.getSettingsList() });
+    this.triggerRender();
   }
 
   private getSettingFromConfig(key: keyof RequestSettings): boolean {
@@ -103,74 +121,8 @@ export class RequestSettingsView {
         <title>${this.panel.title}</title>
       </head>
       <body>
-        ${this.getSettingsList()}
       </body>
       </html>
     `;
-  }
-
-  private getSettingsList(): string {
-    return REQUEST_SETTINGS
-      .map((s) => this.getSettingDiv(s))
-      .join('\n');
-  }
-
-  private getSettingDiv(setting: typeof REQUEST_SETTINGS[0]): string {
-    return /* html */`
-      <div class="col col-1">
-        <span class="title">${setting.title}</span>
-        <span class="description">${setting.description}</span>
-      </div>
-      <div class="col col-2">
-        ${this.getInput(setting.type, this.settings[setting.key], setting.key)}
-      </div>
-    `;
-  }
-
-  private getInput<
-    K extends keyof RequestSettings = keyof RequestSettings,
-    V extends RequestSettings[K] = RequestSettings[K]
-  >(type: string, value: V, key: K): string {
-    let input = '';
-
-    const setting = REQUEST_SETTINGS.find((s) => s.key === key);
-    if (setting === undefined) {
-      return '';
-    }
-
-    const defaultValue = setting.default === 'settings' ? this.getSettingFromConfig(key) : setting.default;
-
-    switch (type) {
-      case 'boolean':
-        input = /* html */`
-          <label class="switch">
-            <input type="checkbox" id="${key}" ${(value ?? defaultValue) ? 'checked' : ''}>
-            <span class="slider"></span>
-          </label>
-        `;
-        break;
-      case 'number':
-        input = /* html */`<input id=${key} type="number" min="0" max="10000000" step="1" value="${value ?? defaultValue}">`;
-        break;
-      case 'select':
-        input = setting.options
-          ?.map((o) => /* html */`
-            <label>
-              <input type="checkbox" id="${key}" name="${o}" value="${o}" ${(this.settings[key] as unknown[])?.includes(o) ? 'checked' : ''}>
-              ${o}
-            </label>
-          `)
-          .join('\n') ?? '';
-        break;
-      case 'array':
-        input = /* html */`<input id=${key} value="${((value ?? defaultValue) as never[]).join(', ')}">`;
-        break;
-    }
-
-    if (value !== undefined) {
-      input += /* html */`<span class="restore" id="${key}.default">Restore default</span>`;
-    }
-
-    return input;
   }
 }
