@@ -4,10 +4,15 @@
   "description": "An extension for VS Code to explore, manage and test Postman Collections.",
   "version": "0.0.1",
   "author": "MrCodingB",
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "preview": true,
+  "publisher": "MrCodingB",
   "bugs": "https://github.com/MrCodingB/Postman-Collection-Explorer-VS-Code/issues",
-  "repository": "github:MrCodingB/Postman-Collection-Explorer-VS-Code",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MrCodingB/Postman-Collection-Explorer-VS-Code.git"
+  },
+  "icon": "assets/extension-icon.png",
   "engines": {
     "vscode": "^1.53.0"
   },
@@ -368,7 +373,7 @@
     ]
   },
   "scripts": {
-    "prepublish": "npm run compile",
+    "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "lint": "eslint src --ext .ts",
     "watch": "tsc -watch -p ./",
