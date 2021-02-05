@@ -1,5 +1,5 @@
 import { Item, ItemGroup, ItemGroupDefinition } from 'postman-collection';
-import { Collection } from './Collection';
+import { Collection } from './collection';
 import { isItemGroup, resolveChildren } from '../utils';
 import { Container } from './container';
 

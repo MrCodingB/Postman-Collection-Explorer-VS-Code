@@ -1,6 +1,6 @@
 import { Event, EventEmitter, Uri, ViewColumn, WebviewPanel, window, workspace } from 'vscode';
 import { EXTENSION_PREFIX, runCommand } from '../../commands/commands';
-import { RequestSettings, REQUEST_SETTINGS } from '../../postman/PostmanSettings';
+import { RequestSettings, REQUEST_SETTINGS } from '../../postman/postmanSettings';
 import { getNonce } from '../../utils';
 
 export class RequestSettingsView {

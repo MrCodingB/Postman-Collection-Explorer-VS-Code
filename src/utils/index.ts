@@ -1,4 +1,5 @@
 export * from './getCollection';
+export * from './getCollections';
 export * from './getNonce';
 export * from './resolveChildren';
 export * from './runWithNewman';

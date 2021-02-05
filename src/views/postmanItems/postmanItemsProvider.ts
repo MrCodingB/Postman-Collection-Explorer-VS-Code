@@ -1,6 +1,6 @@
 import { Event, EventEmitter, TreeDataProvider, window, workspace } from 'vscode';
-import { Collection, Folder, getCollections, Request } from '../../postman';
-import { isPostmanElement } from '../../utils';
+import { Collection, Folder, Request } from '../../postman';
+import { getCollections, isPostmanElement } from '../../utils';
 import { PostmanItemModel } from './postmanItemModel';
 
 export class PostmanItemsProvider implements TreeDataProvider<PostmanItemModel> {

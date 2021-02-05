@@ -1,6 +1,6 @@
-import { Collection } from '../postman/Collection';
-import { Folder } from '../postman/Folder';
-import { Request } from '../postman/Request';
+import { Collection } from '../postman/collection';
+import { Folder } from '../postman/folder';
+import { Request } from '../postman/request';
 
 export function getCollection(item: Folder | Request | Collection): Collection {
   if (Collection.isCollection(item)) {

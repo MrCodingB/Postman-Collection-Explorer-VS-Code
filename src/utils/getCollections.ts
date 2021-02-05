@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 import { workspace } from 'vscode';
-import { Collection } from './Collection';
+import { Collection } from '../postman/collection';
 import { Collection as PmCollection } from 'postman-collection';
 import { EXTENSION_PREFIX } from '../commands/commands';
 

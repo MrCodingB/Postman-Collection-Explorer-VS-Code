@@ -1,10 +1,10 @@
 import { HeaderList, Item, ItemDefinition, RequestBody, Url } from 'postman-collection';
 import { isItem } from '../utils';
-import { Collection } from './Collection';
-import { Folder } from './Folder';
+import { Collection } from './collection';
+import { Folder } from './folder';
 import { RequestMethod } from './methods';
-import { PostmanItem } from './PostmanItem';
-import { RequestSettings } from './PostmanSettings';
+import { PostmanItem } from './postmanItem';
+import { RequestSettings } from './postmanSettings';
 
 export class Request extends PostmanItem<Item> {
   private _method: RequestMethod;

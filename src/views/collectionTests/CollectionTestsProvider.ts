@@ -1,6 +1,6 @@
 import { Event, EventEmitter, TreeDataProvider } from 'vscode';
 import { RunSummary } from '../../postman';
-import { CollectionTestModel } from './CollectionTestModel';
+import { CollectionTestModel } from './collectionTestModel';
 
 export class CollectionTestsProvider implements TreeDataProvider<CollectionTestModel> {
   onDidChangeTreeData: Event<CollectionTestModel | null | undefined | void>;

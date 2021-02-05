@@ -392,6 +392,7 @@
     "pack": "webpack --mode production",
     "pack:dev": "webpack --mode development",
     "deploy": "vsce publish",
+    "vsce": "vsce",
     "cleanbuild": "node ./scripts/clean-build.js",
     "build": "npm run compile && npm run lint && npm run pack:dev",
     "compile": "tsc -p ./",

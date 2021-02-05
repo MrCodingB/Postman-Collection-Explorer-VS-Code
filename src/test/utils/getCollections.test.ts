@@ -1,6 +1,7 @@
 import { expect } from 'chai';
 import { before } from 'mocha';
-import { Collection, getCollections } from '../../postman';
+import { Collection } from '../../postman';
+import { getCollections } from '../../utils';
 
 suite('getCollections', () => {
   let collections: Collection[] | undefined;

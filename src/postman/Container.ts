@@ -1,7 +1,7 @@
 import { Collection as PmCollection, Item, ItemGroup } from 'postman-collection';
-import { Folder } from './Folder';
-import { PostmanItem } from './PostmanItem';
-import { Request } from './Request';
+import { Folder } from './folder';
+import { PostmanItem } from './postmanItem';
+import { Request } from './request';
 
 export abstract class Container<T extends ItemGroup<Item> | PmCollection = ItemGroup<Item> | PmCollection> extends PostmanItem<T> {
   public children: (Folder | Request)[] = [];

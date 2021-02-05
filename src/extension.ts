@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import { commands, EXTENSION_PREFIX } from './commands/commands';
 import { RunSummary } from './postman';
-import { CollectionTestModel } from './views/collectionTests/CollectionTestModel';
-import { CollectionTestsProvider } from './views/collectionTests/CollectionTestsProvider';
+import { CollectionTestModel } from './views/collectionTests/collectionTestModel';
+import { CollectionTestsProvider } from './views/collectionTests/collectionTestsProvider';
 import { PostmanItemModel } from './views/postmanItems/postmanItemModel';
 import { PostmanItemsProvider } from './views/postmanItems/postmanItemsProvider';
 
