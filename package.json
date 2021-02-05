@@ -303,7 +303,7 @@
         }
       ]
     },
-    "configuration":[
+    "configuration": [
       {
         "title": "Postman Collection Explorer",
         "properties": {
@@ -356,6 +356,8 @@
     "vscode-test": "^1.4.0"
   },
   "dependencies": {
+    "@types/chai": "^4.2.14",
+    "chai": "^4.3.0",
     "newman": "^5.2.2",
     "postman-collection": "^3.6.9",
     "postman-runtime": "^7.26.10"
