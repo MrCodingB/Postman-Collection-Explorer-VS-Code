@@ -1,15 +1,13 @@
-.github/**
-.vscode/**
-.vscode-test/**
-out/**
-src/**
-scripts/**
+# Ignore all to use as whitelist
+*
+*/**
 
-**/.editorconfig
-**/tsconfig.json
-**/.eslintrc.json
-**/*.map
-**/*.ts
+!dist/**
+!web/**
+!assets/**
 
-webpack.config.js
-.gitignore
+!CHANGELOG.md
+!LICENSE
+!README.md
+!package.json
+!package-lock.json
