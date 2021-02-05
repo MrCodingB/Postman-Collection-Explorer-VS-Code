@@ -11,7 +11,7 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-        "${workspaceFolder}/.vscode-test/manual",
+        "${workspaceFolder}/.vscode-test/manual/",
 				"--extensionDevelopmentPath=${workspaceFolder}",
         "--disable-extensions"
 			],
@@ -26,7 +26,7 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-        "${workspaceFolder}/.vscode-test/automatic",
+        "${workspaceFolder}/.vscode-test/automatic/",
 				"--extensionDevelopmentPath=${workspaceFolder}",
 				"--extensionTestsPath=${workspaceFolder}/out/test/index",
         "--disable-extensions"

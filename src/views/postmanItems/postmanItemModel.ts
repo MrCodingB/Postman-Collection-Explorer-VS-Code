@@ -68,8 +68,8 @@ export class PostmanItemModel extends TreeItem {
 
     if (this.isRequest()) {
       return {
-        light: join(__dirname, '..', '..', 'assets', 'light', `${this.itemObject.method.toLowerCase()}.svg`),
-        dark: join(__dirname, '..', '..', 'assets', 'dark', `${this.itemObject.method.toLowerCase()}.svg`)
+        light: join(__dirname, '..', '..', '..', 'assets', 'light', `${this.itemObject.method.toLowerCase()}.svg`),
+        dark: join(__dirname, '..', '..', '..', 'assets', 'dark', `${this.itemObject.method.toLowerCase()}.svg`)
       };
     }
 
