@@ -55,8 +55,8 @@ export class PostmanItemModel extends TreeItem {
       this.contextValue = 'folder';
     } else if (this.isRequest()) {
       this.iconPath = {
-        light: join(__dirname, '..', '..', '..', 'assets', 'light', `${this.itemObject.method.toLowerCase()}.svg`),
-        dark: join(__dirname, '..', '..', '..', 'assets', 'dark', `${this.itemObject.method.toLowerCase()}.svg`)
+        light: join(__dirname, '..', 'assets', 'light', `${this.itemObject.method.toLowerCase()}.svg`),
+        dark: join(__dirname, '..', 'assets', 'dark', `${this.itemObject.method.toLowerCase()}.svg`)
       };
       this.contextValue = 'request';
     } else {
