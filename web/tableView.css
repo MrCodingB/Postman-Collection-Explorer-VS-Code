@@ -1,0 +1,51 @@
+.table {
+  font-size: 1rem;
+  border-collapse: collapse;
+  text-align: left;
+  width: 100%;
+  display: grid;
+  grid-template-columns: min-content auto auto auto;
+}
+
+.tr {
+  border-bottom: solid 1px #5a5a5a;
+  display: flex;
+}
+
+.td, .th {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.td ~ .td, .th ~ .th {
+  border-left: solid 1px #5a5a5a;
+}
+
+.td.small {
+  padding: 5px;
+  border-left: none;
+}
+
+.th {
+  padding: 5px;
+  font-size: 1.2rem;
+  border-bottom: solid 2px #5a5a5a;
+  display: flex;
+  flex-direction: column;
+}
+
+.td {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.table .td > input {
+  background-color: inherit;
+}
+
+.disabled input {
+  visibility: hidden;
+}
