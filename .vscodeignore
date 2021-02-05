@@ -1,0 +1,13 @@
+# Ignore all to use as whitelist
+*
+*/**
+
+!dist/**
+!web/**
+!assets/**
+
+!CHANGELOG.md
+!LICENSE
+!README.md
+!package.json
+!package-lock.json
