@@ -29,7 +29,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - name: Install dependencies
-      run: npm install
+      run: npm ci
     - name: Prepare test environment
       run: npm run pretest
     - name: Run Tests
