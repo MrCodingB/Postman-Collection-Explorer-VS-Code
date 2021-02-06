@@ -2,16 +2,16 @@ import { commands, Uri, workspace } from 'vscode';
 import { EXTENSION_PREFIX } from '../commands/commands';
 import { Collection } from '../postman';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
+import { getCollection } from './getCollection';
+import { isPostmanItem, PostmanItem } from './typeChecks';
 
-export async function saveCollection(itemOrCollection?: Collection | PostmanItemModel): Promise<void> {
-  if (itemOrCollection === undefined ||
-      !Collection.isCollection(itemOrCollection) &&
-      !(itemOrCollection?.isCollection !== undefined && itemOrCollection.isCollection())
-  ) {
+export async function save(item: PostmanItem | PostmanItemModel): Promise<void> {
+  if (item === undefined) {
     return;
   }
 
-  const collection = Collection.isCollection(itemOrCollection) ? itemOrCollection : itemOrCollection.itemObject;
+  const postmanItem = isPostmanItem(item) ? item : item.itemObject;
+  const collection = Collection.isCollection(postmanItem) ? postmanItem : getCollection(postmanItem);
 
   try {
     await workspace.fs.writeFile(

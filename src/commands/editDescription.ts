@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { Uri, window, workspace } from 'vscode';
-import { getCollection, saveCollection } from '../utils';
+import { save } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { runCommand } from './commands';
 
@@ -23,8 +23,7 @@ export async function editDescription(item?: PostmanItemModel): Promise<void> {
     if (e.document.uri === document.uri) {
       object.description = document.getText();
 
-      const collection = getCollection(object);
-      e.waitUntil(saveCollection(collection));
+      e.waitUntil(save(object));
     }
   });
 

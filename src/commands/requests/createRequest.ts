@@ -1,6 +1,6 @@
 import { Item } from 'postman-collection';
 import { window } from 'vscode';
-import { getCollection, saveCollection } from '../../utils';
+import { getCollection, save } from '../../utils';
 import { Request } from '../../postman';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 
@@ -21,5 +21,5 @@ export async function createRequest(parentNode?: PostmanItemModel): Promise<void
 
   const collection = getCollection(parentNode.itemObject);
 
-  await saveCollection(collection);
+  await save(collection);
 }

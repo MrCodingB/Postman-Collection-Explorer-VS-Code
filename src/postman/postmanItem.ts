@@ -1,8 +1,8 @@
 import { Event, RequestAuth, RequestAuthDefinition } from 'postman-collection';
-import { isItem, PostmanNativeElement } from '../utils';
+import { isItem, PostmanNativeItem } from '../utils';
 import { Auth } from './auth/auth';
 
-export abstract class PostmanItem<T extends PostmanNativeElement = PostmanNativeElement> {
+export abstract class PostmanItem<T extends PostmanNativeItem = PostmanNativeItem> {
   private _id: string;
   private _name: string;
   private _description: string;
@@ -53,7 +53,7 @@ export abstract class PostmanItem<T extends PostmanNativeElement = PostmanNative
   get auth(): Auth | undefined { return this._auth; }
   set auth(value: Auth | undefined) {
     this._auth = value;
-    (this.rootItem as PostmanNativeElement & { auth?: RequestAuthDefinition }).auth = value?.toDefinition();
+    (this.rootItem as PostmanNativeItem & { auth?: RequestAuthDefinition }).auth = value?.toDefinition();
   }
 
   constructor(public rootItem: T) {
@@ -66,7 +66,7 @@ export abstract class PostmanItem<T extends PostmanNativeElement = PostmanNative
     if (isItem(rootItem) && rootItem.getAuth()) {
       this._auth = new Auth(rootItem.getAuth().toJSON());
     } else {
-      const authDefinition = (rootItem as PostmanNativeElement & { auth?: RequestAuth}).auth?.toJSON();
+      const authDefinition = (rootItem as PostmanNativeItem & { auth?: RequestAuth}).auth?.toJSON();
 
       if (authDefinition !== undefined) {
         this._auth = new Auth(authDefinition);

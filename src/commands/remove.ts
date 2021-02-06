@@ -1,6 +1,6 @@
 import { commands, Uri, workspace } from 'vscode';
 import { Collection } from '../postman';
-import { getCollection, saveCollection } from '../utils';
+import { save } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { EXTENSION_PREFIX } from './commands';
 
@@ -20,6 +20,6 @@ export async function remove(item?: PostmanItemModel): Promise<void> {
   } else {
     object.parent.removeChild(object);
 
-    await saveCollection(getCollection(object));
+    await save(object);
   }
 }

@@ -1,6 +1,6 @@
 import { window } from 'vscode';
 import { METHODS, RequestMethod } from '../../postman';
-import { getCollection, saveCollection } from '../../utils';
+import { save } from '../../utils';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 
 export async function editMethod(item?: PostmanItemModel): Promise<void> {
@@ -20,5 +20,5 @@ export async function editMethod(item?: PostmanItemModel): Promise<void> {
 
   object.method = selection;
 
-  await saveCollection(getCollection(object));
+  await save(object);
 }

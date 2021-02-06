@@ -1,6 +1,6 @@
 import { Url } from 'postman-collection';
 import { window } from 'vscode';
-import { getCollection, saveCollection } from '../../utils';
+import { save } from '../../utils';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 
 export async function editUrl(item?: PostmanItemModel): Promise<void> {
@@ -15,5 +15,5 @@ export async function editUrl(item?: PostmanItemModel): Promise<void> {
   }
 
   request.url = new Url(url);
-  await saveCollection(getCollection(request));
+  await save(request);
 }
