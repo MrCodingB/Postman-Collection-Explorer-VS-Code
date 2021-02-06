@@ -7,7 +7,8 @@ Features
 
 Bugfixes
 
-- Space handling in table view
+- Fix space handling in table view
+- Fix duplicate key handling in table view
 
 ## v0.0.1
 
