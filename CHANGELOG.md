@@ -1,4 +1,16 @@
-## v0.0.1 (not released)
+## v0.1.0
+
+Features
+
+- Edit collection variables
+- Submenu for request specific commands
+
+Bugfixes
+
+- Fix space handling in table view
+- Fix duplicate key handling in table view
+
+## v0.0.1
 
 Features
 

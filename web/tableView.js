@@ -23,8 +23,8 @@ function renderTable() {
   document.body.innerHTML = tableDiv.outerHTML;
 
   document.querySelectorAll("div.table input").forEach((i) => (i.onchange = (ev) => {
-    const [_, key, type] = ev.target.id.match(/^in-(\w+)-(disabled|key|value|description)$/);
-    changeVariable(key, type, type === "disabled" ? !ev.target.checked : ev.target.value);
+    const [_, index, type] = ev.target.id.match(/^in-(\d+)-(disabled|key|value|description)$/);
+    changeVariable(index, type, type === "disabled" ? !ev.target.checked : ev.target.value);
   }));
 }
 
@@ -38,35 +38,39 @@ function placeHeaders(tableDiv) {
 }
 
 function addInputs(tableDiv) {
-  data.forEach((v) =>
+  data.forEach((v, i) => {
     append(tableDiv, [
-      createInputDiv(1, v, "disabled"),
-      createInputDiv(2, v, "key"),
-      createInputDiv(3, v, "value"),
-      createInputDiv(4, v, "description")
+      createInputDiv(i, v, "disabled"),
+      createInputDiv(i, v, "key"),
+      createInputDiv(i, v, "value"),
+      createInputDiv(i, v, "description")
     ])
-  );
+  });
 }
 
 function addEmptyLine(tableDiv) {
   const emtpyDiv = document.createElement("div");
   emtpyDiv.classList.add("tr", "td", "col-1", "small");
 
-  const value = createInputDiv(3, {}, "value");
+  const key = createInputDiv(data.length, {}, "key");
+
+  const value = createInputDiv(data.length, {}, "value");
   value.classList.add("disabled");
 
-  const description = createInputDiv(4, {}, "description");
+  const description = createInputDiv(data.length, {}, "description");
   description.classList.add("disabled");
 
-  append(tableDiv, [emtpyDiv, createInputDiv(2, {}, "key"), value, description]);
+  append(tableDiv, [emtpyDiv, key, value, description]);
 }
 
-function createInputDiv(colIndex, variable, type) {
+function createInputDiv(index, variable, type) {
+  const colIndex = type === 'disabled' ? 1 : type === 'key' ? 2 : type === 'value' ? 3 : 4;
+
   const div = document.createElement("div");
   div.classList.add("tr", "td", `col-${colIndex}`);
 
   const input = document.createElement("input");
-  input.id = `in-${variable.key}-${type}`;
+  input.id = `in-${index}-${type}`;
 
   if (type === "disabled") {
     div.classList.add("small");
@@ -85,13 +89,14 @@ function createInputDiv(colIndex, variable, type) {
   return div;
 }
 
-function changeVariable(key, variableKey, value) {
-  const v = data.find((v) => v.key === key);
-  if (v !== undefined) {
-    v[variableKey] = value;
+function changeVariable(index, variableKey, value) {
+  if (index >= data.length) {
+    data.push({ [variableKey]: value });
   } else {
-    data.push({ key, [variableKey]: value });
+    data[index][variableKey] = value;
   }
+
+  data = data.map((d) => ({...d, type: 'string'}));
 
   renderTable();
   vscode.postMessage({ type: "dataChanged", data });

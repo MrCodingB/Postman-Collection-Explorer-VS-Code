@@ -1,29 +1,25 @@
 import { Item } from 'postman-collection';
 import { window } from 'vscode';
-import { getCollection } from '../../utils';
-import { runCommand } from '../commands';
+import { getCollection, save } from '../../utils';
 import { Request } from '../../postman';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 
-export function createRequest(parentNode?: PostmanItemModel): void {
+export async function createRequest(parentNode?: PostmanItemModel): Promise<void> {
   if (parentNode === undefined || !(parentNode.isCollection() || parentNode.isFolder())) {
     return;
   }
 
-  window
-    .showInputBox({ placeHolder: 'Request name' })
-    .then((name) => {
-      if (name === undefined || name === '') {
-        return;
-      }
+  const name = await window.showInputBox({ placeHolder: 'Request name' });
+  if (name === undefined || name === '') {
+    return;
+  }
 
-      const item = new Item({ name });
-      const request = new Request(parentNode.itemObject, item);
+  const item = new Item({ name });
+  const request = new Request(parentNode.itemObject, item);
 
-      parentNode.itemObject.addChild(request);
+  parentNode.itemObject.addChild(request);
 
-      const collection = getCollection(parentNode.itemObject);
+  const collection = getCollection(parentNode.itemObject);
 
-      runCommand('saveCollection', collection);
-    });
+  await save(collection);
 }

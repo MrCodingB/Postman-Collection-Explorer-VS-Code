@@ -2,7 +2,7 @@
   "name": "postman-collection-explorer",
   "displayName": "Postman Collection Explorer",
   "description": "An extension for VS Code to explore, manage and test Postman Collections.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "author": "MrCodingB",
   "license": "SEE LICENSE IN LICENSE",
   "preview": true,
@@ -50,100 +50,72 @@
         "icon": "$(add)"
       },
       {
-        "command": "postman-collection-explorer.saveCollection",
-        "title": "Save Collection",
-        "category": "Postman",
-        "icon": "$(save)"
-      },
-      {
         "command": "postman-collection-explorer.createFolder",
         "title": "Create Folder",
-        "category": "Postman",
         "icon": "$(new-folder)"
       },
       {
         "command": "postman-collection-explorer.createRequest",
         "title": "Create Request",
-        "category": "Postman",
         "icon": "$(new-file)"
       },
       {
         "command": "postman-collection-explorer.remove",
         "title": "Delete",
-        "category": "Postman",
         "icon": "$(trash)"
       },
       {
         "command": "postman-collection-explorer.rename",
-        "title": "Rename",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Rename"
       },
       {
         "command": "postman-collection-explorer.editAuth",
-        "title": "Edit Authorization",
-        "category": "Postman",
-        "icon": "$(lock)"
+        "title": "Authorization"
       },
       {
         "command": "postman-collection-explorer.editBody",
-        "title": "Edit Body",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Body"
       },
       {
         "command": "postman-collection-explorer.editSettings",
-        "title": "Edit Settings",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Settings"
       },
       {
         "command": "postman-collection-explorer.editDescription",
-        "title": "Edit Description",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Description"
       },
       {
         "command": "postman-collection-explorer.editMethod",
-        "title": "Edit Method",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Method"
       },
       {
         "command": "postman-collection-explorer.editUrl",
-        "title": "Edit URL",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "URL"
       },
       {
         "command": "postman-collection-explorer.editParameters",
-        "title": "Edit Query Parameters",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Query Parameters"
       },
       {
         "command": "postman-collection-explorer.editHeaders",
-        "title": "Edit Headers",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Headers"
       },
       {
         "command": "postman-collection-explorer.editPrerequestScript",
-        "title": "Edit Pre-request Script",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Pre-request Script"
       },
       {
         "command": "postman-collection-explorer.editTestScript",
-        "title": "Edit Test Script",
-        "category": "Postman",
-        "icon": "$(edit)"
+        "title": "Test Script"
+      },
+      {
+        "command": "postman-collection-explorer.editVariables",
+        "title": "Variables"
       },
       {
         "command": "postman-collection-explorer.viewApiDescription",
         "title": "View API Description",
-        "category": "Postman",
-        "icon": "$(book)"
+        "category": "Postman"
       },
       {
         "command": "postman-collection-explorer.runTests",
@@ -178,10 +150,6 @@
     "menus": {
       "commandPalette": [
         {
-          "command": "postman-collection-explorer.saveCollection",
-          "when": "false"
-        },
-        {
           "command": "postman-collection-explorer.createFolder",
           "when": "false"
         },
@@ -235,6 +203,10 @@
         },
         {
           "command": "postman-collection-explorer.editTestScript",
+          "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.editVariables",
           "when": "false"
         }
       ],
@@ -260,104 +232,111 @@
           "group": "1_edit@1"
         },
         {
-          "command": "postman-collection-explorer.editMethod",
-          "when": "view == postmanCollectionExplorer && viewItem == request",
+          "command": "postman-collection-explorer.editVariables",
+          "when": "view == postmanCollectionExplorer && viewItem == collection",
           "group": "1_edit@2"
-        },
-        {
-          "command": "postman-collection-explorer.editUrl",
-          "when": "view == postmanCollectionExplorer && viewItem == request",
-          "group": "1_edit@3"
-        },
-        {
-          "command": "postman-collection-explorer.editParameters",
-          "when": "view == postmanCollectionExplorer && viewItem == request",
-          "group": "1_edit@4"
-        },
-        {
-          "command": "postman-collection-explorer.editHeaders",
-          "when": "view == postmanCollectionExplorer && viewItem == request",
-          "group": "1_edit@5"
-        },
-        {
-          "command": "postman-collection-explorer.editBody",
-          "when": "view == postmanCollectionExplorer && viewItem == request",
-          "group": "1_edit@6"
-        },
-        {
-          "command": "postman-collection-explorer.editSettings",
-          "when": "view == postmanCollectionExplorer && viewItem == request",
-          "group": "1_edit@7"
         },
         {
           "command": "postman-collection-explorer.editDescription",
           "when": "view == postmanCollectionExplorer",
-          "group": "1_edit@8"
+          "group": "1_edit@3"
         },
         {
           "command": "postman-collection-explorer.editAuth",
           "when": "view == postmanCollectionExplorer",
-          "group": "1_edit@9"
+          "group": "1_edit@4"
         },
         {
-          "command": "postman-collection-explorer.editTestScript",
-          "when": "view == postmanCollectionExplorer",
-          "group": "1_edit@10"
+          "submenu": "requestMenu",
+          "when": "view == postmanCollectionExplorer && viewItem == request",
+          "group": "1_edit@5"
         },
         {
           "command": "postman-collection-explorer.editPrerequestScript",
           "when": "view == postmanCollectionExplorer",
-          "group": "1_edit@11"
+          "group": "2_scripts@1"
+        },
+        {
+          "command": "postman-collection-explorer.editTestScript",
+          "when": "view == postmanCollectionExplorer",
+          "group": "2_scripts@2"
         },
         {
           "command": "postman-collection-explorer.createFolder",
           "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
-          "group": "2_add@1"
+          "group": "3_add@1"
         },
         {
           "command": "postman-collection-explorer.createRequest",
           "when": "viewItem == folder || viewItem == collection && view == postmanCollectionExplorer",
-          "group": "2_add@2"
+          "group": "3_add@2"
         },
         {
           "command": "postman-collection-explorer.viewApiDescription",
           "when": "view == postmanCollectionExplorer",
-          "group": "3_view@1"
+          "group": "4_view"
         },
         {
           "command": "postman-collection-explorer.remove",
           "when": "view == postmanCollectionExplorer",
-          "group": "4_remove@1"
+          "group": "5_remove"
         }
       ],
       "view/title": [
         {
-          "command": "postman-collection-explorer.refreshCollectionView",
-          "when": "view == postmanCollectionExplorer",
-          "group": "navigation"
-        },
-        {
           "command": "postman-collection-explorer.createCollection",
           "when": "view == postmanCollectionExplorer",
-          "group": "navigation"
+          "group": "navigation@1"
         },
         {
-          "command": "postman-collection-explorer.refreshTestView",
-          "when": "view == postmanTestExplorer",
-          "group": "navigation"
+          "command": "postman-collection-explorer.refreshCollectionView",
+          "when": "view == postmanCollectionExplorer",
+          "group": "navigation@2"
         },
         {
           "command": "postman-collection-explorer.runTests",
           "when": "view == postmanTestExplorer",
-          "group": "navigation"
+          "group": "navigation@1"
         },
         {
           "command": "postman-collection-explorer.refreshTestView",
           "when": "view == postmanTestExplorer",
-          "group": "actions@1"
+          "group": "navigation@2"
+        }
+      ],
+      "requestMenu": [
+        {
+          "command": "postman-collection-explorer.editMethod",
+          "group": "1_edit@1"
+        },
+        {
+          "command": "postman-collection-explorer.editUrl",
+          "group": "1_edit@2"
+        },
+        {
+          "command": "postman-collection-explorer.editParameters",
+          "group": "1_edit@3"
+        },
+        {
+          "command": "postman-collection-explorer.editHeaders",
+          "group": "1_edit@4"
+        },
+        {
+          "command": "postman-collection-explorer.editBody",
+          "group": "1_edit@5"
+        },
+        {
+          "command": "postman-collection-explorer.editSettings",
+          "group": "1_edit@6"
         }
       ]
     },
+    "submenus": [
+      {
+        "id": "requestMenu",
+        "label": "Request"
+      }
+    ],
     "configuration": [
       {
         "title": "Postman Collection Explorer",

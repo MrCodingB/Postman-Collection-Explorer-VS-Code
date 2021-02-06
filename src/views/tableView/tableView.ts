@@ -25,6 +25,8 @@ export class TableView {
         this.panel.webview.postMessage({ type: 'initialData', data: this.variables });
       }
     });
+
+    this.variables.forEach((v) => v.description = v.description?.toString());
   }
 
   private async getWebViewHtml(): Promise<string> {
