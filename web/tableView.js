@@ -23,7 +23,7 @@ function renderTable() {
   document.body.innerHTML = tableDiv.outerHTML;
 
   document.querySelectorAll("div.table input").forEach((i) => (i.onchange = (ev) => {
-    const [_, key, type] = ev.target.id.match(/^in-(\w+)-(disabled|key|value|description)$/);
+    const [_, key, type] = ev.target.id.match(/^in-(.+)-(disabled|key|value|description)$/);
     changeVariable(key, type, type === "disabled" ? !ev.target.checked : ev.target.value);
   }));
 }
@@ -38,14 +38,19 @@ function placeHeaders(tableDiv) {
 }
 
 function addInputs(tableDiv) {
-  data.forEach((v) =>
+  data.forEach((v) => {
+    if (!v.key) {
+      data.splice(data.indexOf(v), 1);
+      return;
+    }
+
     append(tableDiv, [
       createInputDiv(1, v, "disabled"),
       createInputDiv(2, v, "key"),
       createInputDiv(3, v, "value"),
       createInputDiv(4, v, "description")
     ])
-  );
+  });
 }
 
 function addEmptyLine(tableDiv) {
@@ -88,7 +93,11 @@ function createInputDiv(colIndex, variable, type) {
 function changeVariable(key, variableKey, value) {
   const v = data.find((v) => v.key === key);
   if (v !== undefined) {
-    v[variableKey] = value;
+    if (variableKey === 'key' && !value) {
+      data.splice(data.indexOf(v), 1);
+    } else {
+      v[variableKey] = value;
+    }
   } else {
     data.push({ key, [variableKey]: value });
   }
