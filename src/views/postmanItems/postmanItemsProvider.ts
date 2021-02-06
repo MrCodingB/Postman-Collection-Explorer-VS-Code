@@ -1,6 +1,6 @@
 import { Event, EventEmitter, TreeDataProvider, window, workspace } from 'vscode';
 import { Collection, Folder, Request } from '../../postman';
-import { getCollections, isPostmanElement } from '../../utils';
+import { getCollections, isPostmanItem } from '../../utils';
 import { PostmanItemModel } from './postmanItemModel';
 
 export class PostmanItemsProvider implements TreeDataProvider<PostmanItemModel> {
@@ -31,7 +31,7 @@ export class PostmanItemsProvider implements TreeDataProvider<PostmanItemModel> 
     }
 
     if (element) {
-      return this.getChildrenAsItems(isPostmanElement(element) ? PostmanItemModel.create(element) : element);
+      return this.getChildrenAsItems(isPostmanItem(element) ? PostmanItemModel.create(element) : element);
     } else {
       const collections = await getCollections();
 

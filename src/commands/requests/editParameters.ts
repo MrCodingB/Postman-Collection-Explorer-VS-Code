@@ -1,8 +1,7 @@
 import { PropertyList, QueryParam, VariableDefinition } from 'postman-collection';
-import { getCollection } from '../../utils';
+import { save } from '../../utils';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 import { TableView } from '../../views/tableView/tableView';
-import { runCommand } from '../commands';
 
 export async function editParameters(item?: PostmanItemModel): Promise<void> {
   if (item === undefined || !item.isRequest()) {
@@ -18,6 +17,6 @@ export async function editParameters(item?: PostmanItemModel): Promise<void> {
       .map((v) => new QueryParam({ ...v, key: v.key ?? null }));
 
     request.url.query = new PropertyList(QueryParam as never, request.url, query);
-    runCommand('saveCollection', getCollection(request));
+    save(request);
   });
 }

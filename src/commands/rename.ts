@@ -1,5 +1,6 @@
 import { window } from 'vscode';
-import { getCollection } from '../utils';
+import { Collection } from '../postman';
+import { save } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { runCommand } from './commands';
 
@@ -8,19 +9,20 @@ export async function rename(item?: PostmanItemModel): Promise<void> {
     return;
   }
 
-  const oldName = item.itemObject.name;
+  const object = item.itemObject;
+  const oldName = object.name;
 
   const name = await window.showInputBox({ placeHolder: 'Name', value: oldName, prompt: 'The new name of the item' });
   if (name === undefined) {
     return;
   }
 
-  if (item.isCollection()) {
+  if (Collection.isCollection(object)) {
     await runCommand('remove', item);
-    item.itemObject.filePath = item.itemObject.filePath.replace(new RegExp(oldName, 'g'), name);
+    object.filePath = object.filePath.replace(new RegExp(oldName, 'g'), name);
   }
 
-  item.itemObject.name = name;
+  object.name = name;
 
-  return runCommand('saveCollection', getCollection(item.itemObject));
+  return save(object);
 }

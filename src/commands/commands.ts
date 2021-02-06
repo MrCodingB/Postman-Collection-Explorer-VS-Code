@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 
 import { createCollection } from './collections/createCollection';
-import { saveCollection } from './collections/saveCollection';
 import { createFolder } from './folders/createFolder';
 import { createRequest } from './requests/createRequest';
 import { editDescription } from './editDescription';
@@ -17,12 +16,12 @@ import { editSettings } from './requests/editSettings';
 import { editUrl } from './requests/editUrl';
 import { editHeaders } from './requests/editHeaders';
 import { editParameters } from './requests/editParameters';
+import { editVariables } from './collections/editVariables';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
 export const commands = {
   createCollection,
-  saveCollection,
   createFolder,
   createRequest,
   editAuth,
@@ -35,6 +34,7 @@ export const commands = {
   editUrl,
   editSettings,
   editTestScript,
+  editVariables,
   remove,
   rename,
   viewApiDescription,
