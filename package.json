@@ -2,7 +2,7 @@
   "name": "postman-collection-explorer",
   "displayName": "Postman Collection Explorer",
   "description": "An extension for VS Code to explore, manage and test Postman Collections.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "MrCodingB",
   "license": "SEE LICENSE IN LICENSE",
   "preview": true,
