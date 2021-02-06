@@ -16,6 +16,7 @@ import { editSettings } from './requests/editSettings';
 import { editUrl } from './requests/editUrl';
 import { editHeaders } from './requests/editHeaders';
 import { editParameters } from './requests/editParameters';
+import { editVariables } from './collections/editVariables';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
@@ -33,6 +34,7 @@ export const commands = {
   editUrl,
   editSettings,
   editTestScript,
+  editVariables,
   remove,
   rename,
   viewApiDescription,

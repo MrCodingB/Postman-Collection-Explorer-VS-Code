@@ -102,6 +102,8 @@ function changeVariable(key, variableKey, value) {
     data.push({ key, [variableKey]: value });
   }
 
+  data = data.map((d) => ({...d, type: 'string'}));
+
   renderTable();
   vscode.postMessage({ type: "dataChanged", data });
 }
