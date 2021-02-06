@@ -17,6 +17,7 @@ import { editUrl } from './requests/editUrl';
 import { editHeaders } from './requests/editHeaders';
 import { editParameters } from './requests/editParameters';
 import { editVariables } from './collections/editVariables';
+import { sendRequest } from './requests/sendRequest';
 
 export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
@@ -38,6 +39,7 @@ export const commands = {
   remove,
   rename,
   viewApiDescription,
+  sendRequest,
   runTests,
   getContext: (): vscode.ExtensionContext => ({} as vscode.ExtensionContext)
 };
