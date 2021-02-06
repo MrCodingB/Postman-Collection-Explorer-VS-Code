@@ -1,7 +1,6 @@
 import * as vscode from 'vscode';
 
 import { createCollection } from './collections/createCollection';
-import { saveCollection } from './collections/saveCollection';
 import { createFolder } from './folders/createFolder';
 import { createRequest } from './requests/createRequest';
 import { editDescription } from './editDescription';
@@ -22,7 +21,6 @@ export const EXTENSION_PREFIX = 'postman-collection-explorer';
 
 export const commands = {
   createCollection,
-  saveCollection,
   createFolder,
   createRequest,
   editAuth,

@@ -50,12 +50,6 @@
         "icon": "$(add)"
       },
       {
-        "command": "postman-collection-explorer.saveCollection",
-        "title": "Save Collection",
-        "category": "Postman",
-        "icon": "$(save)"
-      },
-      {
         "command": "postman-collection-explorer.createFolder",
         "title": "Create Folder",
         "category": "Postman",
@@ -177,10 +171,6 @@
     },
     "menus": {
       "commandPalette": [
-        {
-          "command": "postman-collection-explorer.saveCollection",
-          "when": "false"
-        },
         {
           "command": "postman-collection-explorer.createFolder",
           "when": "false"

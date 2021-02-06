@@ -1,7 +1,7 @@
 import { join } from 'path';
 import { Uri, window, workspace } from 'vscode';
 import { ensureTypingsInStorageLocation } from '../postman';
-import { getCollection } from '../utils';
+import { getCollection, saveCollection } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { runCommand } from './commands';
 
@@ -24,7 +24,7 @@ async function editScript(item: PostmanItemModel, type: 'test' | 'prerequest'): 
       object[type] = document.getText();
 
       const collection = getCollection(object);
-      e.waitUntil(runCommand('saveCollection', collection));
+      e.waitUntil(saveCollection(collection));
     }
   });
 

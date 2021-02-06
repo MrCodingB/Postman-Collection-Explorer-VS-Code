@@ -1,8 +1,7 @@
 import { window } from 'vscode';
 import { Auth } from '../postman';
-import { getCollection } from '../utils';
+import { getCollection, saveCollection } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
-import { runCommand } from './commands';
 
 export const AUTH_TYPES = {
   inherit: "Inherit auth from parent",
@@ -50,5 +49,5 @@ export async function editAuth(item?: PostmanItemModel): Promise<void> {
     object.auth = await (object.auth ?? new Auth({ type: authPick.key })).setFromUserInput(authPick.key);
   }
 
-  await runCommand('saveCollection', getCollection(object));
+  await saveCollection(getCollection(object));
 }

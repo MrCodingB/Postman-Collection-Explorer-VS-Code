@@ -1,6 +1,6 @@
 import { join } from 'path';
 import { Uri, window, workspace } from 'vscode';
-import { getCollection } from '../../utils';
+import { getCollection, saveCollection } from '../../utils';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 import { runCommand } from '../commands';
 
@@ -25,7 +25,7 @@ export async function editBody(item: PostmanItemModel): Promise<void> {
       object.body = document.getText();
 
       const collection = getCollection(object);
-      e.waitUntil(runCommand('saveCollection', collection));
+      e.waitUntil(saveCollection(collection));
     }
   });
 

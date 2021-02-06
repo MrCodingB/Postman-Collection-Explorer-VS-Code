@@ -1,5 +1,5 @@
 import { window } from 'vscode';
-import { getCollection } from '../utils';
+import { getCollection, saveCollection } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { runCommand } from './commands';
 
@@ -22,5 +22,5 @@ export async function rename(item?: PostmanItemModel): Promise<void> {
 
   item.itemObject.name = name;
 
-  return runCommand('saveCollection', getCollection(item.itemObject));
+  return saveCollection(getCollection(item.itemObject));
 }

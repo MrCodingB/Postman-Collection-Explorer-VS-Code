@@ -30,5 +30,5 @@ export async function runTests(item?: PostmanItemModel | Collection): Promise<vo
     summaries = [await runTestsForItem(item)];
   }
 
-  commands.executeCommand(`${EXTENSION_PREFIX}.setRunSummaries`, summaries);
+  await commands.executeCommand(`${EXTENSION_PREFIX}.setRunSummaries`, summaries);
 }

@@ -2,7 +2,7 @@ import { Collection } from '../../postman';
 import { Collection as PmCollection } from 'postman-collection';
 import { window, workspace } from 'vscode';
 import { join } from 'path';
-import { runCommand } from '../commands';
+import { saveCollection } from '../../utils';
 
 export function createCollection(): void {
   window
@@ -22,6 +22,6 @@ export function createCollection(): void {
       const filePath = join(workspaceFolders[0].uri.fsPath, `${name}.postman_collection.json`);
       const collection = new Collection(pmCollection, filePath);
 
-      runCommand('saveCollection', collection);
+      saveCollection(collection);
     });
 }

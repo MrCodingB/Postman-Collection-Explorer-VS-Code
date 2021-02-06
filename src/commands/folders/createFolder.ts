@@ -2,8 +2,7 @@ import { Item, ItemGroup } from 'postman-collection';
 import { window } from 'vscode';
 import { Folder } from '../../postman';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
-import { getCollection } from '../../utils';
-import { runCommand } from '../commands';
+import { getCollection, saveCollection } from '../../utils';
 
 export function createFolder(parentNode?: PostmanItemModel): void {
   if (parentNode === undefined || !(parentNode.isCollection() || parentNode.isFolder())) {
@@ -24,6 +23,6 @@ export function createFolder(parentNode?: PostmanItemModel): void {
 
       parent.addChild(folder);
 
-      runCommand('saveCollection', getCollection(parent));
+      saveCollection(getCollection(parent));
     });
 }
