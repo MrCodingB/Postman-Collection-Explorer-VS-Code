@@ -1,6 +1,6 @@
 # Postman Collection Explorer
 
-This extnesion enables you to manage your postman collections inside of Visual Studio Code.
+This extension enables you to manage your postman collections inside of Visual Studio Code.
 
 Features
 
