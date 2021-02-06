@@ -75,6 +75,7 @@ export interface Run {
 export interface RunExecution {
   item: RunExecutionItem;
   assertions?: RunExecutionAssertion[];
+  response: RunExecutionResponse;
 }
 
 export interface RunExecutionItem {
@@ -86,4 +87,15 @@ export interface RunExecutionAssertion {
   assertion: string;
   skipped: boolean;
   error?: NewmanRunExecutionAssertionError;
+}
+
+export interface RunExecutionResponse {
+  code: number;
+  cookie: any[];
+  header: any[];
+  id: string;
+  responseSize: number;
+  responseTime: number;
+  status: string;
+  stream: { type: string; data: number[] };
 }
