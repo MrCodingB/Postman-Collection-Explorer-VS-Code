@@ -1,4 +1,10 @@
-## v0.0.2
+## v0.2.0
+
+Features
+
+- Send requests individually and view responses
+
+## v0.1.0
 
 Features
 
