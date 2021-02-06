@@ -113,6 +113,12 @@
         "title": "Variables"
       },
       {
+        "command": "postman-collection-explorer.sendRequest",
+        "title": "Send Request",
+        "category": "Postman",
+        "icon": "$(export)"
+      },
+      {
         "command": "postman-collection-explorer.viewApiDescription",
         "title": "View API Description",
         "category": "Postman"
@@ -208,6 +214,10 @@
         {
           "command": "postman-collection-explorer.editVariables",
           "when": "false"
+        },
+        {
+          "command": "postman-collection-explorer.sendRequest",
+          "when": "false"
         }
       ],
       "view/item/context": [
@@ -225,6 +235,11 @@
           "command": "postman-collection-explorer.remove",
           "when": "view == postmanCollectionExplorer",
           "group": "inline@3"
+        },
+        {
+          "command": "postman-collection-explorer.sendRequest",
+          "when": "view == postmanCollectionExplorer && viewItem == request",
+          "group": "inline@4"
         },
         {
           "command": "postman-collection-explorer.rename",
