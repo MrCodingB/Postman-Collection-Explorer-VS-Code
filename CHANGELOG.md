@@ -1,3 +1,7 @@
+## v0.2.2
+
+- Update dependencies
+
 ## v0.2.0
 
 Features
