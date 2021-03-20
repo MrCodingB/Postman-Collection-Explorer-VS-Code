@@ -115,7 +115,6 @@
       {
         "command": "postman-collection-explorer.sendRequest",
         "title": "Send Request",
-        "category": "Postman",
         "icon": "$(export)"
       },
       {
