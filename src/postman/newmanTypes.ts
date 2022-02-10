@@ -75,7 +75,7 @@ export interface Run {
 export interface RunExecution {
   item: RunExecutionItem;
   assertions?: RunExecutionAssertion[];
-  response: RunExecutionResponse;
+  response?: RunExecutionResponse;
 }
 
 export interface RunExecutionItem {
