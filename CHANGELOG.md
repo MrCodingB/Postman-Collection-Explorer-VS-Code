@@ -1,3 +1,7 @@
+## v0.3.0
+
+- Handle requests, which don't complete
+
 ## v0.2.3
 
 - Fix pre-request scripts not being saved
