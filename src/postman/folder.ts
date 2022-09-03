@@ -15,7 +15,7 @@ export class Folder extends Container<ItemGroup<Item>> {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
   public static isFolder(obj: any): obj is Folder {
-    const itemGroup = obj.rootItem;
+    const itemGroup = obj?.rootItem;
 
     return itemGroup !== undefined && ItemGroup.isItemGroup(itemGroup);
   }

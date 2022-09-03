@@ -3,7 +3,21 @@ import { RunExecutionResponse } from '../../postman';
 import { getCollection, runWithNewman } from '../../utils';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
 
-function toOrderedResponse(res: RunExecutionResponse): unknown {
+interface OrderedResponse {
+  code: number;
+  status: string;
+  responseTimeInMs: number;
+  responseSizeInB: number;
+  cookies: unknown[];
+  headers: unknown[];
+  body: string;
+}
+
+function toOrderedResponse(res?: RunExecutionResponse): OrderedResponse | undefined {
+  if (res === undefined) {
+    return undefined;
+  }
+
   return {
     code: res.code,
     status: res.status,
@@ -35,8 +49,15 @@ export async function sendRequest(item?: PostmanItemModel): Promise<void> {
   }
 
   const documentObject = executions.length > 1
-    ? executions.map((e) => toOrderedResponse(e.response))
+    ? executions
+      .map((e) => toOrderedResponse(e.response))
+      .filter((r) => r !== undefined) as OrderedResponse[]
     : toOrderedResponse(executions[0].response);
+
+  if (Array.isArray(documentObject) && documentObject.length <= 0 || documentObject === undefined) {
+    await window.showInformationMessage(`${request.name} did not return a response`);
+    return;
+  }
 
   const document = await workspace.openTextDocument({
     language: 'json',

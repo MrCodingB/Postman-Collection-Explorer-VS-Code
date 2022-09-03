@@ -8,12 +8,23 @@
 			"script": "build",
 			"problemMatcher": "$tsc",
 			"presentation": {
-				"reveal": "silent"
+				"reveal": "silent",
+        "clear": true
 			},
 			"group": {
 				"kind": "build",
 				"isDefault": true
 			}
+		},
+    {
+			"type": "shell",
+			"command": "nvs use 14; npm run build",
+			"presentation": {
+				"reveal": "silent",
+        "clear": true
+			},
+			"group": "build",
+      "label": "nvs: build"
 		}
 	]
 }

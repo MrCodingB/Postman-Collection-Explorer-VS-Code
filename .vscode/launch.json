@@ -21,6 +21,21 @@
       "preLaunchTask": "${defaultBuildTask}"
 		},
 		{
+			"name": "Run Extension (nvs)",
+			"type": "extensionHost",
+			"request": "launch",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+        "${workspaceFolder}/.vscode-test/manual/",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+        "--disable-extensions"
+			],
+			"outFiles": [
+				"${workspaceFolder}/dist/**/*.js"
+			],
+      "preLaunchTask": "nvs: build"
+		},
+		{
 			"name": "Test Extension",
 			"type": "extensionHost",
 			"request": "launch",

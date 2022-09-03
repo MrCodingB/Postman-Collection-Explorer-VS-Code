@@ -30,7 +30,7 @@ export abstract class PostmanItem<T extends PostmanNativeItem = PostmanNativeIte
 
   get prerequest(): string { return this._prerequest; }
   set prerequest(value: string) {
-    this.prerequest = value;
+    this._prerequest = value;
     const event = this.getListener('prerequest');
     if (event) {
       event.script.exec = value.split('\n');
