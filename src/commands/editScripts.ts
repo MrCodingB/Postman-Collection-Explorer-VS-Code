@@ -27,8 +27,8 @@ async function editScript(item: PostmanItemModel, type: 'test' | 'prerequest'): 
     }
   });
 
-  const listener = window.onDidChangeVisibleTextEditors((e) => {
-    if (e.find((e) => e.document.uri === document.uri) === undefined) {
+  const listener = workspace.onDidCloseTextDocument((e) => {
+    if (e.uri === document.uri) {
       saveListener.dispose();
       listener.dispose();
       workspace.fs.delete(document.uri, { useTrash: false });

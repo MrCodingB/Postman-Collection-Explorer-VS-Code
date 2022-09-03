@@ -1,3 +1,7 @@
+## v0.2.3
+
+- Fix pre-request scripts not being saved
+
 ## v0.2.2
 
 - Update dependencies
