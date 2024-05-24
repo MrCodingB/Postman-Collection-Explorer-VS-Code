@@ -1,10 +1,10 @@
 import * as vscode from 'vscode';
 import { commands, EXTENSION_PREFIX } from './commands/commands';
-import { RunSummary } from './postman';
 import { CollectionTestModel } from './views/collectionTests/collectionTestModel';
 import { CollectionTestsProvider } from './views/collectionTests/collectionTestsProvider';
 import { PostmanItemModel } from './views/postmanItems/postmanItemModel';
 import { PostmanItemsProvider } from './views/postmanItems/postmanItemsProvider';
+import { NewmanRunSummary } from 'newman';
 
 export function activate(context: vscode.ExtensionContext): void {
   const commandNames = Object.keys(commands) as (keyof typeof commands)[];
@@ -30,7 +30,7 @@ export function activate(context: vscode.ExtensionContext): void {
   context.subscriptions.push(
     vscode.window.registerTreeDataProvider('postmanTestExplorer', testViewItemsProvider),
     vscode.commands.registerCommand(`${EXTENSION_PREFIX}.refreshTestView`, (args?: CollectionTestModel) => testViewItemsProvider.refresh(args)),
-    vscode.commands.registerCommand(`${EXTENSION_PREFIX}.setRunSummaries`, (args?: RunSummary[]) => testViewItemsProvider.setRunSummaries(args))
+    vscode.commands.registerCommand(`${EXTENSION_PREFIX}.setRunSummaries`, (args?: NewmanRunSummary[]) => testViewItemsProvider.setRunSummaries(args))
   );
 }
 

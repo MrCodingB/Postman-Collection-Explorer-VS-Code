@@ -2,12 +2,12 @@ import { window } from 'vscode';
 import { AuthVariable } from './authVariable';
 
 export class AuthStringVar<V extends string = string> implements AuthVariable {
-  type: 'string' = 'string';
+  type = 'string' as const;
   value?: V;
 
   constructor(
     public userHint: string,
-    public optional: boolean = false,
+    public optional = false,
     public options?: V[]
   ) { }
 

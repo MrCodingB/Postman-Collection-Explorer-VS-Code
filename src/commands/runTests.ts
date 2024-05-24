@@ -1,10 +1,11 @@
 import { commands } from 'vscode';
-import { RunSummary, Collection } from '../postman';
+import { Collection } from '../postman';
 import { getCollection, getCollections, runWithNewman } from '../utils';
 import { PostmanItemModel } from '../views/postmanItems/postmanItemModel';
 import { EXTENSION_PREFIX } from './commands';
+import { NewmanRunSummary } from 'newman';
 
-async function runTestsForItem(item: PostmanItemModel | Collection): Promise<RunSummary> {
+async function runTestsForItem(item: PostmanItemModel | Collection): Promise<NewmanRunSummary> {
   const collection = Collection.isCollection(item) ? item : getCollection(item.itemObject);
 
   const [err, summary] = await runWithNewman({
@@ -20,7 +21,7 @@ async function runTestsForItem(item: PostmanItemModel | Collection): Promise<Run
 }
 
 export async function runTests(item?: PostmanItemModel | Collection): Promise<void> {
-  let summaries: RunSummary[] | undefined;
+  let summaries: NewmanRunSummary[] | undefined;
 
   if (item === undefined) {
     const collections = await getCollections();

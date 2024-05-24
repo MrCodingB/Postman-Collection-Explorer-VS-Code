@@ -18,7 +18,7 @@ export const AUTH_TYPES = {
   edgegrid: "Akamai EdgeGrid"
 };
 
-type AuthPick = {
+interface AuthPick {
   key: keyof typeof AUTH_TYPES;
   label: string;
 };

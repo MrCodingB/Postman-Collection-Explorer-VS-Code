@@ -1,7 +1,7 @@
 import { VariableDefinition } from 'postman-collection';
 import { AuthVariable } from './authVariable';
 
-export class AuthProperty<V extends { [key: string]: AuthVariable } = { [key: string]: AuthVariable }> {
+export class AuthProperty<V extends Record<string, AuthVariable> = Record<string, AuthVariable>> {
   constructor(public variables: V) { }
 
   async setVariablesFromUserInput(): Promise<void> {

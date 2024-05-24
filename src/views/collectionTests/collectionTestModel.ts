@@ -1,12 +1,13 @@
 import { join } from 'path';
 import { TreeItem, TreeItemCollapsibleState } from 'vscode';
-import { RunExecution, RunExecutionAssertion, RunSummary } from '../../postman';
+import { RunExecution, RunExecutionAssertion } from '../../postman';
+import { NewmanRunExecution, NewmanRunSummary } from 'newman';
 
 export class CollectionTestModel extends TreeItem {
   readonly status: 'passed' | 'failed' | 'errored';
 
   constructor(
-    readonly itemObject: RunSummary | RunExecution | RunExecutionAssertion,
+    readonly itemObject: NewmanRunSummary | NewmanRunExecution | RunExecutionAssertion,
   ) {
     super('', TreeItemCollapsibleState.None);
     this.contextValue = this.getType(itemObject);
@@ -15,7 +16,7 @@ export class CollectionTestModel extends TreeItem {
 
     if (this.isCollection()) {
       this.id = this.itemObject.collection.id;
-      this.label = this.itemObject.collection.info.name;
+      this.label = this.itemObject.collection.name;
 
       if (this.itemObject.run.executions.length > 0) {
         this.collapsibleState = TreeItemCollapsibleState.Collapsed;
@@ -42,15 +43,15 @@ export class CollectionTestModel extends TreeItem {
     }
   }
 
-  isCollection(): this is { type: 'collection'; itemObject: RunSummary; id: string } {
+  isCollection(): this is { type: 'collection'; itemObject: NewmanRunSummary; id: string; } {
     return this.contextValue === 'collection';
   }
 
-  isRequest(): this is { type: 'request'; itemObject: RunExecution; id: string } {
+  isRequest(): this is { type: 'request'; itemObject: RunExecution; id: string; } {
     return this.contextValue === 'request';
   }
 
-  isAssertion(): this is { type: 'test'; itemObject: RunExecutionAssertion } {
+  isAssertion(): this is { type: 'test'; itemObject: RunExecutionAssertion; } {
     return this.contextValue === 'test';
   }
 

@@ -1,14 +1,6 @@
 import { NewmanRunExecutionAssertionError, NewmanRunFailure, NewmanRunStat } from 'newman';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export interface RunSummary {
-  error?: any;
-  collection: RunCollection;
-  environment: RunEnvironment;
-  globals: RunGlobals;
-  run: Run;
-}
-
 export interface RunCollection {
   id: string;
   item: RunCollectionItem[];

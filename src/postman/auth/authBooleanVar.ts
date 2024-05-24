@@ -2,7 +2,7 @@ import { window } from 'vscode';
 import { AuthVariable } from './authVariable';
 
 export class AuthBooleanVar implements AuthVariable {
-  type: 'boolean' = 'boolean';
+  type = 'boolean' as const;
   optional = false;
   value?: boolean;
 

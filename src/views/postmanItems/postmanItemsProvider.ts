@@ -4,12 +4,12 @@ import { getCollections, isPostmanItem } from '../../utils';
 import { PostmanItemModel } from './postmanItemModel';
 
 export class PostmanItemsProvider implements TreeDataProvider<PostmanItemModel> {
-  public onDidChangeTreeData: Event<PostmanItemModel | null | undefined | void>;
+  public onDidChangeTreeData: Event<PostmanItemModel | null | undefined>;
 
-  private treeDataChanged: EventEmitter<PostmanItemModel | undefined | null | void>;
+  private treeDataChanged: EventEmitter<PostmanItemModel | undefined | null>;
 
   constructor() {
-    this.treeDataChanged = new EventEmitter<PostmanItemModel | undefined | null | void>();
+    this.treeDataChanged = new EventEmitter<PostmanItemModel | undefined | null>();
     this.onDidChangeTreeData = this.treeDataChanged.event;
   }
 

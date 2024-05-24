@@ -1,19 +1,19 @@
 import { Event, EventEmitter, TreeDataProvider } from 'vscode';
-import { RunSummary } from '../../postman';
 import { CollectionTestModel } from './collectionTestModel';
+import { NewmanRunSummary } from 'newman';
 
 export class CollectionTestsProvider implements TreeDataProvider<CollectionTestModel> {
-  onDidChangeTreeData: Event<CollectionTestModel | null | undefined | void>;
+  onDidChangeTreeData: Event<CollectionTestModel | null | undefined>;
 
-  private treeDataChanged: EventEmitter<CollectionTestModel | undefined | null | void>;
-  private summaries?: RunSummary[];
+  private treeDataChanged: EventEmitter<CollectionTestModel | undefined | null>;
+  private summaries?: NewmanRunSummary[];
 
   constructor() {
-    this.treeDataChanged = new EventEmitter<CollectionTestModel | undefined | null | void>();
+    this.treeDataChanged = new EventEmitter<CollectionTestModel | undefined | null>();
     this.onDidChangeTreeData = this.treeDataChanged.event;
   }
 
-  setRunSummaries(summaries?: RunSummary[]): void {
+  setRunSummaries(summaries?: NewmanRunSummary[]): void {
     this.summaries = summaries;
     this.refresh();
   }
@@ -47,7 +47,7 @@ export class CollectionTestsProvider implements TreeDataProvider<CollectionTestM
       return [];
     }
 
-    let elementSummary: RunSummary | undefined;
+    let elementSummary: NewmanRunSummary | undefined;
 
     elementSummary = this.summaries.find((s) => s.collection.id === element.id);
     const collectionFromId = elementSummary?.collection;

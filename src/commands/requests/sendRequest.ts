@@ -1,19 +1,19 @@
 import { window, workspace } from 'vscode';
-import { RunExecutionResponse } from '../../postman';
 import { getCollection, runWithNewman } from '../../utils';
 import { PostmanItemModel } from '../../views/postmanItems/postmanItemModel';
+import { CookieList, HeaderList, Response } from 'postman-collection';
 
-interface OrderedResponse {
+interface ResolvedResponse {
   code: number;
   status: string;
   responseTimeInMs: number;
   responseSizeInB: number;
-  cookies: unknown[];
-  headers: unknown[];
+  cookies: CookieList;
+  headers: HeaderList;
   body: string;
 }
 
-function toOrderedResponse(res?: RunExecutionResponse): OrderedResponse | undefined {
+function resolveResponse(res?: Response): ResolvedResponse | undefined {
   if (res === undefined) {
     return undefined;
   }
@@ -22,10 +22,10 @@ function toOrderedResponse(res?: RunExecutionResponse): OrderedResponse | undefi
     code: res.code,
     status: res.status,
     responseTimeInMs: res.responseTime,
-    responseSizeInB: res.responseSize,
-    cookies: res.cookie,
-    headers: res.header,
-    body: Buffer.from(res.stream.data).toString()
+    responseSizeInB: res.responseSize ?? -1,
+    cookies: res.cookies,
+    headers: res.headers,
+    body: res.stream ? Buffer.from(res.stream).toString() : ''
   };
 }
 
@@ -50,9 +50,9 @@ export async function sendRequest(item?: PostmanItemModel): Promise<void> {
 
   const documentObject = executions.length > 1
     ? executions
-      .map((e) => toOrderedResponse(e.response))
-      .filter((r) => r !== undefined) as OrderedResponse[]
-    : toOrderedResponse(executions[0].response);
+      .map((e) => resolveResponse(e.response))
+      .filter((r) => r !== undefined) as ResolvedResponse[]
+    : resolveResponse(executions[0].response);
 
   if (Array.isArray(documentObject) && documentObject.length <= 0 || documentObject === undefined) {
     await window.showInformationMessage(`${request.name} did not return a response`);

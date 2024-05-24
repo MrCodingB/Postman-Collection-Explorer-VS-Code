@@ -18,7 +18,7 @@
 		},
     {
 			"type": "shell",
-			"command": "nvs use 14; npm run build",
+			"command": "nvs use 20; npm run build",
 			"presentation": {
 				"reveal": "silent",
         "clear": true
