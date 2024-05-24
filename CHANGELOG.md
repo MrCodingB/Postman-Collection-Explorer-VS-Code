@@ -1,3 +1,10 @@
+# Changelog
+
+## v0.4.0
+
+- Fix explorer only loading up to 5 collections
+- Update dependencies
+
 ## v0.3.1
 
 - Handle requests, which don't complete
