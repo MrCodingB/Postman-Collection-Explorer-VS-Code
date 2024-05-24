@@ -50,6 +50,22 @@
 				"${workspaceFolder}/out/test/**/*.js"
 			],
 			"preLaunchTask": "npm: pretest"
+		},
+		{
+			"name": "Test Extension (nvs)",
+			"type": "extensionHost",
+			"request": "launch",
+			"runtimeExecutable": "${execPath}",
+			"args": [
+        "${workspaceFolder}/.vscode-test/automatic/",
+				"--extensionDevelopmentPath=${workspaceFolder}",
+				"--extensionTestsPath=${workspaceFolder}/out/test/index",
+        "--disable-extensions"
+			],
+			"outFiles": [
+				"${workspaceFolder}/out/test/**/*.js"
+			],
+			"preLaunchTask": "nvs: pretest"
 		}
 	]
 }

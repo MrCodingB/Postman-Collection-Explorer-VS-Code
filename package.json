@@ -34,7 +34,7 @@
     "vsce": "vsce",
     "cleanbuild": "node ./scripts/clean-build.js",
     "build": "npm run lint && npm run pack:dev",
-    "compile": "tsc -p ./",
+    "compile": "tsc -p ./tsconfig.json",
     "lint": "eslint -c eslint.config.mjs src",
     "pretest": "npm run compile && npm run lint",
     "test": "node ./out/test/runTest.js"
@@ -49,7 +49,7 @@
     "@types/vscode": "^1.89.0",
     "@vscode/test-electron": "^2.3.10",
     "@vscode/vsce": "^2.26.1",
-    "chai": "^5.1.1",
+    "chai": "^4.4.1",
     "glob": "^10.4.1",
     "mocha": "^10.4.0",
     "ts-loader": "^9.5.1",

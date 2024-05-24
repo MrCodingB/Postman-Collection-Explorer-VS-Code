@@ -25,6 +25,16 @@
 			},
 			"group": "build",
       "label": "nvs: build"
+		},
+    {
+			"type": "shell",
+			"command": "nvs use 20; npm run pretest",
+			"presentation": {
+				"reveal": "silent",
+        "clear": true
+			},
+			"group": "build",
+      "label": "nvs: pretest"
 		}
 	]
 }
