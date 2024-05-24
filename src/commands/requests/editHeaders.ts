@@ -9,7 +9,9 @@ export async function editHeaders(item?: PostmanItemModel): Promise<void> {
   }
 
   const request = item.itemObject;
-  new TableView(request.headers.all(), `${request.name} Headers`).onChange((d) => {
+  const headersTableView = new TableView(request.headers.all(), `${request.name} Headers`);
+
+  headersTableView.onChange((d) => {
     request.headers = new HeaderList(request, d.map((h) => new Header(h)));
     save(request);
   });

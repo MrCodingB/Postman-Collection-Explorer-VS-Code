@@ -15,7 +15,7 @@ async function getCollectionsInWorkspace(): Promise<string[]> {
     .join(',');
 
   const collectionFilePaths = await workspace
-    .findFiles(pattern, `{${ignore}}`, 5)
+    .findFiles(pattern, `{${ignore}}`)
     .then((uris) => uris.map((u) => u.fsPath));
 
   return collectionFilePaths;

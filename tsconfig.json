@@ -14,7 +14,6 @@
     "noEmitOnError": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "charset": "utf-8",
     "newLine": "lf",
     "pretty": true,
     "removeComments": true

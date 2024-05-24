@@ -12,6 +12,7 @@ export class TableView {
 
   constructor(public variables: VariableDefinition[], title: string) {
     this.onChangeEmitter = new EventEmitter<VariableDefinition[]>();
+
     this.onChange = this.onChangeEmitter.event;
 
     this.panel = window.createWebviewPanel(`${EXTENSION_PREFIX}.tableView`, title, ViewColumn.Active, { enableScripts: true });
@@ -32,10 +33,12 @@ export class TableView {
   private async getWebViewHtml(): Promise<string> {
     const context = await runCommand('getContext');
 
-    const styleGlobalUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'global.css'));
-    const styleVSCodeUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'vscode.css'));
-    const styleTableViewUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'tableView.css'));
-    const scriptUri = this.panel.webview.asWebviewUri(Uri.joinPath(context.extensionUri, 'web', 'tableView.js'));
+    const baseUri = Uri.joinPath(context.extensionUri, 'web');
+
+    const styleGlobalUri = this.getUri(baseUri, 'global.css');
+    const styleVSCodeUri = this.getUri(baseUri, 'vscode.css');
+    const styleTableViewUri = this.getUri(baseUri, 'tableView.css');
+    const scriptUri = this.getUri(baseUri, 'tableView.js');
 
     const nonce = getNonce();
 
@@ -58,5 +61,9 @@ export class TableView {
       </body>
       </html>
     `;
+  }
+
+  private getUri(baseUri: Uri, ...pathSegments: string[]): Uri {
+    return this.panel.webview.asWebviewUri(Uri.joinPath(baseUri, ...pathSegments));
   }
 }
